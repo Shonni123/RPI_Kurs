@@ -38,7 +38,7 @@ export const FaqAccordion: React.FC = () => {
   };
 
   return (
-    <section className="pt-4 sm:pt-6 pb-20 sm:pb-24 px-4 sm:px-6 lg:px-8 xl:px-10 bg-white text-slate-900 w-full overflow-hidden">
+    <section id="faq" className="pt-4 sm:pt-6 pb-20 sm:pb-24 px-4 sm:px-6 lg:px-8 xl:px-10 bg-white text-slate-900 w-full overflow-hidden scroll-mt-6">
       <div className="w-full max-w-[1240px] xl:max-w-[1243px] mx-auto space-y-6 sm:space-y-8 select-none">
         
         {/* Title matching Figma in Benzin font */}

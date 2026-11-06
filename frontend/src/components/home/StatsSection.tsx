@@ -5,7 +5,7 @@ import { TopNav } from '../layout/TopNav';
 
 export const StatsSection: React.FC = () => {
   return (
-    <section className="pt-8 sm:pt-10 lg:pt-12 pb-6 sm:pb-8 px-4 sm:px-6 lg:px-8 xl:px-10 bg-white text-slate-900 overflow-hidden">
+    <section id="stats" className="pt-8 sm:pt-10 lg:pt-12 pb-6 sm:pb-8 px-4 sm:px-6 lg:px-8 xl:px-10 bg-white text-slate-900 overflow-hidden scroll-mt-6">
       <div className="w-full max-w-[1364px] mx-auto space-y-6 sm:space-y-8">
         
         {/* Top Header matching Figma in light theme */}

@@ -13,7 +13,7 @@ export const NewsletterSection: React.FC = () => {
   };
 
   return (
-    <section className="pt-2 sm:pt-3 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 xl:px-10 bg-white text-slate-900 w-full overflow-hidden">
+    <section id="newsletter" className="pt-2 sm:pt-3 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 xl:px-10 bg-white text-slate-900 w-full overflow-hidden scroll-mt-6">
       <div className="w-full max-w-[1364px] mx-auto space-y-6 sm:space-y-8">
         
         {/* Top Header matching other sections in light theme */}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { LogOut, Settings, X } from 'lucide-react';
 
 interface TopNavProps {
@@ -9,14 +9,43 @@ interface TopNavProps {
 
 export const TopNav: React.FC<TopNavProps> = ({ theme = 'dark', className = '' }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
   const isDark = theme === 'dark';
 
   const navLinks = [
     { name: 'Главная', path: '/' },
-    { name: 'Мобильная версия', path: '/#mobile' },
-    { name: 'О сервисе', path: '/about' },
-    { name: 'Как это работает', path: '/#why-us' },
+    { name: 'Мобильная версия', path: '/#newsletter' },
+    { name: 'О сервисе', path: '/#why-us' },
+    { name: 'Как это работает', path: '/#features' },
   ];
+
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+    if (path === '/') {
+      if (location.pathname === '/') {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      setIsOpen(false);
+      return;
+    }
+
+    if (path.includes('#')) {
+      const [route, hash] = path.split('#');
+      const targetRoute = route || '/';
+      if (location.pathname === targetRoute) {
+        e.preventDefault();
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        e.preventDefault();
+        navigate(path);
+      }
+      setIsOpen(false);
+    }
+  };
 
   return (
     <nav className={`w-full flex items-center justify-between ${className}`}>
@@ -37,6 +66,7 @@ export const TopNav: React.FC<TopNavProps> = ({ theme = 'dark', className = '' }
           <Link
             key={link.name}
             to={link.path}
+            onClick={(e) => handleLinkClick(e, link.path)}
             className={`px-5 py-2 rounded-full text-xs sm:text-[13px] font-semibold transition-all duration-200 hover:scale-[1.02] whitespace-nowrap shadow-sm ${
               isDark
                 ? 'text-slate-950 bg-white/[0.22] hover:bg-white/[0.38] backdrop-blur-[6px] border border-white/[0.35]'
@@ -83,7 +113,7 @@ export const TopNav: React.FC<TopNavProps> = ({ theme = 'dark', className = '' }
             <Link
               key={link.name}
               to={link.path}
-              onClick={() => setIsOpen(false)}
+              onClick={(e) => handleLinkClick(e, link.path)}
               className="px-4 py-3 rounded-2xl text-xs font-medium text-white hover:bg-white/10 transition-all"
             >
               {link.name}

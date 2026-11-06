@@ -87,7 +87,7 @@ export const WhyUsSection: React.FC = () => {
   ];
 
   return (
-    <section id="why-us" className="pt-6 sm:pt-8 pb-3 sm:pb-4 px-4 sm:px-6 lg:px-8 xl:px-10 bg-white text-slate-900 w-full overflow-hidden">
+    <section id="why-us" className="pt-6 sm:pt-8 pb-3 sm:pb-4 px-4 sm:px-6 lg:px-8 xl:px-10 bg-white text-slate-900 w-full overflow-hidden scroll-mt-4">
       <div className="w-full max-w-[1364px] mx-auto">
         
         {/* Top Header matching Figma in light theme */}

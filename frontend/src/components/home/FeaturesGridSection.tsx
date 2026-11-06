@@ -74,7 +74,7 @@ export const FeaturesGridSection: React.FC = () => {
   ];
 
   return (
-    <section className="pt-3 sm:pt-4 pb-6 sm:pb-8 px-4 sm:px-6 lg:px-8 xl:px-10 bg-white text-slate-900">
+    <section id="features" className="pt-3 sm:pt-4 pb-6 sm:pb-8 px-4 sm:px-6 lg:px-8 xl:px-10 bg-white text-slate-900 scroll-mt-6">
       <div className="w-full max-w-[1364px] mx-auto">
         
         {/* Top Header matching Figma in light theme */}
