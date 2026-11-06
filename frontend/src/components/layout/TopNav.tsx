@@ -28,7 +28,7 @@ export const TopNav: React.FC<TopNavProps> = ({ theme = 'dark', className = '' }
 
   const navLinks = [
     { name: 'Главная', path: '/' },
-    { name: 'Мобильная версия', path: '/#newsletter' },
+    { name: 'Посмотреть рейс', path: '/flights' },
     { name: 'О сервисе', path: '/#why-us' },
     { name: 'Как это работает', path: '/#features' },
   ];

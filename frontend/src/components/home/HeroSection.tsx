@@ -14,7 +14,7 @@ export const HeroSection: React.FC = () => {
         />
       </div>
 
-      {/* Top Bar matching Figma: ≡ | Главная Мобильная версия О сервисе Как это работает | [-> ⚙ */}
+      {/* Top Bar: ≡ | Главная Посмотреть рейс О сервисе Как это работает | [-> ⚙ */}
       <header className="relative z-20 pt-5 sm:pt-6 px-6 sm:px-10 lg:px-14 w-full">
         <TopNav theme="dark" className="max-w-[1440px] mx-auto" />
       </header>
