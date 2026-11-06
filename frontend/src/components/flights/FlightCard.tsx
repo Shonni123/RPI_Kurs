@@ -16,104 +16,121 @@ export const FlightCard: React.FC<FlightCardProps> = ({
   onToggleFavorite,
 }) => {
   return (
-    <div className="group relative rounded-3xl bg-[#161F30]/80 hover:bg-[#161F30] border border-white/10 hover:border-blue-500/50 p-6 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-blue-900/20">
+    <div className="group relative rounded-[24px] sm:rounded-[28px] bg-white border border-[#E2EEF8] hover:border-[#B7DAF4] p-5 sm:p-6 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-sky-100/70">
       
       {/* Top Header: Airline, Flight Number, Status & Favorite Button */}
-      <div className="flex items-center justify-between border-b border-white/5 pb-4">
+      <div className="flex items-center justify-between border-b border-slate-100 pb-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-blue-600/15 border border-blue-500/25 flex items-center justify-center text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+          <div className="w-10 h-10 rounded-2xl bg-[#EFF7FE] border border-[#D5ECF8] flex items-center justify-center text-sky-600 group-hover:bg-black group-hover:text-white transition-colors duration-200">
             <Plane className="w-5 h-5 -rotate-45" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-display font-bold text-sm tracking-wide text-white">
+              <span className="font-benzin-bold text-sm tracking-wide text-slate-950">
                 {flight.flightNumber}
               </span>
-              <span className="text-xs text-slate-400">· {flight.airline}</span>
+              <span className="text-xs text-slate-500 font-tt-travels">· {flight.airline}</span>
             </div>
-            <span className="text-[11px] text-slate-500">{flight.aircraft}</span>
+            <span className="text-[11px] text-slate-400 font-sans">{flight.aircraft}</span>
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
           <StatusBadge status={flight.status} statusText={flight.statusText} />
           <button
             onClick={(e) => {
               e.preventDefault();
+              e.stopPropagation();
               onToggleFavorite(flight.id);
             }}
-            className={`w-9 h-9 rounded-full flex items-center justify-center transition-all ${
+            className={`w-9 h-9 rounded-full flex items-center justify-center transition-all cursor-pointer ${
               isFavorite
-                ? 'bg-rose-500/20 text-rose-400 border border-rose-500/30'
-                : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
+                ? 'bg-rose-50 text-rose-500 border border-rose-200 shadow-xs scale-105'
+                : 'bg-[#F8FCFF] text-slate-400 hover:text-rose-500 hover:bg-rose-50/50 border border-[#E2EEF8]'
             }`}
             title={isFavorite ? 'Удалить из избранного' : 'Добавить в избранное'}
           >
-            <Heart className={`w-4 h-4 ${isFavorite ? 'fill-rose-400' : ''}`} />
+            <Heart className={`w-4 h-4 transition-transform active:scale-125 ${isFavorite ? 'fill-rose-500 text-rose-500' : ''}`} />
           </button>
         </div>
       </div>
 
       {/* Main Route Info */}
-      <div className="py-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+      <div className="py-5 sm:py-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
         
         {/* Origin */}
         <div className="md:col-span-4 space-y-1">
-          <div className="font-display font-extrabold text-2xl sm:text-3xl text-white">
+          <div className="font-benzin-bold text-2xl sm:text-3xl text-slate-950 tracking-tight">
             {flight.departureTime}
           </div>
-          <div className="font-bold text-sm text-slate-200">
-            {flight.from.city} ({flight.from.code})
+          <div className="flex items-center gap-2">
+            <span className="font-tt-travels font-bold text-sm sm:text-base text-slate-800">
+              {flight.from.city}
+            </span>
+            <span className="text-xs font-semibold px-2 py-0.5 rounded-md bg-[#EFF7FE] text-sky-700 border border-[#D5ECF8]">
+              {flight.from.code}
+            </span>
           </div>
-          <div className="text-xs text-slate-400">
-            {flight.from.name} {flight.from.terminal ? `· Терминал ${flight.from.terminal}` : ''}
+          <div className="text-xs text-slate-500 font-sans">
+            {flight.from.name} {flight.from.terminal ? `· Терм. ${flight.from.terminal}` : ''}
           </div>
         </div>
 
-        {/* Flight duration & progress line */}
+        {/* Flight duration & progress route line */}
         <div className="md:col-span-4 flex flex-col items-center justify-center py-2">
-          <span className="text-[11px] font-medium text-slate-400 mb-1">
+          <span className="text-xs font-semibold text-slate-500 font-tt-travels mb-1.5">
             {flight.duration}
           </span>
-          <div className="w-full flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-blue-500 flex-shrink-0" />
-            <div className="relative flex-1 h-[2px] bg-gradient-to-r from-blue-500 via-sky-400 to-blue-500">
-              <Plane className="w-4 h-4 text-sky-400 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+          <div className="w-full flex items-center gap-2 px-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-sky-500 ring-4 ring-sky-100 flex-shrink-0" />
+            <div className="relative flex-1 h-[2px] bg-gradient-to-r from-sky-400 via-blue-500 to-sky-400">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-white border border-[#D5ECF8] shadow-xs flex items-center justify-center">
+                <Plane className="w-3.5 h-3.5 text-sky-600 rotate-90" />
+              </div>
             </div>
-            <span className="w-2 h-2 rounded-full bg-blue-500 flex-shrink-0" />
+            <span className="w-2.5 h-2.5 rounded-full bg-blue-600 ring-4 ring-blue-100 flex-shrink-0" />
           </div>
-          <span className="text-[10px] text-slate-500 mt-1">Прямой рейс</span>
+          <span className="text-[11px] text-slate-400 mt-2 font-sans">Прямой рейс</span>
         </div>
 
         {/* Destination */}
         <div className="md:col-span-4 md:text-right space-y-1">
-          <div className="font-display font-extrabold text-2xl sm:text-3xl text-white">
+          <div className="font-benzin-bold text-2xl sm:text-3xl text-slate-950 tracking-tight">
             {flight.arrivalTime}
           </div>
-          <div className="font-bold text-sm text-slate-200">
-            {flight.to.city} ({flight.to.code})
+          <div className="flex items-center md:justify-end gap-2">
+            <span className="font-tt-travels font-bold text-sm sm:text-base text-slate-800">
+              {flight.to.city}
+            </span>
+            <span className="text-xs font-semibold px-2 py-0.5 rounded-md bg-[#EFF7FE] text-sky-700 border border-[#D5ECF8]">
+              {flight.to.code}
+            </span>
           </div>
-          <div className="text-xs text-slate-400">
-            {flight.to.name} {flight.to.terminal ? `· Терминал ${flight.to.terminal}` : ''}
+          <div className="text-xs text-slate-500 font-sans">
+            {flight.to.name} {flight.to.terminal ? `· Терм. ${flight.to.terminal}` : ''}
           </div>
         </div>
 
       </div>
 
-      {/* Footer info & CTA */}
-      <div className="border-t border-white/5 pt-4 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center gap-4 text-xs text-slate-400">
+      {/* Footer Info & CTA */}
+      <div className="border-t border-slate-100 pt-4 flex flex-wrap items-center justify-between gap-3">
+        <div className="flex items-center gap-4 text-xs text-slate-600 font-sans">
           {flight.from.gate && (
-            <span>Гейт: <strong className="text-white">{flight.from.gate}</strong></span>
+            <span>
+              Гейт: <strong className="text-slate-900 font-semibold">{flight.from.gate}</strong>
+            </span>
           )}
           {flight.price && (
-            <span>От <strong className="text-blue-400 font-semibold">{flight.price.toLocaleString('ru-RU')} ₽</strong></span>
+            <span>
+              Билеты от <strong className="font-benzin-medium text-slate-950 text-xs sm:text-sm">{flight.price.toLocaleString('ru-RU')} ₽</strong>
+            </span>
           )}
         </div>
 
         <Link
           to={`/flights/${flight.id}`}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 hover:bg-blue-600 text-white text-xs font-semibold transition-all group-hover:scale-102"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-black hover:bg-slate-800 text-white text-xs font-semibold transition-all hover:scale-[1.02] shadow-sm cursor-pointer"
         >
           <span>Детали рейса</span>
           <ArrowRight className="w-3.5 h-3.5" />
@@ -123,4 +140,3 @@ export const FlightCard: React.FC<FlightCardProps> = ({
     </div>
   );
 };
-

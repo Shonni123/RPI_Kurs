@@ -1,5 +1,5 @@
 import React from 'react';
-import { PlaneTakeoff } from 'lucide-react';
+import { PlaneTakeoff, RotateCcw } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface EmptyStateProps {
@@ -7,6 +7,7 @@ interface EmptyStateProps {
   description?: string;
   actionText?: string;
   actionLink?: string;
+  onReset?: () => void;
 }
 
 export const EmptyState: React.FC<EmptyStateProps> = ({
@@ -14,22 +15,32 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
   description = 'По вашему запросу нет активных рейсов. Попробуйте изменить параметры поиска или фильтры.',
   actionText,
   actionLink,
+  onReset,
 }) => {
   return (
-    <div className="py-16 px-6 text-center max-w-md mx-auto rounded-3xl bg-[#161F30]/60 border border-white/10 space-y-4">
-      <div className="w-14 h-14 rounded-2xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center mx-auto">
+    <div className="py-14 px-6 text-center max-w-md mx-auto rounded-[28px] bg-white border border-[#E2EEF8] space-y-4 shadow-sm">
+      <div className="w-14 h-14 rounded-2xl bg-[#EFF7FE] border border-[#D5ECF8] text-sky-600 flex items-center justify-center mx-auto">
         <PlaneTakeoff className="w-7 h-7" />
       </div>
-      <h3 className="font-display font-bold text-lg text-white">
+      <h3 className="font-benzin-bold text-base sm:text-lg text-slate-950 uppercase tracking-tight">
         {title}
       </h3>
-      <p className="text-xs sm:text-sm text-slate-300">
+      <p className="text-xs sm:text-sm text-slate-600 font-tt-travels leading-relaxed">
         {description}
       </p>
-      {actionText && actionLink && (
+      {onReset && (
+        <button
+          onClick={onReset}
+          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-black hover:bg-slate-800 text-white text-xs font-semibold shadow-sm transition-all hover:scale-102 cursor-pointer"
+        >
+          <RotateCcw className="w-3.5 h-3.5" />
+          <span>{actionText || 'Сбросить фильтры'}</span>
+        </button>
+      )}
+      {!onReset && actionText && actionLink && (
         <Link
           to={actionLink}
-          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold shadow-lg shadow-blue-600/30 transition-all hover:scale-102"
+          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-black hover:bg-slate-800 text-white text-xs font-semibold shadow-sm transition-all hover:scale-102 cursor-pointer"
         >
           {actionText}
         </Link>
@@ -37,4 +48,3 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
     </div>
   );
 };
-

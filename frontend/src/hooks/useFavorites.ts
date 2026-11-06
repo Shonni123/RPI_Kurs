@@ -28,6 +28,6 @@ export const useFavorites = () => {
 
   const isFavorite = (id: string) => favoriteIds.includes(id);
 
-  return { favoriteIds, toggleFavorite, isFavorite };
+  return { favoriteIds, favorites: favoriteIds, toggleFavorite, isFavorite };
 };
 

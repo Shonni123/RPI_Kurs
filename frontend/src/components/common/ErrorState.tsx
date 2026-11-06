@@ -11,20 +11,20 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
   onRetry,
 }) => {
   return (
-    <div className="py-16 px-6 text-center max-w-md mx-auto rounded-3xl bg-[#161F30]/60 border border-red-500/20 space-y-4">
-      <div className="w-14 h-14 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-400 flex items-center justify-center mx-auto">
+    <div className="py-14 px-6 text-center max-w-md mx-auto rounded-[28px] bg-white border border-rose-200 space-y-4 shadow-sm">
+      <div className="w-14 h-14 rounded-2xl bg-rose-50 border border-rose-200 text-rose-500 flex items-center justify-center mx-auto">
         <AlertTriangle className="w-7 h-7" />
       </div>
-      <h3 className="font-display font-bold text-lg text-white">
+      <h3 className="font-benzin-bold text-base sm:text-lg text-slate-950 uppercase tracking-tight">
         Ошибка получения данных
       </h3>
-      <p className="text-xs sm:text-sm text-slate-300">
+      <p className="text-xs sm:text-sm text-slate-600 font-tt-travels leading-relaxed">
         {message}
       </p>
       {onRetry && (
         <button
           onClick={onRetry}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold shadow-lg shadow-blue-600/30 transition-all hover:scale-102"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-black hover:bg-slate-800 text-white text-xs font-semibold shadow-sm transition-all hover:scale-102 cursor-pointer"
         >
           <RefreshCw className="w-3.5 h-3.5" />
           <span>Повторить попытку</span>
@@ -33,4 +33,3 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
     </div>
   );
 };
-

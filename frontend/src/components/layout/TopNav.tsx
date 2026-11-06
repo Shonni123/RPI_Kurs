@@ -1,6 +1,18 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { LogOut, Settings, X } from 'lucide-react';
+import {
+  LogOut,
+  Settings,
+  X,
+  Plane,
+  Building2,
+  Heart,
+  HelpCircle,
+  Info,
+  ChevronRight,
+  ExternalLink,
+} from 'lucide-react';
+import { useFavorites } from '../../hooks/useFavorites';
 
 interface TopNavProps {
   theme?: 'dark' | 'light';
@@ -11,6 +23,7 @@ export const TopNav: React.FC<TopNavProps> = ({ theme = 'dark', className = '' }
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { favorites } = useFavorites();
   const isDark = theme === 'dark';
 
   const navLinks = [
@@ -18,6 +31,15 @@ export const TopNav: React.FC<TopNavProps> = ({ theme = 'dark', className = '' }
     { name: 'Мобильная версия', path: '/#newsletter' },
     { name: 'О сервисе', path: '/#why-us' },
     { name: 'Как это работает', path: '/#features' },
+  ];
+
+  const drawerLinks = [
+    { name: 'Онлайн-табло рейсов', path: '/flights', icon: Plane, badge: 'Live' },
+    { name: 'Аэропорты и хабы', path: '/airports', icon: Building2 },
+    { name: 'Избранные рейсы', path: '/favorites', icon: Heart, count: favorites.length },
+    { name: 'О сервисе', path: '/#why-us', icon: Info },
+    { name: 'Архитектура и стек', path: '/about', icon: ExternalLink },
+    { name: 'Вопросы и ответы (FAQ)', path: '/#faq', icon: HelpCircle },
   ];
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
@@ -44,99 +66,162 @@ export const TopNav: React.FC<TopNavProps> = ({ theme = 'dark', className = '' }
         navigate(path);
       }
       setIsOpen(false);
+      return;
     }
+
+    setIsOpen(false);
   };
 
   return (
-    <nav className={`w-full flex items-center justify-between ${className}`}>
-      {/* Left: 3-line hamburger menu - 3 identical parallel lines matching Figma */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex flex-col justify-center items-start gap-1.5 p-1 rounded-lg hover:opacity-80 transition-opacity cursor-pointer"
-        aria-label="Меню"
-      >
-        <span className={`w-6 h-0.5 rounded-full transition-all ${isDark ? 'bg-white' : 'bg-slate-900'}`} />
-        <span className={`w-6 h-0.5 rounded-full transition-all ${isDark ? 'bg-white' : 'bg-slate-900'}`} />
-        <span className={`w-6 h-0.5 rounded-full transition-all ${isDark ? 'bg-white' : 'bg-slate-900'}`} />
-      </button>
-
-      {/* Center: Frosted capsule navigation pills matching Figma reference */}
-      <div className="hidden md:flex items-center gap-3 lg:gap-3.5">
-        {navLinks.map((link) => (
-          <Link
-            key={link.name}
-            to={link.path}
-            onClick={(e) => handleLinkClick(e, link.path)}
-            className={`px-5 py-2 rounded-full text-xs sm:text-[13px] font-semibold transition-all duration-200 hover:scale-[1.02] whitespace-nowrap shadow-sm ${
-              isDark
-                ? 'text-slate-950 bg-white/[0.22] hover:bg-white/[0.38] backdrop-blur-[6px] border border-white/[0.35]'
-                : 'text-slate-900 bg-[#ECF9FF] hover:bg-[#DDF2FD] border border-[#D5ECF8]'
-            }`}
-          >
-            {link.name}
-          </Link>
-        ))}
-      </div>
-
-      {/* Right: Exit [-> and Settings ⚙ icons matching Figma */}
-      <div className="flex items-center gap-3.5">
-        <Link
-          to="/login"
-          className={`p-1.5 rounded-full hover:opacity-80 transition-all ${
-            isDark ? 'text-white' : 'text-slate-900'
-          }`}
-          title="Вход / Выход"
+    <>
+      <nav className={`w-full flex items-center justify-between ${className}`}>
+        {/* Left: 3-line hamburger menu - 3 identical parallel lines matching Figma */}
+        <button
+          onClick={() => setIsOpen(true)}
+          className="flex flex-col justify-center items-start gap-1.5 p-1 rounded-lg hover:opacity-80 transition-opacity cursor-pointer group"
+          aria-label="Меню навигации"
+          title="Открыть меню"
         >
-          <LogOut className="w-5 h-5 stroke-[2]" />
-        </Link>
-        <Link
-          to="/settings"
-          className={`p-1.5 rounded-full hover:opacity-80 transition-all ${
-            isDark ? 'text-white' : 'text-slate-900'
-          }`}
-          title="Настройки"
-        >
-          <Settings className="w-5 h-5 stroke-[2]" />
-        </Link>
-      </div>
+          <span className={`w-6 h-0.5 rounded-full transition-all group-hover:w-7 ${isDark ? 'bg-white' : 'bg-slate-900'}`} />
+          <span className={`w-6 h-0.5 rounded-full transition-all group-hover:w-5 ${isDark ? 'bg-white' : 'bg-slate-900'}`} />
+          <span className={`w-6 h-0.5 rounded-full transition-all group-hover:w-6 ${isDark ? 'bg-white' : 'bg-slate-900'}`} />
+        </button>
 
-      {/* Mobile Dropdown */}
-      {isOpen && (
-        <div className="md:hidden fixed inset-x-4 top-20 z-50 bg-slate-950/95 backdrop-blur-2xl border border-white/20 rounded-3xl p-5 shadow-2xl flex flex-col gap-2.5 animate-fadeIn">
-          <div className="flex justify-between items-center pb-2 border-b border-white/10">
-            <span className="text-white text-xs font-semibold uppercase tracking-wider font-display">Навигация</span>
-            <button onClick={() => setIsOpen(false)} className="text-white/70 hover:text-white p-1">
-              <X className="w-5 h-5" />
-            </button>
-          </div>
+        {/* Center: Frosted capsule navigation pills matching Figma reference */}
+        <div className="hidden md:flex items-center gap-3 lg:gap-3.5">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               to={link.path}
               onClick={(e) => handleLinkClick(e, link.path)}
-              className="px-4 py-3 rounded-2xl text-xs font-medium text-white hover:bg-white/10 transition-all"
+              className={`px-5 py-2 rounded-full text-xs sm:text-[13px] font-semibold transition-all duration-200 hover:scale-[1.02] whitespace-nowrap shadow-sm cursor-pointer ${
+                isDark
+                  ? 'text-slate-950 bg-white/[0.22] hover:bg-white/[0.38] backdrop-blur-[6px] border border-white/[0.35]'
+                  : 'text-slate-900 bg-[#ECF9FF] hover:bg-[#DDF2FD] border border-[#D5ECF8]'
+              }`}
             >
               {link.name}
             </Link>
           ))}
-          <div className="pt-2 border-t border-white/10 flex items-center justify-around">
-            <Link
-              to="/flights"
-              onClick={() => setIsOpen(false)}
-              className="text-white/80 hover:text-white text-xs py-2 px-3 rounded-xl bg-white/10"
-            >
-              Табло рейсов
-            </Link>
-            <Link
-              to="/about"
-              onClick={() => setIsOpen(false)}
-              className="text-white/80 hover:text-white text-xs py-2 px-3 rounded-xl bg-white/10"
-            >
-              О проекте
-            </Link>
-          </div>
+        </div>
+
+        {/* Right: Exit [-> and Settings ⚙ icons matching Figma */}
+        <div className="flex items-center gap-3.5">
+          <Link
+            to="/flights"
+            className={`p-1.5 rounded-full hover:opacity-80 transition-all ${
+              isDark ? 'text-white' : 'text-slate-900'
+            }`}
+            title="Табло рейсов"
+          >
+            <LogOut className="w-5 h-5 stroke-[2]" />
+          </Link>
+          <button
+            onClick={() => setIsOpen(true)}
+            className={`relative p-1.5 rounded-full hover:opacity-80 transition-all cursor-pointer ${
+              isDark ? 'text-white' : 'text-slate-900'
+            }`}
+            title="Настройки и меню"
+          >
+            <Settings className="w-5 h-5 stroke-[2]" />
+            {favorites.length > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-rose-500 text-white text-[9px] font-bold flex items-center justify-center">
+                {favorites.length}
+              </span>
+            )}
+          </button>
+        </div>
+      </nav>
+
+      {/* Global Slide-Over Navigation Drawer */}
+      {isOpen && (
+        <div className="fixed inset-0 z-[100] flex animate-fadeIn">
+          {/* Backdrop */}
+          <div
+            onClick={() => setIsOpen(false)}
+            className="fixed inset-0 bg-slate-950/40 backdrop-blur-xs transition-opacity"
+          />
+
+          {/* Drawer Content */}
+          <aside className="relative z-10 w-[300px] sm:w-[340px] h-full bg-white text-slate-900 shadow-2xl flex flex-col justify-between p-6 overflow-y-auto">
+            {/* Header */}
+            <div>
+              <div className="flex items-center justify-between pb-5 border-b border-slate-100">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-xl bg-[#EFF7FE] border border-[#D5ECF8] flex items-center justify-center text-sky-600">
+                    <Plane className="w-4 h-4 -rotate-45" />
+                  </div>
+                  <div>
+                    <h3 className="font-benzin-bold text-xs uppercase tracking-tight text-slate-950">
+                      АВИАРЕЙСЫ
+                    </h3>
+                    <p className="text-[10px] text-slate-400 font-sans">Информационный сервис</p>
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 transition-colors cursor-pointer"
+                  aria-label="Закрыть меню"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Navigation List */}
+              <div className="py-5 space-y-1.5">
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block px-3 mb-2 font-sans">
+                  Разделы сервиса
+                </span>
+
+                {drawerLinks.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <Link
+                      key={item.name}
+                      to={item.path}
+                      onClick={(e) => handleLinkClick(e, item.path)}
+                      className="w-full flex items-center justify-between px-3.5 py-3 rounded-2xl hover:bg-[#EFF7FE] text-slate-800 hover:text-sky-700 transition-colors group text-xs font-semibold"
+                    >
+                      <div className="flex items-center gap-3">
+                        <Icon className="w-4 h-4 text-slate-500 group-hover:text-sky-600 transition-colors" />
+                        <span>{item.name}</span>
+                      </div>
+
+                      <div className="flex items-center gap-1.5">
+                        {item.badge && (
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-sky-100 text-sky-700">
+                            {item.badge}
+                          </span>
+                        )}
+                        {item.count !== undefined && item.count > 0 && (
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-100 text-rose-600">
+                            {item.count}
+                          </span>
+                        )}
+                        <ChevronRight className="w-3.5 h-3.5 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Drawer Footer */}
+            <div className="pt-4 border-t border-slate-100 text-[11px] text-slate-500 space-y-2">
+              <div className="p-3 rounded-2xl bg-[#F8FCFF] border border-[#E2EEF8] space-y-1">
+                <span className="text-slate-900 font-semibold block">Курсовая работа РПИ</span>
+                <p className="text-[10px] text-slate-500">
+                  Разработка веб-интерфейса сервиса об авиарейсах на React.
+                </p>
+              </div>
+              <p className="text-center text-[10px] text-slate-400">
+                © 2026 Файзрахманова. Все права защищены.
+              </p>
+            </div>
+          </aside>
         </div>
       )}
-    </nav>
+    </>
   );
 };
