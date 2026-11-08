@@ -4,6 +4,9 @@
 * **Дисциплина:** Разработка программных интерфейсов (РПИ)
 * **Тема курсовой работы:** Разработка веб-интерфейса для информационного сервиса об авиарейсах на React
 * **Студент:** Файзрахманова Алина
+* **Стек технологий:**
+  * **Frontend (Клиент):** React 19, TypeScript, Vite 6, Tailwind CSS, React Router v7, Lucide Icons
+  * **Backend (Сервер API):** Python 3, Django 5, Django REST Framework (DRF), SQLite / PostgreSQL
 * **Репозиторий проекта на GitHub:** [https://github.com/Shonni123/RPI_Kurs](https://github.com/Shonni123/RPI_Kurs)
 * **Ссылка на интерактивный макет в Figma:** [Интерактивный макет и прототип в Figma](https://www.figma.com/design/ngQ8uOaiwsEfdOtCZpk4w8/%D0%A0%D0%9F%D0%98-%D0%A4%D0%B0%D0%B9%D0%B7%D1%80%D0%B0%D1%85%D0%BC%D0%B0%D0%BD%D0%BE%D0%B2%D0%B0--Copy-?node-id=3-1061)
 
