@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import {
   Plane,
@@ -13,7 +13,8 @@ import {
   Clock,
   Check,
 } from 'lucide-react';
-import { MOCK_FLIGHTS } from '../services/mockFlights';
+import { Flight } from '../types/flight';
+import { flightApi } from '../services/api';
 import { StatusBadge } from '../components/flights/StatusBadge';
 import { useFavorites } from '../hooks/useFavorites';
 import { EmptyState } from '../components/common/EmptyState';
@@ -22,8 +23,31 @@ export const FlightDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { isFavorite, toggleFavorite } = useFavorites();
   const [copied, setCopied] = useState(false);
+  const [flight, setFlight] = useState<Flight | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  const flight = MOCK_FLIGHTS.find((f) => f.id === id);
+  useEffect(() => {
+    let mounted = true;
+    if (id) {
+      flightApi.getFlightById(id).then((data) => {
+        if (mounted) {
+          setFlight(data);
+          setLoading(false);
+        }
+      });
+    }
+    return () => {
+      mounted = false;
+    };
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen pt-20 pb-20 px-4 bg-[#F8FCFF] text-slate-900 flex items-center justify-center">
+        <div className="w-8 h-8 rounded-full border-2 border-sky-600 border-t-transparent animate-spin" />
+      </div>
+    );
+  }
 
   if (!flight) {
     return (

@@ -26,6 +26,7 @@ export interface Flight {
   speed?: number;        // 860 км/ч
   price?: number;        // 14 500 ₽
   isFavorite?: boolean;
+  isRealApi?: boolean;
 }
 
 export interface FlightFiltersState {
