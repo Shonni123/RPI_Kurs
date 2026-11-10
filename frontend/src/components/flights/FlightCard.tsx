@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Plane, Heart, ArrowRight } from 'lucide-react';
+import { Plane, Heart, ArrowRight, ExternalLink } from 'lucide-react';
 import { Flight } from '../../types/flight';
 import { StatusBadge } from './StatusBadge';
 
@@ -119,28 +119,55 @@ export const FlightCard: React.FC<FlightCardProps> = ({
 
       </div>
 
-      {/* Footer Info & CTA */}
+      {/* Footer Info & CTA with Aviasales ticket link and Aviationstack API source */}
       <div className="border-t border-slate-100 pt-4 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center gap-4 text-xs text-slate-600 font-sans">
+        <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs text-slate-600 font-sans">
           {flight.from.gate && (
             <span>
               Гейт: <strong className="text-slate-900 font-semibold">{flight.from.gate}</strong>
             </span>
           )}
           {flight.price && (
-            <span>
-              Билеты от <strong className="font-benzin-medium text-slate-950 text-xs sm:text-sm">{flight.price.toLocaleString('ru-RU')} ₽</strong>
-            </span>
+            <div className="flex items-center gap-2">
+              <span>
+                Билеты от <strong className="font-benzin-medium text-slate-950 text-xs sm:text-sm">{flight.price.toLocaleString('ru-RU')} ₽</strong>
+              </span>
+              <a
+                href={`https://www.aviasales.ru/search/${flight.from.code || 'MOW'}${flight.to.code || 'LED'}1`}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="inline-flex items-center gap-1 text-[11px] font-semibold text-sky-600 hover:text-sky-800 hover:underline px-2 py-0.5 rounded-md bg-[#EFF7FE] border border-[#D5ECF8] transition-colors"
+                title="Купить или проверить цену на Aviasales"
+              >
+                <span>Купить билет</span>
+                <ExternalLink className="w-2.5 h-2.5" />
+              </a>
+            </div>
           )}
         </div>
 
-        <Link
-          to={`/flights/${flight.id}`}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-black hover:bg-slate-800 text-white text-xs font-semibold transition-all hover:scale-[1.02] shadow-sm cursor-pointer"
-        >
-          <span>Детали рейса</span>
-          <ArrowRight className="w-3.5 h-3.5" />
-        </Link>
+        <div className="flex items-center gap-2.5">
+          <a
+            href="https://aviationstack.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="text-[11px] text-slate-400 hover:text-sky-700 transition-colors hidden sm:inline-flex items-center gap-1"
+            title="Источник данных: Aviationstack Global Aviation API"
+          >
+            <span>Aviationstack API</span>
+            <ExternalLink className="w-2.5 h-2.5" />
+          </a>
+
+          <Link
+            to={`/flights/${flight.id}`}
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-black hover:bg-slate-800 text-white text-xs font-semibold transition-all hover:scale-[1.02] shadow-sm cursor-pointer"
+          >
+            <span>Детали рейса</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
       </div>
 
     </div>

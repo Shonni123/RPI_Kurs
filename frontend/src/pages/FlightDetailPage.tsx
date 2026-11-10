@@ -12,6 +12,9 @@ import {
   Calendar,
   Clock,
   Check,
+  ExternalLink,
+  Ticket,
+  Building2,
 } from 'lucide-react';
 import { Flight } from '../types/flight';
 import { flightApi } from '../services/api';
@@ -244,6 +247,87 @@ export const FlightDetailPage: React.FC = () => {
                 <span>Безопасность</span>
               </div>
               <p className="font-benzin-medium text-base sm:text-lg text-emerald-700">Штатно</p>
+            </div>
+          </div>
+
+          {/* Ticket Booking & Pricing Section */}
+          <div className="p-6 rounded-[28px] bg-[#F8FCFF] border border-[#E2EEF8] space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#E2EEF8] pb-4">
+              <div>
+                <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block font-sans">
+                  Стоимость перелёта
+                </span>
+                <div className="flex items-baseline gap-2 mt-0.5">
+                  <span className="font-benzin-bold text-2xl sm:text-3xl text-slate-950">
+                    {flight.price ? `${flight.price.toLocaleString('ru-RU')} ₽` : 'от 12 500 ₽'}
+                  </span>
+                  <span className="text-xs text-slate-500 font-sans">эконом-класс / в одну сторону</span>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2.5">
+                <a
+                  href={`https://www.aviasales.ru/search/${flight.from.code || 'MOW'}${flight.to.code || 'LED'}1`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-black hover:bg-slate-800 text-white text-xs font-semibold shadow-sm transition-all hover:scale-[1.02]"
+                >
+                  <Ticket className="w-3.5 h-3.5" />
+                  <span>Купить на Aviasales</span>
+                  <ExternalLink className="w-3 h-3 text-white/70" />
+                </a>
+
+                <a
+                  href={`https://travel.yandex.ru/avia/search/result/?fromName=${encodeURIComponent(flight.from.city)}&toName=${encodeURIComponent(flight.to.city)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white hover:bg-slate-50 border border-[#D5ECF8] text-slate-800 text-xs font-semibold shadow-xs transition-all"
+                >
+                  <span>Яндекс Путешествия</span>
+                  <ExternalLink className="w-3 h-3 text-slate-400" />
+                </a>
+              </div>
+            </div>
+
+            {/* Data Source & External Verification Links */}
+            <div className="pt-1 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-slate-500 font-sans">
+              <div className="flex items-center gap-2">
+                <Building2 className="w-3.5 h-3.5 text-sky-600 flex-shrink-0" />
+                <span>
+                  Источник статуса и телеметрии: 
+                  <a
+                    href="https://aviationstack.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-sky-600 hover:text-sky-800 hover:underline ml-1 inline-flex items-center gap-0.5"
+                  >
+                    <span>Aviationstack Global Flight API</span>
+                    <ExternalLink className="w-2.5 h-2.5" />
+                  </a>
+                </span>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <a
+                  href={`https://www.google.com/search?q=${encodeURIComponent('Авиакомпания ' + flight.airline + ' официальный сайт')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-slate-500 hover:text-slate-800 hover:underline inline-flex items-center gap-1"
+                >
+                  <span>Сайт {flight.airline}</span>
+                  <ExternalLink className="w-2.5 h-2.5 text-slate-400" />
+                </a>
+                <span>·</span>
+                <a
+                  href={`https://www.google.com/search?q=${encodeURIComponent('Аэропорт ' + flight.from.name + ' онлайн табло')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-slate-500 hover:text-slate-800 hover:underline inline-flex items-center gap-1"
+                >
+                  <span>Табло {flight.from.code}</span>
+                  <ExternalLink className="w-2.5 h-2.5 text-slate-400" />
+                </a>
+              </div>
             </div>
           </div>
 
