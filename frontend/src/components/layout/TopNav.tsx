@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   LogOut,
@@ -25,6 +26,26 @@ export const TopNav: React.FC<TopNavProps> = ({ theme = 'dark', className = '' }
   const navigate = useNavigate();
   const { favorites } = useFavorites();
   const isDark = theme === 'dark';
+
+  // Prevent background scroll and handle Escape key when drawer is open
+  useEffect(() => {
+    if (isOpen) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          setIsOpen(false);
+        }
+      };
+
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = originalOverflow;
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    }
+  }, [isOpen]);
 
   const navLinks = [
     { name: 'Главная', path: '/' },
@@ -133,95 +154,98 @@ export const TopNav: React.FC<TopNavProps> = ({ theme = 'dark', className = '' }
         </div>
       </nav>
 
-      {/* Global Slide-Over Navigation Drawer */}
-      {isOpen && (
-        <div className="fixed inset-0 z-[100] flex animate-fadeIn">
-          {/* Backdrop */}
-          <div
-            onClick={() => setIsOpen(false)}
-            className="fixed inset-0 bg-slate-950/40 backdrop-blur-xs transition-opacity"
-          />
+      {/* Global Slide-Over Navigation Drawer rendered directly in document.body via Portal */}
+      {isOpen &&
+        createPortal(
+          <div className="fixed inset-0 z-[999999] flex isolate" role="dialog" aria-modal="true">
+            {/* Backdrop */}
+            <div
+              onClick={() => setIsOpen(false)}
+              className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs transition-opacity cursor-pointer animate-fadeIn"
+              aria-label="Закрыть меню"
+            />
 
-          {/* Drawer Content */}
-          <aside className="relative z-10 w-[300px] sm:w-[340px] h-full bg-white text-slate-900 shadow-2xl flex flex-col justify-between p-6 overflow-y-auto">
-            {/* Header */}
-            <div>
-              <div className="flex items-center justify-between pb-5 border-b border-slate-100">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-xl bg-[#EFF7FE] border border-[#D5ECF8] flex items-center justify-center text-sky-600">
-                    <Plane className="w-4 h-4 -rotate-45" />
+            {/* Drawer Content */}
+            <aside className="relative z-10 w-[300px] sm:w-[340px] h-screen bg-white text-slate-900 shadow-2xl flex flex-col justify-between p-6 overflow-y-auto animate-slideInLeft border-r border-slate-200">
+              {/* Header */}
+              <div>
+                <div className="flex items-center justify-between pb-5 border-b border-slate-100">
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-xl bg-[#EFF7FE] border border-[#D5ECF8] flex items-center justify-center text-sky-600">
+                      <Plane className="w-4 h-4 -rotate-45" />
+                    </div>
+                    <div>
+                      <h3 className="font-benzin-bold text-xs uppercase tracking-tight text-slate-950">
+                        АВИАРЕЙСЫ
+                      </h3>
+                      <p className="text-[10px] text-slate-400 font-sans">Информационный сервис</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-benzin-bold text-xs uppercase tracking-tight text-slate-950">
-                      АВИАРЕЙСЫ
-                    </h3>
-                    <p className="text-[10px] text-slate-400 font-sans">Информационный сервис</p>
-                  </div>
+
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 transition-colors cursor-pointer"
+                    aria-label="Закрыть меню"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
                 </div>
 
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 transition-colors cursor-pointer"
-                  aria-label="Закрыть меню"
-                >
-                  <X className="w-4 h-4" />
-                </button>
+                {/* Navigation List */}
+                <div className="py-5 space-y-1.5">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block px-3 mb-2 font-sans">
+                    Разделы сервиса
+                  </span>
+
+                  {drawerLinks.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <Link
+                        key={item.name}
+                        to={item.path}
+                        onClick={(e) => handleLinkClick(e, item.path)}
+                        className="w-full flex items-center justify-between px-3.5 py-3 rounded-2xl hover:bg-[#EFF7FE] text-slate-800 hover:text-sky-700 transition-colors group text-xs font-semibold"
+                      >
+                        <div className="flex items-center gap-3">
+                          <Icon className="w-4 h-4 text-slate-500 group-hover:text-sky-600 transition-colors" />
+                          <span>{item.name}</span>
+                        </div>
+
+                        <div className="flex items-center gap-1.5">
+                          {item.badge && (
+                            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-sky-100 text-sky-700">
+                              {item.badge}
+                            </span>
+                          )}
+                          {item.count !== undefined && item.count > 0 && (
+                            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-100 text-rose-600">
+                              {item.count}
+                            </span>
+                          )}
+                          <ChevronRight className="w-3.5 h-3.5 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
               </div>
 
-              {/* Navigation List */}
-              <div className="py-5 space-y-1.5">
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block px-3 mb-2 font-sans">
-                  Разделы сервиса
-                </span>
-
-                {drawerLinks.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <Link
-                      key={item.name}
-                      to={item.path}
-                      onClick={(e) => handleLinkClick(e, item.path)}
-                      className="w-full flex items-center justify-between px-3.5 py-3 rounded-2xl hover:bg-[#EFF7FE] text-slate-800 hover:text-sky-700 transition-colors group text-xs font-semibold"
-                    >
-                      <div className="flex items-center gap-3">
-                        <Icon className="w-4 h-4 text-slate-500 group-hover:text-sky-600 transition-colors" />
-                        <span>{item.name}</span>
-                      </div>
-
-                      <div className="flex items-center gap-1.5">
-                        {item.badge && (
-                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-sky-100 text-sky-700">
-                            {item.badge}
-                          </span>
-                        )}
-                        {item.count !== undefined && item.count > 0 && (
-                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-100 text-rose-600">
-                            {item.count}
-                          </span>
-                        )}
-                        <ChevronRight className="w-3.5 h-3.5 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
-                      </div>
-                    </Link>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Drawer Footer */}
-            <div className="pt-4 border-t border-slate-100 text-[11px] text-slate-500 space-y-2">
-              <div className="p-3 rounded-2xl bg-[#F8FCFF] border border-[#E2EEF8] space-y-1">
-                <span className="text-slate-900 font-semibold block">Курсовая работа РПИ</span>
-                <p className="text-[10px] text-slate-500">
-                  Разработка веб-интерфейса сервиса об авиарейсах на React.
+              {/* Drawer Footer */}
+              <div className="pt-4 border-t border-slate-100 text-[11px] text-slate-500 space-y-2">
+                <div className="p-3 rounded-2xl bg-[#F8FCFF] border border-[#E2EEF8] space-y-1">
+                  <span className="text-slate-900 font-semibold block">Курсовая работа РПИ</span>
+                  <p className="text-[10px] text-slate-500">
+                    Разработка веб-интерфейса сервиса об авиарейсах на React.
+                  </p>
+                </div>
+                <p className="text-center text-[10px] text-slate-400">
+                  © 2026 Файзрахманова. Все права защищены.
                 </p>
               </div>
-              <p className="text-center text-[10px] text-slate-400">
-                © 2026 Файзрахманова. Все права защищены.
-              </p>
-            </div>
-          </aside>
-        </div>
-      )}
+            </aside>
+          </div>,
+          document.body
+        )}
     </>
   );
 };

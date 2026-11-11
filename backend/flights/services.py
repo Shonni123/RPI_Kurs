@@ -257,3 +257,4 @@ def seed_initial_database():
 
     for fl in initial_flights:
         Flight.objects.get_or_create(flight_id=fl['flight_id'], defaults=fl)
+

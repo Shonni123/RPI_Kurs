@@ -14,3 +14,4 @@ urlpatterns = [
     path('sync-aviationstack/', SyncAviationstackAPIView.as_view(), name='sync-aviationstack'),
     path('status/', ApiStatusAPIView.as_view(), name='api-status'),
 ]
+

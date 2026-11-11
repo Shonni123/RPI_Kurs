@@ -76,3 +76,4 @@ class AirportSerializer(serializers.ModelSerializer):
             'arrivalsCount',
             'timezone',
         ]
+
