@@ -3,8 +3,19 @@ Django settings for backend project.
 """
 
 from pathlib import Path
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Load .env file if present
+ENV_FILE = BASE_DIR / '.env'
+if ENV_FILE.exists():
+    with open(ENV_FILE, encoding='utf-8') as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith('#') and '=' in line:
+                k, v = line.split('=', 1)
+                os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
 
 SECRET_KEY = 'django-insecure-(fa7$bovn!ztf4e48amoo2@-67ar(suip!hl_+ce9$=dozetpo'
 
@@ -111,7 +122,20 @@ REST_FRAMEWORK = {
     ],
 }
 
-# Email Settings (Console backend by default so verification codes appear in server console during dev & defense)
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-DEFAULT_FROM_EMAIL = 'Авиарейсы <noreply@aviaraces.ru>'
+# Email Settings
+YANDEX_EMAIL_USER = os.environ.get('YANDEX_EMAIL_USER', '').strip()
+YANDEX_EMAIL_PASSWORD = os.environ.get('YANDEX_EMAIL_PASSWORD', '').strip()
+
+if YANDEX_EMAIL_USER and YANDEX_EMAIL_PASSWORD:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.yandex.ru'
+    EMAIL_PORT = 465
+    EMAIL_USE_SSL = True
+    EMAIL_HOST_USER = YANDEX_EMAIL_USER
+    EMAIL_HOST_PASSWORD = YANDEX_EMAIL_PASSWORD
+    DEFAULT_FROM_EMAIL = f'Авиарейсы <{YANDEX_EMAIL_USER}>'
+else:
+    # Console backend by default (verification codes appear in Django terminal console for easy testing)
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    DEFAULT_FROM_EMAIL = 'Авиарейсы <noreply@aviaraces.ru>'
 
