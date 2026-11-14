@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import { AuthModal } from './components/auth/AuthModal';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { HomePage } from './pages/HomePage';
@@ -8,6 +10,7 @@ import { FlightDetailPage } from './pages/FlightDetailPage';
 import { AirportsPage } from './pages/AirportsPage';
 import { FavoritesPage } from './pages/FavoritesPage';
 import { AboutPage } from './pages/AboutPage';
+import { UserProfilePage } from './pages/UserProfilePage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
 // Scroll to top or to hash element on route change
@@ -43,22 +46,26 @@ const ScrollToTop: React.FC = () => {
 export const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <ScrollToTop />
-      <div className="min-h-screen flex flex-col bg-white text-slate-900 selection:bg-blue-600 selection:text-white">
-        <Navbar />
-        <div className="flex-1">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/flights" element={<FlightsPage />} />
-            <Route path="/flights/:id" element={<FlightDetailPage />} />
-            <Route path="/airports" element={<AirportsPage />} />
-            <Route path="/favorites" element={<FavoritesPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
+      <AuthProvider>
+        <ScrollToTop />
+        <div className="min-h-screen flex flex-col bg-white text-slate-900 selection:bg-blue-600 selection:text-white">
+          <Navbar />
+          <div className="flex-1">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/flights" element={<FlightsPage />} />
+              <Route path="/flights/:id" element={<FlightDetailPage />} />
+              <Route path="/airports" element={<AirportsPage />} />
+              <Route path="/favorites" element={<FavoritesPage />} />
+              <Route path="/profile" element={<UserProfilePage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
+        <AuthModal />
+      </AuthProvider>
     </BrowserRouter>
   );
 };

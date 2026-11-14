@@ -12,8 +12,10 @@ import {
   Info,
   ChevronRight,
   ExternalLink,
+  User as UserIcon,
 } from 'lucide-react';
 import { useFavorites } from '../../hooks/useFavorites';
+import { useAuth } from '../../context/AuthContext';
 
 interface TopNavProps {
   theme?: 'dark' | 'light';
@@ -25,7 +27,15 @@ export const TopNav: React.FC<TopNavProps> = ({ theme = 'dark', className = '' }
   const location = useLocation();
   const navigate = useNavigate();
   const { favorites } = useFavorites();
+  const { user, isAuthenticated, openAuthModal } = useAuth();
   const isDark = theme === 'dark';
+
+  const userInitials = (user?.fullName || user?.username || 'У')
+    .split(' ')
+    .map((w) => w[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
 
   // Prevent background scroll and handle Escape key when drawer is open
   useEffect(() => {
@@ -126,8 +136,38 @@ export const TopNav: React.FC<TopNavProps> = ({ theme = 'dark', className = '' }
           ))}
         </div>
 
-        {/* Right: Exit [-> and Settings ⚙ icons matching Figma */}
-        <div className="flex items-center gap-3.5">
+        {/* Right: User / Auth button, Flights, Settings ⚙ */}
+        <div className="flex items-center gap-2.5 sm:gap-3">
+          {isAuthenticated && user ? (
+            <Link
+              to="/profile"
+              className={`flex items-center gap-2 pl-1 pr-3 py-1 rounded-full text-xs font-semibold transition-all hover:scale-[1.02] shadow-xs cursor-pointer ${
+                isDark
+                  ? 'bg-white/[0.22] hover:bg-white/[0.38] text-white border border-white/[0.35]'
+                  : 'bg-[#EFF7FE] hover:bg-[#DDF2FD] text-sky-800 border border-[#D5ECF8]'
+              }`}
+              title={`Личный кабинет: ${user.fullName || user.username}`}
+            >
+              <div className="w-6 h-6 rounded-full bg-sky-600 text-white font-bold text-[10px] flex items-center justify-center shadow-xs">
+                {userInitials}
+              </div>
+              <span className="hidden sm:inline max-w-[100px] truncate">{user.fullName?.split(' ')[0] || user.username}</span>
+            </Link>
+          ) : (
+            <button
+              onClick={() => openAuthModal('login')}
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all hover:scale-[1.02] shadow-xs cursor-pointer ${
+                isDark
+                  ? 'bg-white/[0.22] hover:bg-white/[0.38] text-white border border-white/[0.35]'
+                  : 'bg-sky-600 hover:bg-sky-700 text-white shadow-sky-600/20'
+              }`}
+              title="Войти в личный кабинет"
+            >
+              <UserIcon className="w-3.5 h-3.5" />
+              <span>Войти</span>
+            </button>
+          )}
+
           <Link
             to="/flights"
             className={`p-1.5 rounded-full hover:opacity-80 transition-all ${
@@ -189,6 +229,39 @@ export const TopNav: React.FC<TopNavProps> = ({ theme = 'dark', className = '' }
                   >
                     <X className="w-4 h-4" />
                   </button>
+                </div>
+
+                {/* User Profile Card / Auth Button in Drawer */}
+                <div className="pt-4 pb-2 border-b border-slate-100">
+                  {isAuthenticated && user ? (
+                    <Link
+                      to="/profile"
+                      onClick={() => setIsOpen(false)}
+                      className="flex items-center gap-3 p-3 rounded-2xl bg-[#EFF7FE] border border-[#D5ECF8] hover:bg-[#E0EFFD] transition-colors group"
+                    >
+                      <div className="w-10 h-10 rounded-xl bg-sky-600 text-white font-bold flex items-center justify-center text-xs shadow-xs">
+                        {userInitials}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <span className="font-semibold text-xs text-slate-900 block truncate group-hover:text-sky-700">
+                          {user.fullName || user.username}
+                        </span>
+                        <span className="text-[10px] text-slate-500 block truncate">{user.email}</span>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
+                    </Link>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        setIsOpen(false);
+                        openAuthModal('login');
+                      }}
+                      className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-2xl bg-sky-600 hover:bg-sky-700 text-white font-semibold text-xs transition-all cursor-pointer shadow-xs"
+                    >
+                      <UserIcon className="w-4 h-4" />
+                      <span>Войти / Регистрация</span>
+                    </button>
+                  )}
                 </div>
 
                 {/* Navigation List */}
