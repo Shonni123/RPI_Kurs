@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
-  LogOut,
   Settings,
   X,
   Plane,
@@ -155,13 +154,6 @@ export const TopNav: React.FC<TopNavProps> = ({ className = '' }) => {
             </button>
           )}
 
-          <Link
-            to="/flights"
-            className="p-1.5 rounded-full hover:opacity-80 transition-all text-slate-900 hover:text-sky-600"
-            title="Табло рейсов"
-          >
-            <LogOut className="w-5 h-5 stroke-[2]" />
-          </Link>
           <button
             onClick={() => setIsOpen(true)}
             className="relative p-1.5 rounded-full hover:opacity-80 transition-all cursor-pointer text-slate-900 hover:text-sky-600"
