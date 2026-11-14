@@ -1,10 +1,9 @@
 import React from 'react';
-import { TopNav } from '../layout/TopNav';
 import { IMAGES } from '../../assets/images';
 
 export const HeroSection: React.FC = () => {
   return (
-    <section className="relative min-h-screen flex flex-col justify-between overflow-hidden rounded-none shadow-2xl">
+    <section className="relative min-h-[calc(100vh-65px)] flex flex-col justify-end overflow-hidden rounded-none shadow-2xl">
       {/* Background Plane Image directly from Figma (sharp, unrounded corners at bottom) */}
       <div className="absolute inset-0 z-0">
         <img
@@ -14,13 +13,8 @@ export const HeroSection: React.FC = () => {
         />
       </div>
 
-      {/* Top Bar: ≡ | Главная Посмотреть рейс О сервисе Как это работает | [-> ⚙ */}
-      <header className="relative z-20 pt-5 sm:pt-6 px-6 sm:px-10 lg:px-14 w-full">
-        <TopNav theme="dark" className="max-w-[1440px] mx-auto" />
-      </header>
-
       {/* Bottom Content: online + АВИАРЕЙСЫ and 4+ Frosted Card */}
-      <div className="relative z-20 w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 flex flex-col xl:flex-row items-end justify-between gap-6 pb-6 sm:pb-8 lg:pb-10 pt-8">
+      <div className="relative z-20 w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 flex flex-col xl:flex-row items-end justify-between gap-6 pb-6 sm:pb-8 lg:pb-10 pt-16 sm:pt-24">
         
         {/* Main Title Group: Combined vector of online in High Summit font + АВИАРЕЙСЫ in Benzin with exact spacing */}
         <div className="relative w-full max-w-[940px] select-none">

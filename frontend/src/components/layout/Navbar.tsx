@@ -1,18 +1,10 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 import { TopNav } from './TopNav';
 
 export const Navbar: React.FC = () => {
-  const location = useLocation();
-
-  // On HomePage, HeroSection and WhyUsSection have their own integrated headers matching Figma frames
-  if (location.pathname === '/') {
-    return null;
-  }
-
   return (
-    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 px-4 sm:px-8 py-3.5 shadow-sm">
-      <TopNav theme="light" />
+    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-sky-100/70 px-4 sm:px-8 lg:px-12 py-3 shadow-xs transition-colors">
+      <TopNav theme="light" className="max-w-[1440px] mx-auto" />
     </header>
   );
 };

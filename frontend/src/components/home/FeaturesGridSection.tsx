@@ -1,6 +1,5 @@
 import React from 'react';
 import { IMAGES } from '../../assets/images';
-import { TopNav } from '../layout/TopNav';
 
 export const FeaturesGridSection: React.FC = () => {
   const features = [
@@ -77,13 +76,8 @@ export const FeaturesGridSection: React.FC = () => {
     <section id="features" className="pt-3 sm:pt-4 pb-6 sm:pb-8 px-4 sm:px-6 lg:px-8 xl:px-10 bg-white text-slate-900 scroll-mt-6">
       <div className="w-full max-w-[1364px] mx-auto">
         
-        {/* Top Header matching Figma in light theme */}
-        <header className="w-full">
-          <TopNav theme="light" />
-        </header>
-
         {/* Title matching Figma in Benzin-Bold font */}
-        <div className="select-none mt-2.5 sm:mt-3 mb-4 sm:mb-5">
+        <div className="select-none mt-1 sm:mt-2 mb-4 sm:mb-5">
           <h2
             className="text-[22px] sm:text-[26px] lg:text-[32px] tracking-tight uppercase text-slate-950 leading-tight"
             style={{ fontFamily: "'Benzin-Bold', sans-serif", fontWeight: 700 }}

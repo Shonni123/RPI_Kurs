@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import { ArrowUpRight, ArrowRight, ChevronRight } from 'lucide-react';
 import { IMAGES } from '../../assets/images';
 import { Link } from 'react-router-dom';
-import { TopNav } from '../layout/TopNav';
 
 export const WhyUsSection: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -90,13 +89,8 @@ export const WhyUsSection: React.FC = () => {
     <section id="why-us" className="pt-6 sm:pt-8 pb-3 sm:pb-4 px-4 sm:px-6 lg:px-8 xl:px-10 bg-white text-slate-900 w-full overflow-hidden scroll-mt-4">
       <div className="w-full max-w-[1364px] mx-auto">
         
-        {/* Top Header matching Figma in light theme */}
-        <header className="w-full">
-          <TopNav theme="light" />
-        </header>
-
-        {/* Section Title matching Figma in Benzin-Medium - tight spacing to header */}
-        <div className="select-none mt-2 sm:mt-2.5">
+        {/* Section Title matching Figma in Benzin-Medium */}
+        <div className="select-none mt-1 sm:mt-2">
           <h2
             className="text-[22px] sm:text-[28px] lg:text-[34px] font-medium tracking-tight text-slate-950 uppercase leading-tight font-benzin"
             style={{ fontFamily: "'Benzin-Bold', 'Benzin-Medium', 'Benzin', sans-serif" }}

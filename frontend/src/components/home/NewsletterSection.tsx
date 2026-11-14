@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { TopNav } from '../layout/TopNav';
 
 export const NewsletterSection: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -13,14 +12,9 @@ export const NewsletterSection: React.FC = () => {
   };
 
   return (
-    <section id="newsletter" className="pt-2 sm:pt-3 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 xl:px-10 bg-white text-slate-900 w-full overflow-hidden scroll-mt-6">
+    <section id="newsletter" className="pt-6 sm:pt-8 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 xl:px-10 bg-white text-slate-900 w-full overflow-hidden scroll-mt-6">
       <div className="w-full max-w-[1364px] mx-auto space-y-6 sm:space-y-8">
         
-        {/* Top Header matching other sections in light theme */}
-        <header className="w-full">
-          <TopNav theme="light" />
-        </header>
-
         {/* Newsletter Card matching Figma exactly */}
         <div className="w-full max-w-[1240px] xl:max-w-[1243px] mx-auto">
           <div className="relative w-full rounded-[33px] bg-[#F8FCFF] border border-[#E2EEF8] overflow-hidden min-h-[420px] sm:min-h-[453px] flex flex-col items-center justify-between pt-10 sm:pt-11 pb-10 sm:pb-12 px-6 sm:px-10 select-none">

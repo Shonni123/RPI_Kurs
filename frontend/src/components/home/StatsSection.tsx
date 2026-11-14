@@ -1,20 +1,14 @@
 import React from 'react';
 import { Plus } from 'lucide-react';
 import { IMAGES } from '../../assets/images';
-import { TopNav } from '../layout/TopNav';
 
 export const StatsSection: React.FC = () => {
   return (
     <section id="stats" className="pt-8 sm:pt-10 lg:pt-12 pb-6 sm:pb-8 px-4 sm:px-6 lg:px-8 xl:px-10 bg-white text-slate-900 overflow-hidden scroll-mt-6">
       <div className="w-full max-w-[1364px] mx-auto space-y-6 sm:space-y-8">
         
-        {/* Top Header matching Figma in light theme */}
-        <header className="w-full">
-          <TopNav theme="light" />
-        </header>
-
         {/* Massive "FLIGHTS" typography cutout with airplane flying out matching Figma */}
-        <div className="mt-4 sm:mt-5 lg:mt-6 mb-5 sm:mb-7 w-full max-w-[1240px] xl:max-w-[1280px] mx-auto select-none">
+        <div className="mt-2 sm:mt-3 mb-5 sm:mb-7 w-full max-w-[1240px] xl:max-w-[1280px] mx-auto select-none">
           <img
             src="/assets/flights_title_figma.png?v=3"
             alt="FLIGHTS"

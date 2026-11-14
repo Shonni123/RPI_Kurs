@@ -22,13 +22,12 @@ interface TopNavProps {
   className?: string;
 }
 
-export const TopNav: React.FC<TopNavProps> = ({ theme = 'dark', className = '' }) => {
+export const TopNav: React.FC<TopNavProps> = ({ className = '' }) => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const { favorites } = useFavorites();
   const { user, isAuthenticated, openAuthModal } = useAuth();
-  const isDark = theme === 'dark';
 
   const userInitials = (user?.fullName || user?.username || 'У')
     .split(' ')
@@ -113,23 +112,19 @@ export const TopNav: React.FC<TopNavProps> = ({ theme = 'dark', className = '' }
           aria-label="Меню навигации"
           title="Открыть меню"
         >
-          <span className={`w-6 h-0.5 rounded-full transition-all group-hover:w-7 ${isDark ? 'bg-white' : 'bg-slate-900'}`} />
-          <span className={`w-6 h-0.5 rounded-full transition-all group-hover:w-5 ${isDark ? 'bg-white' : 'bg-slate-900'}`} />
-          <span className={`w-6 h-0.5 rounded-full transition-all group-hover:w-6 ${isDark ? 'bg-white' : 'bg-slate-900'}`} />
+          <span className="w-6 h-0.5 rounded-full transition-all group-hover:w-7 bg-slate-900" />
+          <span className="w-6 h-0.5 rounded-full transition-all group-hover:w-5 bg-slate-900" />
+          <span className="w-6 h-0.5 rounded-full transition-all group-hover:w-6 bg-slate-900" />
         </button>
 
-        {/* Center: Frosted capsule navigation pills matching Figma reference */}
+        {/* Center: Frosted capsule navigation pills in light blue theme matching Image 2 */}
         <div className="hidden md:flex items-center gap-3 lg:gap-3.5">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               to={link.path}
               onClick={(e) => handleLinkClick(e, link.path)}
-              className={`px-5 py-2 rounded-full text-xs sm:text-[13px] font-semibold transition-all duration-200 hover:scale-[1.02] whitespace-nowrap shadow-sm cursor-pointer ${
-                isDark
-                  ? 'text-slate-950 bg-white/[0.22] hover:bg-white/[0.38] backdrop-blur-[6px] border border-white/[0.35]'
-                  : 'text-slate-900 bg-[#ECF9FF] hover:bg-[#DDF2FD] border border-[#D5ECF8]'
-              }`}
+              className="px-5 py-2 rounded-full text-xs sm:text-[13px] font-semibold transition-all duration-200 hover:scale-[1.02] whitespace-nowrap shadow-xs cursor-pointer text-slate-900 bg-[#ECF9FF] hover:bg-[#DDF2FD] border border-[#D5ECF8]"
             >
               {link.name}
             </Link>
@@ -141,11 +136,7 @@ export const TopNav: React.FC<TopNavProps> = ({ theme = 'dark', className = '' }
           {isAuthenticated && user ? (
             <Link
               to="/profile"
-              className={`flex items-center gap-2 pl-1 pr-3 py-1 rounded-full text-xs font-semibold transition-all hover:scale-[1.02] shadow-xs cursor-pointer ${
-                isDark
-                  ? 'bg-white/[0.22] hover:bg-white/[0.38] text-white border border-white/[0.35]'
-                  : 'bg-[#EFF7FE] hover:bg-[#DDF2FD] text-sky-800 border border-[#D5ECF8]'
-              }`}
+              className="flex items-center gap-2 pl-1 pr-3 py-1 rounded-full text-xs font-semibold transition-all hover:scale-[1.02] shadow-xs cursor-pointer bg-[#ECF9FF] hover:bg-[#DDF2FD] text-sky-900 border border-[#D5ECF8]"
               title={`Личный кабинет: ${user.fullName || user.username}`}
             >
               <div className="w-6 h-6 rounded-full bg-sky-600 text-white font-bold text-[10px] flex items-center justify-center shadow-xs">
@@ -156,32 +147,24 @@ export const TopNav: React.FC<TopNavProps> = ({ theme = 'dark', className = '' }
           ) : (
             <button
               onClick={() => openAuthModal('login')}
-              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all hover:scale-[1.02] shadow-xs cursor-pointer ${
-                isDark
-                  ? 'bg-white/[0.22] hover:bg-white/[0.38] text-white border border-white/[0.35]'
-                  : 'bg-sky-600 hover:bg-sky-700 text-white shadow-sky-600/20'
-              }`}
+              className="flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold transition-all hover:scale-[1.02] shadow-xs cursor-pointer bg-[#ECF9FF] hover:bg-[#DDF2FD] text-sky-900 border border-[#D5ECF8]"
               title="Войти в личный кабинет"
             >
-              <UserIcon className="w-3.5 h-3.5" />
+              <UserIcon className="w-3.5 h-3.5 text-sky-700" />
               <span>Войти</span>
             </button>
           )}
 
           <Link
             to="/flights"
-            className={`p-1.5 rounded-full hover:opacity-80 transition-all ${
-              isDark ? 'text-white' : 'text-slate-900'
-            }`}
+            className="p-1.5 rounded-full hover:opacity-80 transition-all text-slate-900 hover:text-sky-600"
             title="Табло рейсов"
           >
             <LogOut className="w-5 h-5 stroke-[2]" />
           </Link>
           <button
             onClick={() => setIsOpen(true)}
-            className={`relative p-1.5 rounded-full hover:opacity-80 transition-all cursor-pointer ${
-              isDark ? 'text-white' : 'text-slate-900'
-            }`}
+            className="relative p-1.5 rounded-full hover:opacity-80 transition-all cursor-pointer text-slate-900 hover:text-sky-600"
             title="Настройки и меню"
           >
             <Settings className="w-5 h-5 stroke-[2]" />
