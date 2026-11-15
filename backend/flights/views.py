@@ -4,7 +4,11 @@ from rest_framework import status
 from django.db.models import Q
 from .models import Flight, Airport
 from .serializers import FlightSerializer, AirportSerializer
-from .services import fetch_and_sync_aviationstack_flights, seed_initial_database
+from .services import (
+    fetch_and_sync_aviationstack_flights,
+    seed_initial_database,
+    update_dynamic_flight_lifecycle,
+)
 
 class FlightListAPIView(APIView):
     """
@@ -14,6 +18,9 @@ class FlightListAPIView(APIView):
         # Auto-seed if database is empty
         if not Flight.objects.exists():
             seed_initial_database()
+
+        # Update dynamic statuses according to current time
+        update_dynamic_flight_lifecycle()
 
         queryset = Flight.objects.all()
 
@@ -57,6 +64,7 @@ class FlightDetailAPIView(APIView):
     Returns single flight by slug ID.
     """
     def get(self, request, flight_id):
+        update_dynamic_flight_lifecycle()
         try:
             flight = Flight.objects.get(flight_id=flight_id)
             serializer = FlightSerializer(flight)

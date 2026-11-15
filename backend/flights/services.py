@@ -129,6 +129,81 @@ def fetch_and_sync_aviationstack_flights(limit=25):
             'error': str(e),
         }
 
+def update_dynamic_flight_lifecycle():
+    """
+    Dynamically recalculates flight statuses and updates today's dates
+    based on the current clock time so that the flight board always feels
+    alive, active, and realistic 24/7.
+    """
+    now = datetime.datetime.now()
+    today_str = now.strftime('%Y-%m-%d')
+    current_minutes = now.hour * 60 + now.minute
+
+    flights = Flight.objects.all()
+    for flight in flights:
+        changed = False
+
+        # Keep dates fresh to current date
+        if flight.departure_date != today_str:
+            flight.departure_date = today_str
+            changed = True
+
+        # Parse departure and arrival time
+        try:
+            dep_h, dep_m = map(int, flight.departure_time.split(':'))
+            arr_h, arr_m = map(int, flight.arrival_time.split(':'))
+            dep_min = dep_h * 60 + dep_m
+            arr_min = arr_h * 60 + arr_m
+
+            # If arrival wraps past midnight (e.g. 23:30 to 02:15)
+            if arr_min < dep_min:
+                arr_min += 24 * 60
+
+            # If flight is explicitly marked delayed
+            if flight.status == 'delayed' or 'задержан' in flight.status_text.lower():
+                flight.altitude = 0
+                flight.speed = 0
+                if changed:
+                    flight.save()
+                continue
+
+            # Calculate dynamic status
+            # 1) If current time < departure time
+            if current_minutes < dep_min:
+                diff_to_dep = dep_min - current_minutes
+                if diff_to_dep <= 45:
+                    flight.status = 'boarding'
+                    flight.status_text = 'Посадка на борт'
+                    flight.altitude = 0
+                    flight.speed = 0
+                else:
+                    flight.status = 'scheduled'
+                    flight.status_text = 'По расписанию'
+                    flight.altitude = 0
+                    flight.speed = 0
+                changed = True
+            # 2) If in the air (between departure and arrival)
+            elif dep_min <= current_minutes < arr_min:
+                flight.status = 'in_air'
+                flight.status_text = 'В полёте'
+                flight.altitude = 10400
+                flight.speed = 870
+                changed = True
+            # 3) If landed
+            else:
+                flight.status = 'landed'
+                flight.status_text = f'Прибыл в {flight.arrival_time}'
+                flight.altitude = 0
+                flight.speed = 0
+                changed = True
+
+        except Exception:
+            pass
+
+        if changed:
+            flight.save()
+
+
 def seed_initial_database():
     """
     Populates SQLite database with initial authentic flights and airports
