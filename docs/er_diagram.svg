@@ -1,275 +1,111 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 960" width="100%" height="100%" style="background:#ffffff; font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 480" width="100%" height="100%" style="background:#ffffff; font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif;">
   <defs>
-    <filter id="shadow" x="-3%" y="-3%" width="106%" height="108%">
-      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.06" />
+    <filter id="shadow" x="-3%" y="-4%" width="106%" height="110%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-opacity="0.05" />
     </filter>
   </defs>
 
   <!-- Чистый белый фон -->
   <rect width="100%" height="100%" fill="#ffffff" />
 
-  <!-- ================= 1. USER (auth_user) ================= -->
-  <g transform="translate(40, 40)" filter="url(#shadow)">
-    <rect x="0" y="0" width="360" height="34" rx="4" fill="#E2E8F0" stroke="#334155" stroke-width="1.2" />
-    <text x="14" y="22" font-size="14" font-weight="bold" fill="#0F172A">USER (auth_user)</text>
-    <rect x="0" y="34" width="360" height="206" fill="#FFFFFF" stroke="#334155" stroke-width="1.2" />
-    
-    <text x="14" y="58" font-size="12" font-weight="bold" fill="#1E293B">id</text>
-    <text x="120" y="58" font-size="11.5" fill="#475569">INTEGER</text>
-    <text x="210" y="58" font-size="11" fill="#64748B">PK, autoincrement</text>
-
-    <text x="14" y="82" font-size="12" font-weight="bold" fill="#1E293B">username</text>
-    <text x="120" y="82" font-size="11.5" fill="#475569">VARCHAR(150)</text>
-    <text x="235" y="82" font-size="11" fill="#64748B">UNIQUE</text>
-
-    <text x="14" y="106" font-size="12" font-weight="bold" fill="#1E293B">email</text>
-    <text x="120" y="106" font-size="11.5" fill="#475569">VARCHAR(254)</text>
-    <text x="235" y="106" font-size="11" fill="#64748B">UNIQUE</text>
-
-    <text x="14" y="130" font-size="12" font-weight="bold" fill="#1E293B">password</text>
-    <text x="120" y="130" font-size="11.5" fill="#475569">VARCHAR(128)</text>
-    <text x="225" y="130" font-size="10.5" fill="#64748B">PBKDF2-SHA256</text>
-
-    <text x="14" y="154" font-size="12" font-weight="bold" fill="#1E293B">first_name</text>
-    <text x="120" y="154" font-size="11.5" fill="#475569">VARCHAR(150)</text>
-
-    <text x="14" y="178" font-size="12" font-weight="bold" fill="#1E293B">last_name</text>
-    <text x="120" y="178" font-size="11.5" fill="#475569">VARCHAR(150)</text>
-
-    <text x="14" y="202" font-size="12" font-weight="bold" fill="#1E293B">is_active</text>
-    <text x="120" y="202" font-size="11.5" fill="#475569">BOOLEAN</text>
-    <text x="220" y="202" font-size="11" fill="#64748B">default: True</text>
-
-    <text x="14" y="226" font-size="12" font-weight="bold" fill="#1E293B">date_joined</text>
-    <text x="120" y="226" font-size="11.5" fill="#475569">DATETIME</text>
+  <!-- 1. USER -->
+  <g transform="translate(30, 30)" filter="url(#shadow)">
+    <rect x="0" y="0" width="260" height="30" rx="3" fill="#E2E8F0" stroke="#334155" stroke-width="1.2" />
+    <text x="10" y="20" font-size="12" font-weight="bold" fill="#0F172A">USER (auth_user)</text>
+    <rect x="0" y="30" width="260" height="116" fill="#FFFFFF" stroke="#334155" stroke-width="1.2" />
+    <text x="10" y="52" font-size="11" font-weight="bold" fill="#1E293B">id</text><text x="95" y="52" font-size="10.5" fill="#475569">INTEGER</text><text x="175" y="52" font-size="10.5" fill="#64748B">PK</text>
+    <text x="10" y="74" font-size="11" font-weight="bold" fill="#1E293B">username</text><text x="95" y="74" font-size="10.5" fill="#475569">VARCHAR</text><text x="175" y="74" font-size="10.5" fill="#64748B">UNIQUE</text>
+    <text x="10" y="96" font-size="11" font-weight="bold" fill="#1E293B">email</text><text x="95" y="96" font-size="10.5" fill="#475569">VARCHAR</text><text x="175" y="96" font-size="10.5" fill="#64748B">UNIQUE</text>
+    <text x="10" y="118" font-size="11" font-weight="bold" fill="#1E293B">password</text><text x="95" y="118" font-size="10.5" fill="#475569">VARCHAR</text><text x="175" y="118" font-size="10.5" fill="#64748B">PBKDF2</text>
+    <text x="10" y="140" font-size="11" font-weight="bold" fill="#1E293B">date_joined</text><text x="95" y="140" font-size="10.5" fill="#475569">DATETIME</text>
   </g>
 
-  <!-- ================= 2. USER_PROFILE (accounts_userprofile) ================= -->
-  <g transform="translate(470, 40)" filter="url(#shadow)">
-    <rect x="0" y="0" width="380" height="34" rx="4" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.2" />
-    <text x="14" y="22" font-size="14" font-weight="bold" fill="#0369A1">USER_PROFILE (accounts_userprofile)</text>
-    <rect x="0" y="34" width="380" height="136" fill="#FFFFFF" stroke="#334155" stroke-width="1.2" />
-
-    <text x="14" y="58" font-size="12" font-weight="bold" fill="#1E293B">id</text>
-    <text x="140" y="58" font-size="11.5" fill="#475569">INTEGER</text>
-    <text x="235" y="58" font-size="11" fill="#64748B">PK, autoincrement</text>
-
-    <text x="14" y="82" font-size="12" font-weight="bold" fill="#1E293B">user_id</text>
-    <text x="140" y="82" font-size="11.5" fill="#475569">INTEGER</text>
-    <text x="235" y="82" font-size="11" font-weight="600" fill="#0284C7">FK -> auth_user (1:1)</text>
-
-    <text x="14" y="106" font-size="12" font-weight="bold" fill="#1E293B">is_email_verified</text>
-    <text x="140" y="106" font-size="11.5" fill="#475569">BOOLEAN</text>
-    <text x="235" y="106" font-size="11" fill="#64748B">default: False</text>
-
-    <text x="14" y="130" font-size="12" font-weight="bold" fill="#1E293B">phone</text>
-    <text x="140" y="130" font-size="11.5" fill="#475569">VARCHAR(30)</text>
-
-    <text x="14" y="154" font-size="12" font-weight="bold" fill="#1E293B">created_at</text>
-    <text x="140" y="154" font-size="11.5" fill="#475569">DATETIME</text>
+  <!-- 2. USER_PROFILE -->
+  <g transform="translate(30, 220)" filter="url(#shadow)">
+    <rect x="0" y="0" width="260" height="30" rx="3" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.2" />
+    <text x="10" y="20" font-size="12" font-weight="bold" fill="#0369A1">USER_PROFILE</text>
+    <rect x="0" y="30" width="260" height="96" fill="#FFFFFF" stroke="#334155" stroke-width="1.2" />
+    <text x="10" y="52" font-size="11" font-weight="bold" fill="#1E293B">id</text><text x="110" y="52" font-size="10.5" fill="#475569">INTEGER</text><text x="180" y="52" font-size="10.5" fill="#64748B">PK</text>
+    <text x="10" y="74" font-size="11" font-weight="bold" fill="#1E293B">user_id</text><text x="110" y="74" font-size="10.5" fill="#475569">INTEGER</text><text x="180" y="74" font-size="10.5" font-weight="bold" fill="#0284C7">FK (1:1)</text>
+    <text x="10" y="96" font-size="11" font-weight="bold" fill="#1E293B">is_verified</text><text x="110" y="96" font-size="10.5" fill="#475569">BOOLEAN</text><text x="180" y="96" font-size="10.5" fill="#64748B">Email</text>
+    <text x="10" y="118" font-size="11" font-weight="bold" fill="#1E293B">phone</text><text x="110" y="118" font-size="10.5" fill="#475569">VARCHAR</text>
   </g>
 
-  <!-- ================= 3. EMAIL_VERIFICATION_CODE ================= -->
-  <g transform="translate(920, 40)" filter="url(#shadow)">
-    <rect x="0" y="0" width="380" height="34" rx="4" fill="#FEF3C7" stroke="#D97706" stroke-width="1.2" />
-    <text x="14" y="22" font-size="14" font-weight="bold" fill="#92400E">EMAIL_VERIFICATION_CODE</text>
-    <rect x="0" y="34" width="380" height="160" fill="#FFFFFF" stroke="#334155" stroke-width="1.2" />
-
-    <text x="14" y="58" font-size="12" font-weight="bold" fill="#1E293B">id</text>
-    <text x="110" y="58" font-size="11.5" fill="#475569">INTEGER</text>
-    <text x="210" y="58" font-size="11" fill="#64748B">PK, autoincrement</text>
-
-    <text x="14" y="82" font-size="12" font-weight="bold" fill="#1E293B">user_id</text>
-    <text x="110" y="82" font-size="11.5" fill="#475569">INTEGER</text>
-    <text x="210" y="82" font-size="11" font-weight="600" fill="#D97706">FK -> auth_user (1:N)</text>
-
-    <text x="14" y="106" font-size="12" font-weight="bold" fill="#1E293B">code</text>
-    <text x="110" y="106" font-size="11.5" fill="#475569">VARCHAR(6)</text>
-    <text x="210" y="106" font-size="11" fill="#64748B">6-значный код</text>
-
-    <text x="14" y="130" font-size="12" font-weight="bold" fill="#1E293B">purpose</text>
-    <text x="110" y="130" font-size="11.5" fill="#475569">VARCHAR(20)</text>
-    <text x="210" y="130" font-size="11" fill="#64748B">verify / reset</text>
-
-    <text x="14" y="154" font-size="12" font-weight="bold" fill="#1E293B">is_used</text>
-    <text x="110" y="154" font-size="11.5" fill="#475569">BOOLEAN</text>
-    <text x="210" y="154" font-size="11" fill="#64748B">default: False</text>
-
-    <text x="14" y="178" font-size="12" font-weight="bold" fill="#1E293B">created_at</text>
-    <text x="110" y="178" font-size="11.5" fill="#475569">DATETIME</text>
-    <text x="210" y="178" font-size="11" fill="#64748B">TTL: 15 минут</text>
+  <!-- 3. EMAIL_VERIFICATION_CODE -->
+  <g transform="translate(340, 30)" filter="url(#shadow)">
+    <rect x="0" y="0" width="280" height="30" rx="3" fill="#FEF3C7" stroke="#D97706" stroke-width="1.2" />
+    <text x="10" y="20" font-size="12" font-weight="bold" fill="#92400E">EMAIL_VERIFICATION_CODE</text>
+    <rect x="0" y="30" width="280" height="138" fill="#FFFFFF" stroke="#334155" stroke-width="1.2" />
+    <text x="10" y="52" font-size="11" font-weight="bold" fill="#1E293B">id</text><text x="105" y="52" font-size="10.5" fill="#475569">INTEGER</text><text x="190" y="52" font-size="10.5" fill="#64748B">PK</text>
+    <text x="10" y="74" font-size="11" font-weight="bold" fill="#1E293B">user_id</text><text x="105" y="74" font-size="10.5" fill="#475569">INTEGER</text><text x="190" y="74" font-size="10.5" font-weight="bold" fill="#D97706">FK (1:N)</text>
+    <text x="10" y="96" font-size="11" font-weight="bold" fill="#1E293B">code</text><text x="105" y="96" font-size="10.5" fill="#475569">VARCHAR(6)</text><text x="190" y="96" font-size="10.5" fill="#64748B">6 цифр</text>
+    <text x="10" y="118" font-size="11" font-weight="bold" fill="#1E293B">purpose</text><text x="105" y="118" font-size="10.5" fill="#475569">VARCHAR</text><text x="190" y="118" font-size="10.5" fill="#64748B">verify / reset</text>
+    <text x="10" y="140" font-size="11" font-weight="bold" fill="#1E293B">is_used</text><text x="105" y="140" font-size="10.5" fill="#475569">BOOLEAN</text><text x="190" y="140" font-size="10.5" fill="#64748B">default: False</text>
+    <text x="10" y="162" font-size="11" font-weight="bold" fill="#1E293B">created_at</text><text x="105" y="162" font-size="10.5" fill="#475569">DATETIME</text><text x="190" y="162" font-size="10.5" fill="#64748B">TTL 15 мин</text>
   </g>
 
-  <!-- ================= 4. AIRPORT (flights_airport) ================= -->
-  <g transform="translate(40, 360)" filter="url(#shadow)">
-    <rect x="0" y="0" width="360" height="34" rx="4" fill="#E2E8F0" stroke="#334155" stroke-width="1.2" />
-    <text x="14" y="22" font-size="14" font-weight="bold" fill="#0F172A">AIRPORT (flights_airport)</text>
-    <rect x="0" y="34" width="360" height="206" fill="#FFFFFF" stroke="#334155" stroke-width="1.2" />
-
-    <text x="14" y="58" font-size="12" font-weight="bold" fill="#1E293B">id</text>
-    <text x="140" y="58" font-size="11.5" fill="#475569">INTEGER</text>
-    <text x="235" y="58" font-size="11" fill="#64748B">PK, autoincrement</text>
-
-    <text x="14" y="82" font-size="12" font-weight="bold" fill="#1E293B">code</text>
-    <text x="140" y="82" font-size="11.5" fill="#475569">VARCHAR(10)</text>
-    <text x="235" y="82" font-size="11" font-weight="bold" fill="#0369A1">UK (IATA SVO, DXB)</text>
-
-    <text x="14" y="106" font-size="12" font-weight="bold" fill="#1E293B">name</text>
-    <text x="140" y="106" font-size="11.5" fill="#475569">VARCHAR(150)</text>
-
-    <text x="14" y="130" font-size="12" font-weight="bold" fill="#1E293B">city</text>
-    <text x="140" y="130" font-size="11.5" fill="#475569">VARCHAR(100)</text>
-
-    <text x="14" y="154" font-size="12" font-weight="bold" fill="#1E293B">country</text>
-    <text x="140" y="154" font-size="11.5" fill="#475569">VARCHAR(100)</text>
-
-    <text x="14" y="178" font-size="12" font-weight="bold" fill="#1E293B">departures_count</text>
-    <text x="140" y="178" font-size="11.5" fill="#475569">INTEGER</text>
-
-    <text x="14" y="202" font-size="12" font-weight="bold" fill="#1E293B">arrivals_count</text>
-    <text x="140" y="202" font-size="11.5" fill="#475569">INTEGER</text>
-
-    <text x="14" y="226" font-size="12" font-weight="bold" fill="#1E293B">timezone</text>
-    <text x="140" y="226" font-size="11.5" fill="#475569">VARCHAR(20)</text>
-    <text x="235" y="226" font-size="11" fill="#64748B">UTC+3, UTC+4</text>
+  <!-- 4. AIRPORT -->
+  <g transform="translate(670, 120)" filter="url(#shadow)">
+    <rect x="0" y="0" width="260" height="30" rx="3" fill="#E2E8F0" stroke="#334155" stroke-width="1.2" />
+    <text x="10" y="20" font-size="12" font-weight="bold" fill="#0F172A">AIRPORT (flights_airport)</text>
+    <rect x="0" y="30" width="260" height="116" fill="#FFFFFF" stroke="#334155" stroke-width="1.2" />
+    <text x="10" y="52" font-size="11" font-weight="bold" fill="#1E293B">id</text><text x="95" y="52" font-size="10.5" fill="#475569">INTEGER</text><text x="175" y="52" font-size="10.5" fill="#64748B">PK</text>
+    <text x="10" y="74" font-size="11" font-weight="bold" fill="#1E293B">code</text><text x="95" y="74" font-size="10.5" fill="#475569">VARCHAR(10)</text><text x="175" y="74" font-size="10.5" font-weight="bold" fill="#0369A1">UK (IATA)</text>
+    <text x="10" y="96" font-size="11" font-weight="bold" fill="#1E293B">name</text><text x="95" y="96" font-size="10.5" fill="#475569">VARCHAR</text><text x="175" y="96" font-size="10.5" fill="#64748B">Название</text>
+    <text x="10" y="118" font-size="11" font-weight="bold" fill="#1E293B">city</text><text x="95" y="118" font-size="10.5" fill="#475569">VARCHAR</text><text x="175" y="118" font-size="10.5" fill="#64748B">Город</text>
+    <text x="10" y="140" font-size="11" font-weight="bold" fill="#1E293B">country</text><text x="95" y="140" font-size="10.5" fill="#475569">VARCHAR</text><text x="175" y="140" font-size="10.5" fill="#64748B">Страна</text>
   </g>
 
-  <!-- ================= 5. FLIGHT (flights_flight) ================= -->
-  <g transform="translate(470, 260)" filter="url(#shadow)">
-    <rect x="0" y="0" width="480" height="34" rx="4" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.2" />
-    <text x="14" y="22" font-size="14" font-weight="bold" fill="#15803D">FLIGHT (flights_flight)</text>
-    <rect x="0" y="34" width="480" height="660" fill="#FFFFFF" stroke="#334155" stroke-width="1.2" />
-
-    <text x="14" y="58" font-size="12" font-weight="bold" fill="#1E293B">id</text>
-    <text x="150" y="58" font-size="11.5" fill="#475569">INTEGER</text>
-    <text x="260" y="58" font-size="11" fill="#64748B">PK, autoincrement</text>
-
-    <text x="14" y="82" font-size="12" font-weight="bold" fill="#1E293B">flight_id</text>
-    <text x="150" y="82" font-size="11.5" fill="#475569">VARCHAR(50)</text>
-    <text x="260" y="82" font-size="11" fill="#64748B">UK slug (su-1702)</text>
-
-    <text x="14" y="106" font-size="12" font-weight="bold" fill="#1E293B">flight_number</text>
-    <text x="150" y="106" font-size="11.5" fill="#475569">VARCHAR(30)</text>
-    <text x="260" y="106" font-size="11" fill="#64748B">Номер рейса (SU 1702)</text>
-
-    <text x="14" y="130" font-size="12" font-weight="bold" fill="#1E293B">airline</text>
-    <text x="150" y="130" font-size="11.5" fill="#475569">VARCHAR(100)</text>
-    <text x="260" y="130" font-size="11" fill="#64748B">Авиакомпания</text>
-
-    <text x="14" y="154" font-size="12" font-weight="bold" fill="#1E293B">aircraft</text>
-    <text x="150" y="154" font-size="11.5" fill="#475569">VARCHAR(100)</text>
-    <text x="260" y="154" font-size="11" fill="#64748B">Модель борта</text>
-
-    <text x="14" y="178" font-size="12" font-weight="bold" fill="#1E293B">from_code</text>
-    <text x="150" y="178" font-size="11.5" fill="#475569">VARCHAR(10)</text>
-    <text x="260" y="178" font-size="11" font-weight="bold" fill="#0284C7">FK -> flights_airport.code</text>
-
-    <text x="14" y="202" font-size="12" font-weight="bold" fill="#1E293B">from_name / city</text>
-    <text x="150" y="202" font-size="11.5" fill="#475569">VARCHAR(150)</text>
-    <text x="260" y="202" font-size="11" fill="#64748B">Аэропорт и город вылета</text>
-
-    <text x="14" y="226" font-size="12" font-weight="bold" fill="#1E293B">from_terminal / gate</text>
-    <text x="150" y="226" font-size="11.5" fill="#475569">VARCHAR(20)</text>
-    <text x="260" y="226" font-size="11" fill="#64748B">Терминал и гейт вылета</text>
-
-    <text x="14" y="250" font-size="12" font-weight="bold" fill="#1E293B">to_code</text>
-    <text x="150" y="250" font-size="11.5" fill="#475569">VARCHAR(10)</text>
-    <text x="260" y="250" font-size="11" font-weight="bold" fill="#0284C7">FK -> flights_airport.code</text>
-
-    <text x="14" y="274" font-size="12" font-weight="bold" fill="#1E293B">to_name / city</text>
-    <text x="150" y="274" font-size="11.5" fill="#475569">VARCHAR(150)</text>
-    <text x="260" y="274" font-size="11" fill="#64748B">Аэропорт и город прилета</text>
-
-    <text x="14" y="298" font-size="12" font-weight="bold" fill="#1E293B">to_terminal / gate</text>
-    <text x="150" y="298" font-size="11.5" fill="#475569">VARCHAR(20)</text>
-    <text x="260" y="298" font-size="11" fill="#64748B">Терминал и гейт прилета</text>
-
-    <text x="14" y="322" font-size="12" font-weight="bold" fill="#1E293B">departure_time</text>
-    <text x="150" y="322" font-size="11.5" fill="#475569">VARCHAR(20)</text>
-    <text x="260" y="322" font-size="11" fill="#64748B">ЧЧ:ММ вылета</text>
-
-    <text x="14" y="346" font-size="12" font-weight="bold" fill="#1E293B">arrival_time</text>
-    <text x="150" y="346" font-size="11.5" fill="#475569">VARCHAR(20)</text>
-    <text x="260" y="346" font-size="11" fill="#64748B">ЧЧ:ММ прилета</text>
-
-    <text x="14" y="370" font-size="12" font-weight="bold" fill="#1E293B">departure_date</text>
-    <text x="150" y="370" font-size="11.5" fill="#475569">VARCHAR(20)</text>
-    <text x="260" y="370" font-size="11" fill="#64748B">Дата вылета (ГГГГ-ММ-ДД)</text>
-
-    <text x="14" y="394" font-size="12" font-weight="bold" fill="#1E293B">duration</text>
-    <text x="150" y="394" font-size="11.5" fill="#475569">VARCHAR(50)</text>
-    <text x="260" y="394" font-size="11" fill="#64748B">Время в пути</text>
-
-    <text x="14" y="418" font-size="12" font-weight="bold" fill="#1E293B">status</text>
-    <text x="150" y="418" font-size="11.5" fill="#475569">VARCHAR(30)</text>
-    <text x="260" y="418" font-size="11" fill="#64748B">scheduled, in_air, landed...</text>
-
-    <text x="14" y="442" font-size="12" font-weight="bold" fill="#1E293B">status_text</text>
-    <text x="150" y="442" font-size="11.5" fill="#475569">VARCHAR(100)</text>
-    <text x="260" y="442" font-size="11" fill="#64748B">Текст статуса на русском</text>
-
-    <text x="14" y="466" font-size="12" font-weight="bold" fill="#1E293B">altitude</text>
-    <text x="150" y="466" font-size="11.5" fill="#475569">INTEGER</text>
-    <text x="260" y="466" font-size="11" fill="#64748B">Высота (м)</text>
-
-    <text x="14" y="490" font-size="12" font-weight="bold" fill="#1E293B">speed</text>
-    <text x="150" y="490" font-size="11.5" fill="#475569">INTEGER</text>
-    <text x="260" y="490" font-size="11" fill="#64748B">Скорость (км/ч)</text>
-
-    <text x="14" y="514" font-size="12" font-weight="bold" fill="#1E293B">price</text>
-    <text x="150" y="514" font-size="11.5" fill="#475569">INTEGER</text>
-    <text x="260" y="514" font-size="11" fill="#64748B">Цена билета (руб)</text>
-
-    <text x="14" y="538" font-size="12" font-weight="bold" fill="#1E293B">is_real_api</text>
-    <text x="150" y="538" font-size="11.5" fill="#475569">BOOLEAN</text>
-    <text x="260" y="538" font-size="11" fill="#64748B">Загружено из Aviationstack</text>
-
-    <text x="14" y="562" font-size="12" font-weight="bold" fill="#1E293B">created_at</text>
-    <text x="150" y="562" font-size="11.5" fill="#475569">DATETIME</text>
-
-    <text x="14" y="586" font-size="12" font-weight="bold" fill="#1E293B">updated_at</text>
-    <text x="150" y="586" font-size="11.5" fill="#475569">DATETIME</text>
-    <text x="260" y="586" font-size="11" font-weight="bold" fill="#D97706">TTL удаление через 14 дней</text>
+  <!-- 5. FLIGHT -->
+  <g transform="translate(990, 80)" filter="url(#shadow)">
+    <rect x="0" y="0" width="290" height="30" rx="3" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.2" />
+    <text x="10" y="20" font-size="12" font-weight="bold" fill="#15803D">FLIGHT (flights_flight)</text>
+    <rect x="0" y="30" width="290" height="206" fill="#FFFFFF" stroke="#334155" stroke-width="1.2" />
+    <text x="10" y="52" font-size="11" font-weight="bold" fill="#1E293B">id</text><text x="110" y="52" font-size="10.5" fill="#475569">INTEGER</text><text x="195" y="52" font-size="10.5" fill="#64748B">PK</text>
+    <text x="10" y="74" font-size="11" font-weight="bold" fill="#1E293B">flight_number</text><text x="110" y="74" font-size="10.5" fill="#475569">VARCHAR</text><text x="195" y="74" font-size="10.5" fill="#64748B">SU 1702</text>
+    <text x="10" y="96" font-size="11" font-weight="bold" fill="#1E293B">airline</text><text x="110" y="96" font-size="10.5" fill="#475569">VARCHAR</text><text x="195" y="96" font-size="10.5" fill="#64748B">Авиакомпания</text>
+    <text x="10" y="118" font-size="11" font-weight="bold" fill="#1E293B">from_code</text><text x="110" y="118" font-size="10.5" fill="#475569">VARCHAR</text><text x="195" y="118" font-size="10.5" font-weight="bold" fill="#0284C7">FK (1:N)</text>
+    <text x="10" y="140" font-size="11" font-weight="bold" fill="#1E293B">to_code</text><text x="110" y="140" font-size="10.5" fill="#475569">VARCHAR</text><text x="195" y="140" font-size="10.5" font-weight="bold" fill="#0284C7">FK (1:N)</text>
+    <text x="10" y="162" font-size="11" font-weight="bold" fill="#1E293B">dep / arr_time</text><text x="110" y="162" font-size="10.5" fill="#475569">VARCHAR</text><text x="195" y="162" font-size="10.5" fill="#64748B">ЧЧ:ММ</text>
+    <text x="10" y="184" font-size="11" font-weight="bold" fill="#1E293B">departure_date</text><text x="110" y="184" font-size="10.5" fill="#475569">VARCHAR</text><text x="195" y="184" font-size="10.5" fill="#64748B">ГГГГ-ММ-ДД</text>
+    <text x="10" y="206" font-size="11" font-weight="bold" fill="#1E293B">status</text><text x="110" y="206" font-size="10.5" fill="#475569">VARCHAR</text><text x="195" y="206" font-size="10.5" fill="#64748B">scheduled...</text>
+    <text x="10" y="228" font-size="11" font-weight="bold" fill="#1E293B">price</text><text x="110" y="228" font-size="10.5" fill="#475569">INTEGER</text><text x="195" y="228" font-size="10.5" fill="#64748B">Цена (руб)</text>
   </g>
 
-  <!-- ================= СВЯЗИ (RELATIONSHIP ARROWS) ================= -->
+  <!-- СВЯЗИ -->
   <!-- 1. USER -> USER_PROFILE (1:1) -->
-  <line x1="400" y1="100" x2="470" y2="100" stroke="#1E3A8A" stroke-width="2" />
-  <line x1="412" y1="92" x2="412" y2="108" stroke="#1E3A8A" stroke-width="2" />
-  <line x1="418" y1="92" x2="418" y2="108" stroke="#1E3A8A" stroke-width="2" />
-  <line x1="452" y1="92" x2="452" y2="108" stroke="#1E3A8A" stroke-width="2" />
-  <line x1="458" y1="92" x2="458" y2="108" stroke="#1E3A8A" stroke-width="2" />
-  <text x="435" y="84" text-anchor="middle" font-size="11" font-weight="bold" fill="#1E3A8A">1 : 1</text>
+  <line x1="110" y1="176" x2="110" y2="220" stroke="#1E3A8A" stroke-width="1.8" />
+  <line x1="102" y1="186" x2="118" y2="186" stroke="#1E3A8A" stroke-width="1.8" />
+  <line x1="102" y1="210" x2="118" y2="210" stroke="#1E3A8A" stroke-width="1.8" />
+  <text x="125" y="202" font-size="10.5" font-weight="bold" fill="#1E3A8A">1 : 1</text>
 
   <!-- 2. USER -> EMAIL_VERIFICATION_CODE (1:N) -->
-  <line x1="850" y1="100" x2="920" y2="100" stroke="#1E3A8A" stroke-width="2" />
-  <line x1="860" y1="92" x2="860" y2="108" stroke="#1E3A8A" stroke-width="2" />
-  <line x1="908" y1="92" x2="920" y2="100" stroke="#1E3A8A" stroke-width="2" />
-  <line x1="908" y1="108" x2="920" y2="100" stroke="#1E3A8A" stroke-width="2" />
-  <text x="885" y="84" text-anchor="middle" font-size="11" font-weight="bold" fill="#1E3A8A">1 : N</text>
+  <line x1="290" y1="90" x2="340" y2="90" stroke="#1E3A8A" stroke-width="1.8" />
+  <line x1="298" y1="82" x2="298" y2="98" stroke="#1E3A8A" stroke-width="1.8" />
+  <line x1="328" y1="82" x2="340" y2="90" stroke="#1E3A8A" stroke-width="1.8" />
+  <line x1="328" y1="98" x2="340" y2="90" stroke="#1E3A8A" stroke-width="1.8" />
+  <text x="315" y="78" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#1E3A8A">1 : N</text>
 
-  <!-- 3. AIRPORT -> FLIGHT (from_code, 1:N) -->
-  <path d="M 400 450 L 470 450" fill="none" stroke="#1E3A8A" stroke-width="2" />
-  <line x1="412" y1="442" x2="412" y2="458" stroke="#1E3A8A" stroke-width="2" />
-  <line x1="458" y1="442" x2="470" y2="450" stroke="#1E3A8A" stroke-width="2" />
-  <line x1="458" y1="458" x2="470" y2="450" stroke="#1E3A8A" stroke-width="2" />
-  <text x="435" y="438" text-anchor="middle" font-size="11" font-weight="bold" fill="#1E3A8A">1 : N (from)</text>
+  <!-- 3. AIRPORT -> FLIGHT (from, 1:N) -->
+  <line x1="930" y1="160" x2="990" y2="160" stroke="#1E3A8A" stroke-width="1.8" />
+  <line x1="938" y1="152" x2="938" y2="168" stroke="#1E3A8A" stroke-width="1.8" />
+  <line x1="978" y1="152" x2="990" y2="160" stroke="#1E3A8A" stroke-width="1.8" />
+  <line x1="978" y1="168" x2="990" y2="160" stroke="#1E3A8A" stroke-width="1.8" />
+  <text x="960" y="148" text-anchor="middle" font-size="10" font-weight="bold" fill="#1E3A8A">1 : N (from)</text>
 
-  <!-- 4. AIRPORT -> FLIGHT (to_code, 1:N) -->
-  <path d="M 400 520 L 470 520" fill="none" stroke="#1E3A8A" stroke-width="2" />
-  <line x1="412" y1="512" x2="412" y2="528" stroke="#1E3A8A" stroke-width="2" />
-  <line x1="458" y1="512" x2="470" y2="520" stroke="#1E3A8A" stroke-width="2" />
-  <line x1="458" y1="528" x2="470" y2="520" stroke="#1E3A8A" stroke-width="2" />
-  <text x="435" y="508" text-anchor="middle" font-size="11" font-weight="bold" fill="#1E3A8A">1 : N (to)</text>
+  <!-- 4. AIRPORT -> FLIGHT (to, 1:N) -->
+  <line x1="930" y1="210" x2="990" y2="210" stroke="#1E3A8A" stroke-width="1.8" />
+  <line x1="938" y1="202" x2="938" y2="218" stroke="#1E3A8A" stroke-width="1.8" />
+  <line x1="978" y1="202" x2="990" y2="210" stroke="#1E3A8A" stroke-width="1.8" />
+  <line x1="978" y1="218" x2="990" y2="210" stroke="#1E3A8A" stroke-width="1.8" />
+  <text x="960" y="198" text-anchor="middle" font-size="10" font-weight="bold" fill="#1E3A8A">1 : N (to)</text>
 
-  <!-- ================= 6. ЛЕГЕНДА / СНОСКА ================= -->
-  <g transform="translate(980, 260)" filter="url(#shadow)">
-    <rect x="0" y="0" width="320" height="175" rx="5" fill="#FAFBFD" stroke="#94A3B8" stroke-width="1.2" />
-    <text x="14" y="24" font-size="13" font-weight="bold" fill="#1E293B">Условные обозначения (ГОСТ):</text>
-    <text x="14" y="52" font-size="11.5" fill="#334155">• <tspan font-weight="bold">PK</tspan> — Первичный ключ (Primary Key)</text>
-    <text x="14" y="76" font-size="11.5" fill="#334155">• <tspan font-weight="bold">FK</tspan> — Внешний ключ (Foreign Key)</text>
-    <text x="14" y="100" font-size="11.5" fill="#334155">• <tspan font-weight="bold">UK</tspan> — Ограничение уникальности</text>
-    <text x="14" y="124" font-size="11.5" fill="#334155">• <tspan font-weight="bold">1 : 1</tspan> — Отношение «один-к-одному»</text>
-    <text x="14" y="148" font-size="11.5" fill="#334155">• <tspan font-weight="bold">1 : N</tspan> — Отношение «один-ко-многим»</text>
+  <!-- ЛЕГЕНДА -->
+  <g transform="translate(340, 230)">
+    <rect x="0" y="0" width="280" height="100" rx="4" fill="#FAFBFD" stroke="#94A3B8" stroke-width="1" />
+    <text x="10" y="20" font-size="11" font-weight="bold" fill="#1E293B">Обозначения связей (ГОСТ):</text>
+    <text x="10" y="42" font-size="10" fill="#334155">• <tspan font-weight="bold">PK</tspan> — Первичный ключ | <tspan font-weight="bold">FK</tspan> — Внешний ключ</text>
+    <text x="10" y="62" font-size="10" fill="#334155">• <tspan font-weight="bold">1 : 1</tspan> — Связь один к одному (Профиль)</text>
+    <text x="10" y="82" font-size="10" fill="#334155">• <tspan font-weight="bold">1 : N</tspan> — Связь один ко многим (Коды, Рейсы)</text>
   </g>
 </svg>
