@@ -8,6 +8,7 @@ from .services import (
     fetch_and_sync_aviationstack_flights,
     seed_initial_database,
     update_dynamic_flight_lifecycle,
+    cleanup_archived_flights,
 )
 
 class FlightListAPIView(APIView):
@@ -113,4 +114,30 @@ class ApiStatusAPIView(APIView):
             'flights_in_db': Flight.objects.count(),
             'airports_in_db': Airport.objects.count(),
             'aviationstack_integration': 'enabled',
+        })
+
+
+class CleanupArchivedFlightsAPIView(APIView):
+    """
+    Data retention & TTL maintenance:
+    Deletes completed (landed or cancelled) flights older than the given days (default 14 days / 2 weeks).
+    """
+    def post(self, request):
+        days = int(request.data.get('days', 14))
+        deleted_count = cleanup_archived_flights(days_retention=days)
+        return Response({
+            'success': True,
+            'message': f'Успешно очищено {deleted_count} завершённых рейсов старше {days} дней',
+            'deleted_count': deleted_count,
+            'remaining_flights': Flight.objects.count(),
+        })
+
+    def get(self, request):
+        days = int(request.query_params.get('days', 14))
+        deleted_count = cleanup_archived_flights(days_retention=days)
+        return Response({
+            'success': True,
+            'message': f'Успешно очищено {deleted_count} завершённых рейсов старше {days} дней',
+            'deleted_count': deleted_count,
+            'remaining_flights': Flight.objects.count(),
         })

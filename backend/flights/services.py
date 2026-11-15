@@ -129,12 +129,55 @@ def fetch_and_sync_aviationstack_flights(limit=25):
             'error': str(e),
         }
 
+def cleanup_archived_flights(days_retention=14):
+    """
+    Automatic Data Retention Policy (TTL cleanup):
+    Deletes finished flights ('landed' or 'cancelled') that are older
+    than `days_retention` days (default 14 days / 2 weeks).
+    Protects database storage and keeps flight lists clean and relevant.
+    """
+    cutoff_date = datetime.date.today() - datetime.timedelta(days=days_retention)
+    cutoff_str = cutoff_date.strftime('%Y-%m-%d')
+    cutoff_datetime = datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=days_retention)
+
+    # 1. Direct ORM delete for matching ISO departure dates
+    deleted_count, _ = Flight.objects.filter(
+        status__in=['landed', 'cancelled'],
+        departure_date__lt=cutoff_str
+    ).delete()
+
+    # 2. Safety pass for any flights with non-standard date formats or updated_at
+    remaining_finished = Flight.objects.filter(status__in=['landed', 'cancelled'])
+    additional_deleted = 0
+    for fl in remaining_finished:
+        should_delete = False
+        if fl.departure_date:
+            try:
+                fl_date = datetime.date.fromisoformat(fl.departure_date.strip()[:10])
+                if fl_date < cutoff_date:
+                    should_delete = True
+            except Exception:
+                pass
+        if not should_delete and fl.updated_at:
+            if fl.updated_at < cutoff_datetime:
+                should_delete = True
+        if should_delete:
+            fl.delete()
+            additional_deleted += 1
+
+    return deleted_count + additional_deleted
+
+
 def update_dynamic_flight_lifecycle():
     """
     Dynamically recalculates flight statuses and updates today's dates
     based on the current clock time so that the flight board always feels
     alive, active, and realistic 24/7.
+    Also automatically runs cleanup for completed flights older than 14 days.
     """
+    # 1. Automatic cleanup of finished flights older than 14 days (TTL)
+    cleanup_archived_flights(days_retention=14)
+
     now = datetime.datetime.now()
     today_str = now.strftime('%Y-%m-%d')
     current_minutes = now.hour * 60 + now.minute
@@ -143,8 +186,18 @@ def update_dynamic_flight_lifecycle():
     for flight in flights:
         changed = False
 
-        # Keep dates fresh to current date
-        if flight.departure_date != today_str:
+        # If flight is historical (departure_date < today) and finished (landed or cancelled),
+        # keep it as a historical record until it expires via retention policy (14 days).
+        if flight.departure_date and flight.departure_date < today_str and flight.status in ['landed', 'cancelled']:
+            continue
+
+        # Keep dates fresh to current date for today's active flights or flights missing date
+        if not flight.departure_date or flight.departure_date == today_str:
+            if flight.departure_date != today_str:
+                flight.departure_date = today_str
+                changed = True
+        else:
+            # If flight had an outdated non-completed status, update date to today to keep alive
             flight.departure_date = today_str
             changed = True
 
@@ -209,6 +262,7 @@ def seed_initial_database():
     Populates SQLite database with initial authentic flights and airports
     so the system is immediately fully operational.
     """
+    today_str = datetime.date.today().isoformat()
     initial_airports = [
         {'code': 'SVO', 'name': 'Шереметьево имени А. С. Пушкина', 'city': 'Москва', 'country': 'Россия', 'departures_count': 142, 'arrivals_count': 138, 'timezone': 'UTC+3'},
         {'code': 'DME', 'name': 'Домодедово имени М. В. Ломоносова', 'city': 'Москва', 'country': 'Россия', 'departures_count': 98, 'arrivals_count': 95, 'timezone': 'UTC+3'},
@@ -241,7 +295,7 @@ def seed_initial_database():
             'to_gate': '04',
             'departure_time': '15:40',
             'arrival_time': '07:15',
-            'departure_date': '2026-11-09',
+            'departure_date': today_str,
             'duration': '8 ч 35 мин',
             'status': 'in_air',
             'status_text': 'В полёте',
@@ -267,7 +321,7 @@ def seed_initial_database():
             'to_gate': '08',
             'departure_time': '17:10',
             'arrival_time': '21:00',
-            'departure_date': '2026-11-09',
+            'departure_date': today_str,
             'duration': '3 ч 50 мин',
             'status': 'scheduled',
             'status_text': 'Ожидает взлёта',
@@ -293,7 +347,7 @@ def seed_initial_database():
             'to_gate': '12',
             'departure_time': '14:20',
             'arrival_time': '15:45',
-            'departure_date': '2026-11-09',
+            'departure_date': today_str,
             'duration': '1 ч 25 мин',
             'status': 'delayed',
             'status_text': 'Задержан до 16:30',
@@ -319,7 +373,7 @@ def seed_initial_database():
             'to_gate': 'B12',
             'departure_time': '16:45',
             'arrival_time': '23:15',
-            'departure_date': '2026-11-09',
+            'departure_date': today_str,
             'duration': '5 ч 30 мин',
             'status': 'boarding',
             'status_text': 'Посадка на борт',
