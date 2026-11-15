@@ -1,12 +1,23 @@
 # Диаграмма запросов (Request Flow Diagram)
 
-Диаграмма прохождения запросов между клиентом, сервером и базой данных выполнена по стандарту проектирования веб-приложений.
+Диаграмма прохождения запросов между клиентом, сервером и базой данных выполнена в строгом академическом стиле на **чистом белом фоне** для вставки в отчет по курсовой работе.
 
 ---
 
-## 1. Диаграмма запросов (Mermaid Flowchart)
+## 1. Готовое изображение диаграммы (для вставки в отчёт Word)
+
+![Диаграмма запросов](./request_flow_diagram.png)
+
+*Файлы диаграммы высокой четкости (300 DPI) для пояснительной записки:*
+* **PNG формат:** [`docs/request_flow_diagram.png`](file:///c:/Users/faizr/PycharmProjects/KursovayaRPI/docs/request_flow_diagram.png)
+* **Векторный SVG формат:** [`docs/request_flow_diagram.svg`](file:///c:/Users/faizr/PycharmProjects/KursovayaRPI/docs/request_flow_diagram.svg)
+
+---
+
+## 2. Диаграмма запросов (Mermaid-код)
 
 ```mermaid
+%%{init: {'theme': 'neutral', 'themeVariables': {'darkMode': false, 'background': '#FFFFFF', 'mainBkg': '#FFFFFF', 'nodeBorder': '#333333', 'textColor': '#000000', 'lineColor': '#1E3A8A'}}}%%
 flowchart LR
     subgraph DB ["База данных (Database)"]
         SQLite[("СУБД SQLite 3")]
