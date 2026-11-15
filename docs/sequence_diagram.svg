@@ -1,0 +1,175 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1080" width="100%" height="100%" style="background:#ffffff; font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif;">
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1E3A8A" />
+    </marker>
+    <marker id="arrow-sky" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0284C7" />
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#D97706" />
+    </marker>
+  </defs>
+
+  <!-- Чистый белый непрозрачный фон -->
+  <rect width="100%" height="100%" fill="#ffffff" />
+
+  <!-- Участники (Верхние блоки) -->
+  <g>
+    <rect x="20" y="30" width="140" height="40" rx="4" fill="#F8FAFC" stroke="#334155" stroke-width="1.2" />
+    <text x="90" y="55" text-anchor="middle" font-size="12" font-weight="bold" fill="#0F172A">Пользователь</text>
+    <line x1="90" y1="70" x2="90" y2="1020" stroke="#CBD5E1" stroke-width="1" stroke-dasharray="4 4" />
+
+    <rect x="230" y="30" width="140" height="40" rx="4" fill="#F8FAFC" stroke="#334155" stroke-width="1.2" />
+    <text x="300" y="55" text-anchor="middle" font-size="12" font-weight="bold" fill="#0F172A">React SPA (UI)</text>
+    <line x1="300" y1="70" x2="300" y2="1020" stroke="#CBD5E1" stroke-width="1" stroke-dasharray="4 4" />
+
+    <rect x="440" y="30" width="140" height="40" rx="4" fill="#F8FAFC" stroke="#334155" stroke-width="1.2" />
+    <text x="510" y="55" text-anchor="middle" font-size="12" font-weight="bold" fill="#0F172A">Сервисы (api.ts)</text>
+    <line x1="510" y1="70" x2="510" y2="1020" stroke="#CBD5E1" stroke-width="1" stroke-dasharray="4 4" />
+
+    <rect x="680" y="30" width="140" height="40" rx="4" fill="#F8FAFC" stroke="#334155" stroke-width="1.2" />
+    <text x="750" y="55" text-anchor="middle" font-size="12" font-weight="bold" fill="#0F172A">Django REST API</text>
+    <line x1="750" y1="70" x2="750" y2="1020" stroke="#CBD5E1" stroke-width="1" stroke-dasharray="4 4" />
+
+    <rect x="940" y="30" width="140" height="40" rx="4" fill="#F8FAFC" stroke="#334155" stroke-width="1.2" />
+    <text x="1010" y="55" text-anchor="middle" font-size="12" font-weight="bold" fill="#0F172A">Движок сервисов</text>
+    <line x1="1010" y1="70" x2="1010" y2="1020" stroke="#CBD5E1" stroke-width="1" stroke-dasharray="4 4" />
+
+    <rect x="1190" y="30" width="140" height="40" rx="4" fill="#F8FAFC" stroke="#334155" stroke-width="1.2" />
+    <text x="1260" y="55" text-anchor="middle" font-size="12" font-weight="bold" fill="#0F172A">СУБД SQLite 3</text>
+    <line x1="1260" y1="70" x2="1260" y2="1020" stroke="#CBD5E1" stroke-width="1" stroke-dasharray="4 4" />
+
+    <rect x="1430" y="30" width="140" height="40" rx="4" fill="#F8FAFC" stroke="#334155" stroke-width="1.2" />
+    <text x="1500" y="55" text-anchor="middle" font-size="12" font-weight="bold" fill="#0F172A">Яндекс SMTP (SSL)</text>
+    <line x1="1500" y1="70" x2="1500" y2="1020" stroke="#CBD5E1" stroke-width="1" stroke-dasharray="4 4" />
+  </g>
+
+  <!-- ================= СЦЕНАРИЙ 1 ================= -->
+  <rect x="20" y="95" width="1560" height="360" rx="6" fill="#F0F9FF" stroke="#BAE6FD" stroke-width="1.2" />
+  <text x="40" y="120" font-size="13" font-weight="bold" fill="#0369A1">Сценарий 1: Получение табло рейсов, симуляция 24/7 и автоочистка TTL</text>
+
+  <!-- 1. User -> UI -->
+  <line x1="90" y1="140" x2="295" y2="140" stroke="#1E3A8A" stroke-width="1.4" marker-end="url(#arrow-blue)" />
+  <text x="192" y="132" text-anchor="middle" font-size="10.5" fill="#1E3A8A">1. Ввод фильтра "Сочи" на странице /flights</text>
+
+  <!-- 2. UI -> Api -->
+  <line x1="300" y1="170" x2="505" y2="170" stroke="#1E3A8A" stroke-width="1.4" marker-end="url(#arrow-blue)" />
+  <text x="402" y="162" text-anchor="middle" font-size="10.5" fill="#1E3A8A">2. fetchFlights({ search: "Сочи" })</text>
+
+  <!-- 3. Api -> Django -->
+  <line x1="510" y1="200" x2="745" y2="200" stroke="#1E3A8A" stroke-width="1.4" marker-end="url(#arrow-blue)" />
+  <text x="627" y="192" text-anchor="middle" font-size="10.5" fill="#1E3A8A">3. GET /api/flights/?search=Сочи</text>
+
+  <!-- 4. Django -> Engine -->
+  <line x1="750" y1="230" x2="1005" y2="230" stroke="#1E3A8A" stroke-width="1.4" marker-end="url(#arrow-blue)" />
+  <text x="877" y="222" text-anchor="middle" font-size="10.5" fill="#1E3A8A">4. update_dynamic_flight_lifecycle()</text>
+
+  <!-- 5. Engine -> DB -->
+  <line x1="1010" y1="260" x2="1255" y2="260" stroke="#1E3A8A" stroke-width="1.4" marker-end="url(#arrow-blue)" />
+  <text x="1132" y="252" text-anchor="middle" font-size="10" fill="#1E3A8A">5. cleanup_archived_flights (DELETE старше 14 дней)</text>
+
+  <!-- 6. DB -> Engine -->
+  <line x1="1260" y1="290" x2="1015" y2="290" stroke="#0284C7" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arrow-sky)" />
+  <text x="1132" y="282" text-anchor="middle" font-size="10" fill="#0284C7">6. 0 устаревших рейсов удалено</text>
+
+  <!-- 7. Engine -> DB -->
+  <line x1="1010" y1="320" x2="1255" y2="320" stroke="#1E3A8A" stroke-width="1.4" marker-end="url(#arrow-blue)" />
+  <text x="1132" y="312" text-anchor="middle" font-size="10" fill="#1E3A8A">7. UPDATE статусов по часам (scheduled -> in_air -> landed)</text>
+
+  <!-- 8. DB -> Engine -->
+  <line x1="1260" y1="350" x2="1015" y2="350" stroke="#0284C7" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arrow-sky)" />
+  <text x="1132" y="342" text-anchor="middle" font-size="10" fill="#0284C7">8. Статусы рейсов актуализированы</text>
+
+  <!-- 9. Django -> DB -->
+  <line x1="750" y1="375" x2="1255" y2="375" stroke="#1E3A8A" stroke-width="1.4" marker-end="url(#arrow-blue)" />
+  <text x="1002" y="367" text-anchor="middle" font-size="10" fill="#1E3A8A">9. SELECT * FROM flights WHERE search LIKE '%Сочи%'</text>
+
+  <!-- 10. DB -> Django -->
+  <line x1="1260" y1="400" x2="755" y2="400" stroke="#0284C7" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arrow-sky)" />
+  <text x="1002" y="392" text-anchor="middle" font-size="10" fill="#0284C7">10. Строки рейсов (ORM Queryset)</text>
+
+  <!-- 11. Django -> Api -->
+  <line x1="750" y1="420" x2="515" y2="420" stroke="#0284C7" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arrow-sky)" />
+  <text x="632" y="412" text-anchor="middle" font-size="10" fill="#0284C7">11. 200 OK [JSON: flights]</text>
+
+  <!-- 12. Api -> UI -->
+  <line x1="510" y1="440" x2="305" y2="440" stroke="#0284C7" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arrow-sky)" />
+  <text x="407" y="432" text-anchor="middle" font-size="10" fill="#0284C7">12. Рендеринг карточек рейсов (useMemo, 60 FPS)</text>
+
+  <!-- ================= СЦЕНАРИЙ 2 ================= -->
+  <rect x="20" y="475" width="1560" height="525" rx="6" fill="#FFFDF0" stroke="#FDE68A" stroke-width="1.2" />
+  <text x="40" y="500" font-size="13" font-weight="bold" fill="#92400E">Сценарий 2: Регистрация и верификация через 6-значный код Яндекс SMTP (SSL 465)</text>
+
+  <!-- 13. User -> UI -->
+  <line x1="90" y1="520" x2="295" y2="520" stroke="#1E3A8A" stroke-width="1.4" marker-end="url(#arrow-blue)" />
+  <text x="192" y="512" text-anchor="middle" font-size="10.5" fill="#1E3A8A">13. Ввод email и пароля в модальном окне регистрации</text>
+
+  <!-- 14. UI -> Api -->
+  <line x1="300" y1="550" x2="505" y2="550" stroke="#1E3A8A" stroke-width="1.4" marker-end="url(#arrow-blue)" />
+  <text x="402" y="542" text-anchor="middle" font-size="10.5" fill="#1E3A8A">14. register({ email, password })</text>
+
+  <!-- 15. Api -> Django -->
+  <line x1="510" y1="580" x2="745" y2="580" stroke="#1E3A8A" stroke-width="1.4" marker-end="url(#arrow-blue)" />
+  <text x="627" y="572" text-anchor="middle" font-size="10.5" fill="#1E3A8A">15. POST /api/auth/register/</text>
+
+  <!-- 16. Django -> DB -->
+  <line x1="750" y1="610" x2="1255" y2="610" stroke="#1E3A8A" stroke-width="1.4" marker-end="url(#arrow-blue)" />
+  <text x="1002" y="602" text-anchor="middle" font-size="10" fill="#1E3A8A">16. INSERT auth_user (хэш PBKDF2), userprofile (verified=False)</text>
+
+  <!-- 17. DB -> Django -->
+  <line x1="1260" y1="640" x2="755" y2="640" stroke="#D97706" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arrow-amber)" />
+  <text x="1002" y="632" text-anchor="middle" font-size="10" fill="#D97706">17. Пользователь успешно создан</text>
+
+  <!-- 18. Django -> Engine -->
+  <line x1="750" y1="670" x2="1005" y2="670" stroke="#1E3A8A" stroke-width="1.4" marker-end="url(#arrow-blue)" />
+  <text x="877" y="662" text-anchor="middle" font-size="10" fill="#1E3A8A">18. EmailVerificationCode.generate_for_user()</text>
+
+  <!-- 19. Engine -> DB -->
+  <line x1="1010" y1="700" x2="1255" y2="700" stroke="#1E3A8A" stroke-width="1.4" marker-end="url(#arrow-blue)" />
+  <text x="1132" y="692" text-anchor="middle" font-size="10" fill="#1E3A8A">19. INSERT 6-значный код (TTL: 15 минут)</text>
+
+  <!-- 20. DB -> Engine -->
+  <line x1="1260" y1="730" x2="1015" y2="730" stroke="#D97706" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arrow-amber)" />
+  <text x="1132" y="722" text-anchor="middle" font-size="10" fill="#D97706">20. Код верификации сохранен в БД</text>
+
+  <!-- 21. Django -> SMTP -->
+  <line x1="750" y1="760" x2="1495" y2="760" stroke="#1E3A8A" stroke-width="1.4" marker-end="url(#arrow-blue)" />
+  <text x="1122" y="752" text-anchor="middle" font-size="10" fill="#1E3A8A">21. send_mail(код, to=email, port=465 SSL smtp.yandex.ru)</text>
+
+  <!-- 22. SMTP -> Django -->
+  <line x1="1500" y1="790" x2="755" y2="790" stroke="#D97706" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arrow-amber)" />
+  <text x="1122" y="782" text-anchor="middle" font-size="10" fill="#D97706">22. 250 Message accepted for delivery</text>
+
+  <!-- 23. Django -> Api -->
+  <line x1="750" y1="815" x2="515" y2="815" stroke="#D97706" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arrow-amber)" />
+  <text x="632" y="807" text-anchor="middle" font-size="10" fill="#D97706">23. 201 Created { message: "Код отправлен на почту" }</text>
+
+  <!-- 24. Api -> UI -->
+  <line x1="510" y1="840" x2="305" y2="840" stroke="#D97706" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arrow-amber)" />
+  <text x="407" y="832" text-anchor="middle" font-size="10" fill="#D97706">24. Открытие 6 ячеек ввода (автофокус)</text>
+
+  <!-- 25. User -> UI -->
+  <line x1="90" y1="870" x2="295" y2="870" stroke="#1E3A8A" stroke-width="1.4" marker-end="url(#arrow-blue)" />
+  <text x="192" y="862" text-anchor="middle" font-size="10.5" fill="#1E3A8A">25. Ввод 6-значного кода из почтового ящика</text>
+
+  <!-- 26. UI -> Api -->
+  <line x1="300" y1="895" x2="505" y2="895" stroke="#1E3A8A" stroke-width="1.4" marker-end="url(#arrow-blue)" />
+  <text x="402" y="887" text-anchor="middle" font-size="10.5" fill="#1E3A8A">26. verifyEmail({ email, code })</text>
+
+  <!-- 27. Api -> Django -->
+  <line x1="510" y1="920" x2="745" y2="920" stroke="#1E3A8A" stroke-width="1.4" marker-end="url(#arrow-blue)" />
+  <text x="627" y="912" text-anchor="middle" font-size="10.5" fill="#1E3A8A">27. POST /api/auth/verify-email/</text>
+
+  <!-- 28. Django -> DB -->
+  <line x1="750" y1="945" x2="1255" y2="945" stroke="#1E3A8A" stroke-width="1.4" marker-end="url(#arrow-blue)" />
+  <text x="1002" y="937" text-anchor="middle" font-size="10" fill="#1E3A8A">28. SELECT код WHERE is_used=False AND expires > now()</text>
+
+  <!-- 29. DB -> Django -->
+  <line x1="1260" y1="965" x2="755" y2="965" stroke="#D97706" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arrow-amber)" />
+  <text x="1002" y="957" text-anchor="middle" font-size="10" fill="#D97706">29. UPDATE userprofile SET is_verified=True, is_used=True</text>
+
+  <!-- 30. Django -> UI -->
+  <line x1="750" y1="985" x2="305" y2="985" stroke="#0284C7" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arrow-sky)" />
+  <text x="527" y="977" text-anchor="middle" font-size="10" fill="#0284C7">30. 200 OK { token, user: verified } -> Вход в профиль</text>
+</svg>
