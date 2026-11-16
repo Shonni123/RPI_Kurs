@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 480" width="100%" height="100%" style="background:#ffffff; font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1380 490" width="100%" height="100%" style="background:#ffffff; font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif;">
   <defs>
     <filter id="shadow" x="-3%" y="-4%" width="106%" height="110%">
       <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-opacity="0.05" />
@@ -21,7 +21,7 @@
   </g>
 
   <!-- 2. USER_PROFILE -->
-  <g transform="translate(30, 220)" filter="url(#shadow)">
+  <g transform="translate(30, 240)" filter="url(#shadow)">
     <rect x="0" y="0" width="260" height="30" rx="3" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.2" />
     <text x="10" y="20" font-size="12" font-weight="bold" fill="#0369A1">USER_PROFILE</text>
     <rect x="0" y="30" width="260" height="96" fill="#FFFFFF" stroke="#334155" stroke-width="1.2" />
@@ -45,7 +45,7 @@
   </g>
 
   <!-- 4. AIRPORT -->
-  <g transform="translate(670, 120)" filter="url(#shadow)">
+  <g transform="translate(670, 30)" filter="url(#shadow)">
     <rect x="0" y="0" width="260" height="30" rx="3" fill="#E2E8F0" stroke="#334155" stroke-width="1.2" />
     <text x="10" y="20" font-size="12" font-weight="bold" fill="#0F172A">AIRPORT (flights_airport)</text>
     <rect x="0" y="30" width="260" height="116" fill="#FFFFFF" stroke="#334155" stroke-width="1.2" />
@@ -56,56 +56,61 @@
     <text x="10" y="140" font-size="11" font-weight="bold" fill="#1E293B">country</text><text x="95" y="140" font-size="10.5" fill="#475569">VARCHAR</text><text x="175" y="140" font-size="10.5" fill="#64748B">Страна</text>
   </g>
 
-  <!-- 5. FLIGHT -->
-  <g transform="translate(990, 80)" filter="url(#shadow)">
-    <rect x="0" y="0" width="290" height="30" rx="3" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.2" />
+  <!-- 5. FLIGHT (ДОПОЛНЕННАЯ) -->
+  <g transform="translate(980, 30)" filter="url(#shadow)">
+    <rect x="0" y="0" width="350" height="30" rx="3" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.2" />
     <text x="10" y="20" font-size="12" font-weight="bold" fill="#15803D">FLIGHT (flights_flight)</text>
-    <rect x="0" y="30" width="290" height="206" fill="#FFFFFF" stroke="#334155" stroke-width="1.2" />
-    <text x="10" y="52" font-size="11" font-weight="bold" fill="#1E293B">id</text><text x="110" y="52" font-size="10.5" fill="#475569">INTEGER</text><text x="195" y="52" font-size="10.5" fill="#64748B">PK</text>
-    <text x="10" y="74" font-size="11" font-weight="bold" fill="#1E293B">flight_number</text><text x="110" y="74" font-size="10.5" fill="#475569">VARCHAR</text><text x="195" y="74" font-size="10.5" fill="#64748B">SU 1702</text>
-    <text x="10" y="96" font-size="11" font-weight="bold" fill="#1E293B">airline</text><text x="110" y="96" font-size="10.5" fill="#475569">VARCHAR</text><text x="195" y="96" font-size="10.5" fill="#64748B">Авиакомпания</text>
-    <text x="10" y="118" font-size="11" font-weight="bold" fill="#1E293B">from_code</text><text x="110" y="118" font-size="10.5" fill="#475569">VARCHAR</text><text x="195" y="118" font-size="10.5" font-weight="bold" fill="#0284C7">FK (1:N)</text>
-    <text x="10" y="140" font-size="11" font-weight="bold" fill="#1E293B">to_code</text><text x="110" y="140" font-size="10.5" fill="#475569">VARCHAR</text><text x="195" y="140" font-size="10.5" font-weight="bold" fill="#0284C7">FK (1:N)</text>
-    <text x="10" y="162" font-size="11" font-weight="bold" fill="#1E293B">dep / arr_time</text><text x="110" y="162" font-size="10.5" fill="#475569">VARCHAR</text><text x="195" y="162" font-size="10.5" fill="#64748B">ЧЧ:ММ</text>
-    <text x="10" y="184" font-size="11" font-weight="bold" fill="#1E293B">departure_date</text><text x="110" y="184" font-size="10.5" fill="#475569">VARCHAR</text><text x="195" y="184" font-size="10.5" fill="#64748B">ГГГГ-ММ-ДД</text>
-    <text x="10" y="206" font-size="11" font-weight="bold" fill="#1E293B">status</text><text x="110" y="206" font-size="10.5" fill="#475569">VARCHAR</text><text x="195" y="206" font-size="10.5" fill="#64748B">scheduled...</text>
-    <text x="10" y="228" font-size="11" font-weight="bold" fill="#1E293B">price</text><text x="110" y="228" font-size="10.5" fill="#475569">INTEGER</text><text x="195" y="228" font-size="10.5" fill="#64748B">Цена (руб)</text>
+    <rect x="0" y="30" width="350" height="316" fill="#FFFFFF" stroke="#334155" stroke-width="1.2" />
+    <text x="10" y="52" font-size="11" font-weight="bold" fill="#1E293B">id</text><text x="115" y="52" font-size="10.5" fill="#475569">INTEGER</text><text x="215" y="52" font-size="10.5" fill="#64748B">PK</text>
+    <text x="10" y="74" font-size="11" font-weight="bold" fill="#1E293B">flight_number</text><text x="115" y="74" font-size="10.5" fill="#475569">VARCHAR</text><text x="215" y="74" font-size="10.5" fill="#64748B">SU 1702</text>
+    <text x="10" y="96" font-size="11" font-weight="bold" fill="#1E293B">airline</text><text x="115" y="96" font-size="10.5" fill="#475569">VARCHAR</text><text x="215" y="96" font-size="10.5" fill="#64748B">Авиакомпания</text>
+    <text x="10" y="118" font-size="11" font-weight="bold" fill="#1E293B">from_code</text><text x="115" y="118" font-size="10.5" fill="#475569">VARCHAR</text><text x="215" y="118" font-size="10.5" font-weight="bold" fill="#0284C7">FK (1:N)</text>
+    <text x="10" y="140" font-size="11" font-weight="bold" fill="#1E293B">to_code</text><text x="115" y="140" font-size="10.5" fill="#475569">VARCHAR</text><text x="215" y="140" font-size="10.5" font-weight="bold" fill="#0284C7">FK (1:N)</text>
+    <text x="10" y="162" font-size="11" font-weight="bold" fill="#1E293B">departure_date</text><text x="115" y="162" font-size="10.5" fill="#475569">VARCHAR(20)</text><text x="215" y="162" font-size="10.5" fill="#64748B">Дата вылета</text>
+    <text x="10" y="184" font-size="11" font-weight="bold" fill="#1E293B">departure_time</text><text x="115" y="184" font-size="10.5" fill="#475569">VARCHAR(20)</text><text x="215" y="184" font-size="10.5" fill="#64748B">ЧЧ:ММ</text>
+    <text x="10" y="206" font-size="11" font-weight="bold" fill="#1E293B">arrival_time</text><text x="115" y="206" font-size="10.5" fill="#475569">VARCHAR(20)</text><text x="215" y="206" font-size="10.5" fill="#64748B">ЧЧ:ММ</text>
+    <text x="10" y="228" font-size="11" font-weight="bold" fill="#1E293B">status</text><text x="115" y="228" font-size="10.5" fill="#475569">VARCHAR(30)</text><text x="215" y="228" font-size="10.5" fill="#64748B">scheduled...</text>
+    <text x="10" y="250" font-size="11" font-weight="bold" fill="#1E293B">altitude</text><text x="115" y="250" font-size="10.5" fill="#475569">INTEGER</text><text x="215" y="250" font-size="10.5" fill="#64748B">Высота (м)</text>
+    <text x="10" y="272" font-size="11" font-weight="bold" fill="#1E293B">speed</text><text x="115" y="272" font-size="10.5" fill="#475569">INTEGER</text><text x="215" y="272" font-size="10.5" fill="#64748B">Скорость (км/ч)</text>
+    <text x="10" y="294" font-size="11" font-weight="bold" fill="#1E293B">price</text><text x="115" y="294" font-size="10.5" fill="#475569">INTEGER</text><text x="215" y="294" font-size="10.5" font-weight="bold" fill="#15803D">руб.</text>
+    <text x="10" y="316" font-size="11" font-weight="bold" fill="#1E293B">updated_at</text><text x="115" y="316" font-size="10.5" fill="#475569">DATETIME</text><text x="215" y="316" font-size="10.5" fill="#64748B">Обновление</text>
   </g>
 
-  <!-- СВЯЗИ -->
+  <!-- ЛИНИИ СВЯЗЕЙ -->
   <!-- 1. USER -> USER_PROFILE (1:1) -->
-  <line x1="110" y1="176" x2="110" y2="220" stroke="#1E3A8A" stroke-width="1.8" />
-  <line x1="102" y1="186" x2="118" y2="186" stroke="#1E3A8A" stroke-width="1.8" />
-  <line x1="102" y1="210" x2="118" y2="210" stroke="#1E3A8A" stroke-width="1.8" />
-  <text x="125" y="202" font-size="10.5" font-weight="bold" fill="#1E3A8A">1 : 1</text>
+  <line x1="160" y1="176" x2="160" y2="240" stroke="#1E3A8A" stroke-width="2" />
+  <line x1="152" y1="184" x2="168" y2="184" stroke="#1E3A8A" stroke-width="2" />
+  <line x1="152" y1="232" x2="168" y2="232" stroke="#1E3A8A" stroke-width="2" />
+  <text x="172" y="210" font-size="11" font-weight="bold" fill="#1E3A8A">1 : 1</text>
 
   <!-- 2. USER -> EMAIL_VERIFICATION_CODE (1:N) -->
-  <line x1="290" y1="90" x2="340" y2="90" stroke="#1E3A8A" stroke-width="1.8" />
-  <line x1="298" y1="82" x2="298" y2="98" stroke="#1E3A8A" stroke-width="1.8" />
-  <line x1="328" y1="82" x2="340" y2="90" stroke="#1E3A8A" stroke-width="1.8" />
-  <line x1="328" y1="98" x2="340" y2="90" stroke="#1E3A8A" stroke-width="1.8" />
-  <text x="315" y="78" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#1E3A8A">1 : N</text>
+  <line x1="290" y1="90" x2="340" y2="90" stroke="#1E3A8A" stroke-width="2" />
+  <line x1="298" y1="82" x2="298" y2="98" stroke="#1E3A8A" stroke-width="2" />
+  <line x1="328" y1="82" x2="340" y2="90" stroke="#1E3A8A" stroke-width="2" />
+  <line x1="328" y1="98" x2="340" y2="90" stroke="#1E3A8A" stroke-width="2" />
+  <text x="302" y="80" font-size="11" font-weight="bold" fill="#1E3A8A">1 : N</text>
 
-  <!-- 3. AIRPORT -> FLIGHT (from, 1:N) -->
-  <line x1="930" y1="160" x2="990" y2="160" stroke="#1E3A8A" stroke-width="1.8" />
-  <line x1="938" y1="152" x2="938" y2="168" stroke="#1E3A8A" stroke-width="1.8" />
-  <line x1="978" y1="152" x2="990" y2="160" stroke="#1E3A8A" stroke-width="1.8" />
-  <line x1="978" y1="168" x2="990" y2="160" stroke="#1E3A8A" stroke-width="1.8" />
-  <text x="960" y="148" text-anchor="middle" font-size="10" font-weight="bold" fill="#1E3A8A">1 : N (from)</text>
+  <!-- 3. AIRPORT -> FLIGHT (from_code, 1:N) -->
+  <line x1="930" y1="140" x2="980" y2="140" stroke="#1E3A8A" stroke-width="2" />
+  <line x1="938" y1="132" x2="938" y2="148" stroke="#1E3A8A" stroke-width="2" />
+  <line x1="968" y1="132" x2="980" y2="140" stroke="#1E3A8A" stroke-width="2" />
+  <line x1="968" y1="148" x2="980" y2="140" stroke="#1E3A8A" stroke-width="2" />
+  <text x="935" y="128" font-size="10.5" font-weight="bold" fill="#1E3A8A">1 : N (from)</text>
 
-  <!-- 4. AIRPORT -> FLIGHT (to, 1:N) -->
-  <line x1="930" y1="210" x2="990" y2="210" stroke="#1E3A8A" stroke-width="1.8" />
-  <line x1="938" y1="202" x2="938" y2="218" stroke="#1E3A8A" stroke-width="1.8" />
-  <line x1="978" y1="202" x2="990" y2="210" stroke="#1E3A8A" stroke-width="1.8" />
-  <line x1="978" y1="218" x2="990" y2="210" stroke="#1E3A8A" stroke-width="1.8" />
-  <text x="960" y="198" text-anchor="middle" font-size="10" font-weight="bold" fill="#1E3A8A">1 : N (to)</text>
+  <!-- 4. AIRPORT -> FLIGHT (to_code, 1:N) -->
+  <line x1="930" y1="165" x2="980" y2="165" stroke="#1E3A8A" stroke-width="2" />
+  <line x1="938" y1="157" x2="938" y2="173" stroke="#1E3A8A" stroke-width="2" />
+  <line x1="968" y1="157" x2="980" y2="165" stroke="#1E3A8A" stroke-width="2" />
+  <line x1="968" y1="173" x2="980" y2="165" stroke="#1E3A8A" stroke-width="2" />
+  <text x="935" y="185" font-size="10.5" font-weight="bold" fill="#1E3A8A">1 : N (to)</text>
 
   <!-- ЛЕГЕНДА -->
-  <g transform="translate(340, 230)">
-    <rect x="0" y="0" width="280" height="100" rx="4" fill="#FAFBFD" stroke="#94A3B8" stroke-width="1" />
-    <text x="10" y="20" font-size="11" font-weight="bold" fill="#1E293B">Обозначения связей (ГОСТ):</text>
-    <text x="10" y="42" font-size="10" fill="#334155">• <tspan font-weight="bold">PK</tspan> — Первичный ключ | <tspan font-weight="bold">FK</tspan> — Внешний ключ</text>
-    <text x="10" y="62" font-size="10" fill="#334155">• <tspan font-weight="bold">1 : 1</tspan> — Связь один к одному (Профиль)</text>
-    <text x="10" y="82" font-size="10" fill="#334155">• <tspan font-weight="bold">1 : N</tspan> — Связь один ко многим (Коды, Рейсы)</text>
+  <g transform="translate(340, 240)" filter="url(#shadow)">
+    <rect x="0" y="0" width="600" height="120" rx="4" fill="#FAFBFD" stroke="#94A3B8" stroke-width="1.2" />
+    <text x="12" y="24" font-size="11.5" font-weight="bold" fill="#1E293B">Обозначения реляционных связей (ГОСТ):</text>
+    <text x="12" y="48" font-size="10.5" fill="#334155">• PK — Первичный ключ (Primary Key) | FK — Внешний ключ (Foreign Key)</text>
+    <text x="12" y="70" font-size="10.5" fill="#334155">• UK — Ограничение уникальности (Unique Constraint)</text>
+    <text x="12" y="92" font-size="10.5" fill="#334155">• 1 : 1 — Связь один к одному (Профиль пользователя)</text>
+    <text x="12" y="112" font-size="10.5" fill="#334155">• 1 : N — Связь один ко многим (Коды подтверждения, Рейсы авиалиний)</text>
   </g>
 </svg>

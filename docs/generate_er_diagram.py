@@ -3,7 +3,8 @@ from PIL import Image, ImageDraw, ImageFont
 
 def generate_compact_er_diagram_png(output_path='docs/er_diagram.png'):
     scale = 2
-    w, h = 1350 * scale, 450 * scale
+    # Width and height to comfortably house the updated FLIGHT table
+    w, h = 1380 * scale, 480 * scale
 
     # Pure white background
     img = Image.new('RGB', (w, h), color='#FFFFFF')
@@ -42,11 +43,11 @@ def generate_compact_er_diagram_png(output_path='docs/er_diagram.png'):
             draw.text((S(x + 10), S(cur_y)), name, font=font_field_bold, fill='#1E293B')
             
             # Type
-            draw.text((S(x + 105), S(cur_y)), ftype, font=font_field_reg, fill='#475569')
+            draw.text((S(x + 115), S(cur_y)), ftype, font=font_field_reg, fill='#475569')
 
             # Note / constraint
             if note:
-                draw.text((S(x + 185), S(cur_y)), note, font=font_field_reg, fill='#64748B')
+                draw.text((S(x + 205), S(cur_y)), note, font=font_field_reg, fill='#64748B')
 
             cur_y += row_h
 
@@ -69,7 +70,7 @@ def generate_compact_er_diagram_png(output_path='docs/er_diagram.png'):
         ("     | is_verified", "BOOLEAN", "Email"),
         ("     | phone", "VARCHAR(30)", ""),
     ]
-    p_x, p_y, p_w, p_h = draw_table(40, 250, 280, "USER_PROFILE (accounts_userprofile)", profile_fields, '#E0F2FE', '#0284C7')
+    p_x, p_y, p_w, p_h = draw_table(40, 260, 280, "USER_PROFILE (accounts_userprofile)", profile_fields, '#E0F2FE', '#0284C7')
 
     # ================= 3. EMAIL_VERIFICATION_CODE =================
     code_fields = [
@@ -90,21 +91,25 @@ def generate_compact_er_diagram_png(output_path='docs/er_diagram.png'):
         ("     | city", "VARCHAR(100)", "Город"),
         ("     | country", "VARCHAR(100)", "Страна"),
     ]
-    a_x, a_y, a_w, a_h = draw_table(690, 40, 270, "AIRPORT (flights_airport)", airport_fields, '#E2E8F0')
+    a_x, a_y, a_w, a_h = draw_table(690, 40, 280, "AIRPORT (flights_airport)", airport_fields, '#E2E8F0')
 
-    # ================= 5. FLIGHT =================
+    # ================= 5. FLIGHT (ДОПОЛНЕННАЯ) =================
     flight_fields = [
         ("PK | id", "INTEGER", ""),
         ("     | flight_number", "VARCHAR(30)", "SU 1702"),
         ("     | airline", "VARCHAR(100)", "Авиакомпания"),
         ("FK | from_code", "VARCHAR(10)", "1:N вылет"),
         ("FK | to_code", "VARCHAR(10)", "1:N прилет"),
+        ("     | dep_date", "VARCHAR(20)", "Дата вылета"),
         ("     | dep_time", "VARCHAR(20)", "ЧЧ:ММ"),
         ("     | arr_time", "VARCHAR(20)", "ЧЧ:ММ"),
         ("     | status", "VARCHAR(30)", "scheduled..."),
-        ("     | price", "INTEGER", "Цена (руб)"),
+        ("     | altitude", "INTEGER", "Высота (м)"),
+        ("     | speed", "INTEGER", "Скорость (км/ч)"),
+        ("     | price", "INTEGER", "Цена (руб.)"),
+        ("     | updated_at", "DATETIME", "Обновление"),
     ]
-    f_x, f_y, f_w, f_h = draw_table(1000, 40, 290, "FLIGHT (flights_flight)", flight_fields, '#DCFCE7', '#16A34A')
+    f_x, f_y, f_w, f_h = draw_table(1010, 40, 320, "FLIGHT (flights_flight)", flight_fields, '#DCFCE7', '#16A34A')
 
     # ================= СВЯЗИ (RELATIONSHIPS) =================
     c_line = '#1E3A8A'
@@ -141,8 +146,8 @@ def generate_compact_er_diagram_png(output_path='docs/er_diagram.png'):
     draw.text((S(a_x + a_w + 8), S(y_af_to - 18)), "1 : N (to)", font=font_rel, fill=c_line)
 
     # ================= ЛЕГЕНДА =================
-    leg_x, leg_y = 360, 250
-    draw.rectangle([S(leg_x), S(leg_y), S(leg_x + 600), S(leg_y + 130)], fill='#FAFBFD', outline='#94A3B8', width=S(1))
+    leg_x, leg_y = 360, 260
+    draw.rectangle([S(leg_x), S(leg_y), S(leg_x + 610), S(leg_y + 130)], fill='#FAFBFD', outline='#94A3B8', width=S(1))
     draw.text((S(leg_x + 12), S(leg_y + 10)), "Обозначения реляционных связей (ГОСТ):", font=font_title, fill='#1E293B')
     draw.text((S(leg_x + 12), S(leg_y + 36)), "• PK — Первичный ключ (Primary Key) | FK — Внешний ключ (Foreign Key)", font=font_field_reg, fill='#334155')
     draw.text((S(leg_x + 12), S(leg_y + 60)), "• UK — Ограничение уникальности (Unique Constraint)", font=font_field_reg, fill='#334155')
@@ -151,7 +156,7 @@ def generate_compact_er_diagram_png(output_path='docs/er_diagram.png'):
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     img.save(output_path, dpi=(300, 300))
-    print(f"Compact ER diagram PNG regenerated: {output_path}")
+    print(f"Updated Compact ER diagram PNG generated: {output_path}")
 
 if __name__ == '__main__':
     generate_compact_er_diagram_png()
