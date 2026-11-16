@@ -1,10 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1620 380" width="100%" height="100%" style="background:#ffffff; font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1940 380" width="100%" height="100%" style="background:#ffffff; font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif;">
   <defs>
     <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1E3A8A" />
-    </marker>
-    <marker id="arrow-gray" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#64748B" />
     </marker>
     <marker id="arrow-amber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#D97706" />
@@ -14,109 +11,132 @@
     </filter>
   </defs>
 
-  <!-- Явный чистый белый непрозрачный фон для отчета и документов -->
+  <!-- Чистый белый непрозрачный фон для ГОСТ отчета и печати -->
   <rect width="100%" height="100%" fill="#ffffff" />
 
   <!-- ================= 1. БАЗА ДАННЫХ (DATABASE) ================= -->
-  <rect x="25" y="75" width="180" height="230" rx="6" fill="#FAFBFD" stroke="#94A3B8" stroke-width="1.2" />
+  <rect x="20" y="75" width="190" height="235" rx="6" fill="#FAFBFD" stroke="#94A3B8" stroke-width="1.2" />
   <text x="115" y="98" text-anchor="middle" font-size="13" font-weight="600" fill="#334155">База данных (Database)</text>
 
   <!-- Цилиндр СУБД SQLite 3 -->
-  <g transform="translate(50, 150)">
-    <path d="M 0 25 C 0 10, 130 10, 130 25 L 130 75 C 130 90, 0 90, 0 75 Z" fill="#F1F5F9" stroke="#64748B" stroke-width="1.4" />
-    <path d="M 0 50 C 0 65, 130 65, 130 50" fill="none" stroke="#94A3B8" stroke-width="1.2" />
-    <ellipse cx="65" cy="25" rx="65" ry="15" fill="#E2E8F0" stroke="#64748B" stroke-width="1.4" />
-    <text x="65" y="60" text-anchor="middle" font-size="14" font-weight="bold" fill="#1E293B">СУБД SQLite 3</text>
+  <g transform="translate(40, 150)">
+    <path d="M 0 25 C 0 10, 150 10, 150 25 L 150 75 C 150 90, 0 90, 0 75 Z" fill="#F1F5F9" stroke="#64748B" stroke-width="1.4" />
+    <path d="M 0 50 C 0 65, 150 65, 150 50" fill="none" stroke="#94A3B8" stroke-width="1.2" />
+    <ellipse cx="75" cy="25" rx="75" ry="15" fill="#E2E8F0" stroke="#64748B" stroke-width="1.4" />
+    <text x="75" y="60" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1E293B">СУБД SQLite 3</text>
   </g>
 
-  <!-- ================= 2. СЕРВЕРНАЯ ЧАСТЬ (BACKEND) ================= -->
-  <rect x="245" y="75" width="465" height="230" rx="6" fill="#FAFBFD" stroke="#94A3B8" stroke-width="1.2" />
-  <text x="477" y="98" text-anchor="middle" font-size="13" font-weight="600" fill="#334155">Серверная часть (Backend)</text>
+  <!-- ================= 2. СЕРВЕРНАЯ ЧАСТЬ (BACKEND & WEB SERVER) ================= -->
+  <rect x="230" y="75" width="810" height="235" rx="6" fill="#FAFBFD" stroke="#94A3B8" stroke-width="1.2" />
+  <text x="635" y="98" text-anchor="middle" font-size="13" font-weight="600" fill="#334155">Серверная часть (Backend &amp; Web Server)</text>
 
-  <!-- Блок: Контроллеры -->
-  <rect x="265" y="165" width="215" height="60" rx="5" fill="#FFFFFF" stroke="#64748B" stroke-width="1.4" filter="url(#shadow)" />
-  <text x="372" y="192" text-anchor="middle" font-size="13" font-weight="bold" fill="#0F172A">Контроллеры</text>
-  <text x="372" y="211" text-anchor="middle" font-size="11.5" fill="#475569">(Flights, Airports, Auth)</text>
+  <!-- Блок 1: Django ORM (Исправление 1) -->
+  <rect x="250" y="165" width="160" height="65" rx="5" fill="#FFFFFF" stroke="#64748B" stroke-width="1.4" filter="url(#shadow)" />
+  <text x="330" y="193" text-anchor="middle" font-size="13" font-weight="bold" fill="#0F172A">Django ORM</text>
+  <text x="330" y="212" text-anchor="middle" font-size="11" fill="#475569">(Слой моделей)</text>
 
-  <!-- Блок: REST API Маршрутизатор -->
-  <rect x="520" y="165" width="170" height="60" rx="5" fill="#FFFFFF" stroke="#64748B" stroke-width="1.4" filter="url(#shadow)" />
-  <text x="605" y="192" text-anchor="middle" font-size="13" font-weight="bold" fill="#0F172A">REST API</text>
-  <text x="605" y="211" text-anchor="middle" font-size="12" fill="#475569">Маршрутизатор</text>
+  <!-- Блок 2: Контроллеры -->
+  <rect x="445" y="165" width="195" height="65" rx="5" fill="#FFFFFF" stroke="#64748B" stroke-width="1.4" filter="url(#shadow)" />
+  <text x="542" y="193" text-anchor="middle" font-size="13" font-weight="bold" fill="#0F172A">Контроллеры</text>
+  <text x="542" y="212" text-anchor="middle" font-size="11" fill="#475569">(Flights, Airports, Auth)</text>
+
+  <!-- Блок 3: URL-маршрутизатор Django/DRF (Исправление 5) -->
+  <rect x="675" y="165" width="185" height="65" rx="5" fill="#FFFFFF" stroke="#64748B" stroke-width="1.4" filter="url(#shadow)" />
+  <text x="767" y="193" text-anchor="middle" font-size="13" font-weight="bold" fill="#0F172A">URL-маршрутизатор</text>
+  <text x="767" y="212" text-anchor="middle" font-size="11.5" fill="#475569">Django / DRF</text>
+
+  <!-- Блок 4: Веб-сервер Nginx (Исправление 2) -->
+  <rect x="895" y="165" width="125" height="65" rx="5" fill="#F8FAFC" stroke="#64748B" stroke-width="1.4" filter="url(#shadow)" />
+  <text x="957" y="193" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#0F172A">Nginx</text>
+  <text x="957" y="212" text-anchor="middle" font-size="11" fill="#475569">(Reverse Proxy)</text>
 
   <!-- ================= 3. КЛИЕНТСКАЯ ЧАСТЬ (FRONTEND) ================= -->
-  <rect x="750" y="75" width="845" height="230" rx="6" fill="#FAFBFD" stroke="#94A3B8" stroke-width="1.2" />
-  <text x="1172" y="98" text-anchor="middle" font-size="13" font-weight="600" fill="#334155">Клиентская часть (Frontend)</text>
+  <rect x="1060" y="75" width="860" height="235" rx="6" fill="#FAFBFD" stroke="#94A3B8" stroke-width="1.2" />
+  <text x="1490" y="98" text-anchor="middle" font-size="13" font-weight="600" fill="#334155">Клиентская часть (Frontend)</text>
 
-  <!-- Блок: Службы данных (Services) -->
-  <rect x="775" y="165" width="155" height="60" rx="5" fill="#FFFFFF" stroke="#64748B" stroke-width="1.4" filter="url(#shadow)" />
-  <text x="852" y="192" text-anchor="middle" font-size="13" font-weight="bold" fill="#0F172A">Службы данных</text>
-  <text x="852" y="211" text-anchor="middle" font-size="11.5" fill="#475569">(Services / api.ts)</text>
+  <!-- Блок 5: Службы данных (Services) -->
+  <rect x="1080" y="165" width="150" height="65" rx="5" fill="#FFFFFF" stroke="#64748B" stroke-width="1.4" filter="url(#shadow)" />
+  <text x="1155" y="193" text-anchor="middle" font-size="13" font-weight="bold" fill="#0F172A">Службы данных</text>
+  <text x="1155" y="212" text-anchor="middle" font-size="11" fill="#475569">(Services / api.ts)</text>
 
-  <!-- Блок: Локальный кэш (Fallback) -->
-  <rect x="990" y="165" width="145" height="60" rx="5" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.4" stroke-dasharray="4 3" filter="url(#shadow)" />
-  <text x="1062" y="192" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#92400E">Локальный кэш</text>
-  <text x="1062" y="211" text-anchor="middle" font-size="11" fill="#B45309">(Fallback / Mocks)</text>
+  <!-- Блок 6: Локальный кэш (Fallback) -->
+  <rect x="1290" y="165" width="145" height="65" rx="5" fill="#FFFBEB" stroke="#D97706" stroke-width="1.4" stroke-dasharray="4 3" filter="url(#shadow)" />
+  <text x="1362" y="193" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#92400E">Локальный кэш</text>
+  <text x="1362" y="212" text-anchor="middle" font-size="11" fill="#B45309">(Fallback / Mocks)</text>
 
-  <!-- Блок: Интерфейс React SPA -->
-  <rect x="1195" y="165" width="160" height="60" rx="5" fill="#FFFFFF" stroke="#64748B" stroke-width="1.4" filter="url(#shadow)" />
-  <text x="1275" y="192" text-anchor="middle" font-size="13" font-weight="bold" fill="#0F172A">Интерфейс</text>
-  <text x="1275" y="211" text-anchor="middle" font-size="12" fill="#475569">React SPA</text>
+  <!-- Блок 7: Интерфейс React SPA -->
+  <rect x="1495" y="165" width="155" height="65" rx="5" fill="#FFFFFF" stroke="#64748B" stroke-width="1.4" filter="url(#shadow)" />
+  <text x="1572" y="193" text-anchor="middle" font-size="13" font-weight="bold" fill="#0F172A">Интерфейс</text>
+  <text x="1572" y="212" text-anchor="middle" font-size="11.5" fill="#475569">React SPA</text>
 
-  <!-- Блок: Пользователь -->
-  <rect x="1425" y="165" width="145" height="60" rx="5" fill="#F1F5F9" stroke="#64748B" stroke-width="1.4" filter="url(#shadow)" />
-  <text x="1497" y="201" text-anchor="middle" font-size="14" font-weight="bold" fill="#0F172A">Пользователь</text>
+  <!-- Блок 8: Пользователь -->
+  <rect x="1710" y="165" width="150" height="65" rx="5" fill="#F1F5F9" stroke="#64748B" stroke-width="1.4" filter="url(#shadow)" />
+  <text x="1785" y="202" text-anchor="middle" font-size="14" font-weight="bold" fill="#0F172A">Пользователь</text>
 
-  <!-- ================= СТРЕЛКИ И СВЯЗИ ================= -->
+  <!-- ================= СТРЕЛКИ (НИЖНИЙ КОНТУР: ПРЯМОЙ ХОД ЗАПРОСА 1 -> 7) ================= -->
 
-  <!-- 1. Действие в интерфейсе (Пользователь -> Интерфейс) [Нижняя дуга] -->
-  <path d="M 1425 210 C 1395 240, 1375 240, 1355 215" fill="none" stroke="#1E3A8A" stroke-width="1.6" marker-end="url(#arrow-blue)" />
-  <text x="1390" y="255" text-anchor="middle" font-size="11" font-weight="600" fill="#1E3A8A">1. Действие в интерфейсе</text>
+  <!-- 1. Действие в интерфейсе (User -> UI) -->
+  <path d="M 1740 230 Q 1680 270 1620 230" fill="none" stroke="#1E3A8A" stroke-width="1.8" marker-end="url(#arrow-blue)" />
+  <text x="1680" y="265" text-anchor="middle" font-size="10.5" font-weight="600" fill="#1E3A8A">1. Действие в интерфейсе</text>
 
-  <!-- 2. Вызов метода (Интерфейс -> Службы данных) [Нижняя дуга] -->
-  <path d="M 1205 215 C 1115 285, 1025 285, 930 215" fill="none" stroke="#1E3A8A" stroke-width="1.6" marker-end="url(#arrow-blue)" />
-  <text x="1067" y="295" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1E3A8A">2. Вызов метода</text>
+  <!-- 2. Вызов метода (UI -> Services) -->
+  <path d="M 1515 230 Q 1362 315 1210 230" fill="none" stroke="#1E3A8A" stroke-width="1.8" marker-end="url(#arrow-blue)" />
+  <text x="1362" y="295" text-anchor="middle" font-size="11" font-weight="600" fill="#1E3A8A">2. Вызов метода</text>
 
-  <!-- Пунктирный Fallback контур -->
-  <!-- Службы -> Кэш -->
-  <path d="M 930 195 L 988 195" fill="none" stroke="#D97706" stroke-width="1.3" stroke-dasharray="3 3" marker-end="url(#arrow-amber)" />
-  <text x="960" y="182" text-anchor="middle" font-size="10" font-weight="500" fill="#B45309">Сбой сети / &gt;2c</text>
+  <!-- 3. HTTP-запрос (Services -> Nginx) -->
+  <path d="M 1100 230 Q 1050 275 1000 230" fill="none" stroke="#1E3A8A" stroke-width="1.8" marker-end="url(#arrow-blue)" />
+  <text x="1050" y="270" text-anchor="middle" font-size="10.5" font-weight="600" fill="#1E3A8A">3. HTTP-запрос</text>
 
-  <!-- Кэш -> Интерфейс -->
-  <path d="M 1135 195 L 1193 195" fill="none" stroke="#D97706" stroke-width="1.3" stroke-dasharray="3 3" marker-end="url(#arrow-amber)" />
-  <text x="1165" y="182" text-anchor="middle" font-size="10" font-weight="500" fill="#B45309">Автономные данные</text>
+  <!-- 4. Проксирование (Nginx -> URL-маршрутизатор) -->
+  <path d="M 915 230 Q 869 255 823 230" fill="none" stroke="#1E3A8A" stroke-width="1.8" marker-end="url(#arrow-blue)" />
+  <text x="869" y="255" text-anchor="middle" font-size="10" font-weight="600" fill="#1E3A8A">4. Проксирование</text>
 
-  <!-- 3. HTTP Запрос (Службы данных -> REST API Маршрутизатор) [Нижняя дуга] -->
-  <path d="M 780 215 C 745 250, 715 250, 680 215" fill="none" stroke="#1E3A8A" stroke-width="1.6" marker-end="url(#arrow-blue)" />
-  <text x="730" y="260" text-anchor="middle" font-size="11" font-weight="600" fill="#1E3A8A">3. HTTP Запрос</text>
+  <!-- 5. Вызов контроллера (URL-маршрутизатор -> Контроллеры) -->
+  <path d="M 705 230 Q 653 255 601 230" fill="none" stroke="#1E3A8A" stroke-width="1.8" marker-end="url(#arrow-blue)" />
+  <text x="653" y="255" text-anchor="middle" font-size="10" font-weight="600" fill="#1E3A8A">5. Вызов контроллера</text>
 
-  <!-- 4. Вызов контроллера (Маршрутизатор -> Контроллеры) [Нижняя дуга] -->
-  <path d="M 525 210 C 510 225, 495 225, 480 210" fill="none" stroke="#1E3A8A" stroke-width="1.6" marker-end="url(#arrow-blue)" />
-  <text x="502" y="238" text-anchor="middle" font-size="10.5" font-weight="600" fill="#1E3A8A">4. Вызов контроллера</text>
+  <!-- 6. ORM-запрос (Контроллеры -> Django ORM) [Исправление 1] -->
+  <path d="M 475 230 Q 426 255 378 230" fill="none" stroke="#1E3A8A" stroke-width="1.8" marker-end="url(#arrow-blue)" />
+  <text x="426" y="255" text-anchor="middle" font-size="10" font-weight="600" fill="#1E3A8A">6. ORM-запрос</text>
 
-  <!-- 5. SQL Запрос (Контроллеры -> СУБД SQLite 3) [Нижняя дуга] -->
-  <path d="M 270 215 C 230 260, 205 260, 165 225" fill="none" stroke="#1E3A8A" stroke-width="1.6" marker-end="url(#arrow-blue)" />
-  <text x="218" y="265" text-anchor="middle" font-size="11" font-weight="600" fill="#1E3A8A">5. SQL Запрос</text>
+  <!-- 7. SQL-запрос (Django ORM -> SQLite) -->
+  <path d="M 270 230 Q 219 275 168 230" fill="none" stroke="#1E3A8A" stroke-width="1.8" marker-end="url(#arrow-blue)" />
+  <text x="219" y="270" text-anchor="middle" font-size="10.5" font-weight="600" fill="#1E3A8A">7. SQL-запрос</text>
 
-  <!-- ================= ОБРАТНЫЙ ПОТОК (ВЕРХНИЙ КОНТУР) ================= -->
+  <!-- ================= СТРЕЛКИ (ВЕРХНИЙ КОНТУР: ОБРАТНЫЙ ХОД ОТВЕТА 8 -> 14) ================= -->
 
-  <!-- 6. Строки данных (СУБД -> Контроллеры) [Верхняя дуга] -->
-  <path d="M 165 175 C 205 140, 230 140, 268 175" fill="none" stroke="#1E3A8A" stroke-width="1.6" marker-end="url(#arrow-blue)" />
-  <text x="217" y="135" text-anchor="middle" font-size="11" font-weight="600" fill="#1E3A8A">6. Строки данных</text>
+  <!-- 8. Результат SQL-запроса (SQLite -> Django ORM) [Исправление 4] -->
+  <path d="M 168 165 Q 219 125 270 165" fill="none" stroke="#1E3A8A" stroke-width="1.8" marker-end="url(#arrow-blue)" />
+  <text x="219" y="132" text-anchor="middle" font-size="10" font-weight="600" fill="#1E3A8A">8. Результат SQL-запроса</text>
 
-  <!-- 7. JSON Ответ (Контроллеры -> Маршрутизатор) [Верхняя дуга] -->
-  <path d="M 480 175 C 495 160, 510 160, 523 175" fill="none" stroke="#1E3A8A" stroke-width="1.6" marker-end="url(#arrow-blue)" />
-  <text x="502" y="150" text-anchor="middle" font-size="10.5" font-weight="600" fill="#1E3A8A">7. JSON Ответ</text>
+  <!-- 9. Данные моделей (Django ORM -> Контроллеры) -->
+  <path d="M 378 165 Q 426 140 475 165" fill="none" stroke="#1E3A8A" stroke-width="1.8" marker-end="url(#arrow-blue)" />
+  <text x="426" y="142" text-anchor="middle" font-size="10" font-weight="600" fill="#1E3A8A">9. Данные моделей</text>
 
-  <!-- 8. HTTP 200/201 (Маршрутизатор -> Службы данных) [Верхняя дуга] -->
-  <path d="M 680 175 C 715 140, 745 140, 778 175" fill="none" stroke="#1E3A8A" stroke-width="1.6" marker-end="url(#arrow-blue)" />
-  <text x="730" y="135" text-anchor="middle" font-size="11" font-weight="600" fill="#1E3A8A">8. HTTP 200/201</text>
+  <!-- 10. JSON-ответ (Контроллеры -> URL-маршрутизатор) -->
+  <path d="M 601 165 Q 653 140 705 165" fill="none" stroke="#1E3A8A" stroke-width="1.8" marker-end="url(#arrow-blue)" />
+  <text x="653" y="142" text-anchor="middle" font-size="10" font-weight="600" fill="#1E3A8A">10. JSON-ответ</text>
 
-  <!-- 9. Обновление состояния (Службы данных -> Интерфейс) [Верхняя дуга] -->
-  <path d="M 930 175 C 1025 105, 1115 105, 1202 175" fill="none" stroke="#1E3A8A" stroke-width="1.6" marker-end="url(#arrow-blue)" />
-  <text x="1067" y="98" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1E3A8A">9. Обновление состояния</text>
+  <!-- 11. Ответ (URL-маршрутизатор -> Nginx) -->
+  <path d="M 823 165 Q 869 140 915 165" fill="none" stroke="#1E3A8A" stroke-width="1.8" marker-end="url(#arrow-blue)" />
+  <text x="869" y="142" text-anchor="middle" font-size="10" font-weight="600" fill="#1E3A8A">11. Ответ</text>
 
-  <!-- 10. Рендеринг (Интерфейс -> Пользователь) [Верхняя дуга] -->
-  <path d="M 1355 175 C 1375 150, 1395 150, 1423 175" fill="none" stroke="#1E3A8A" stroke-width="1.6" marker-end="url(#arrow-blue)" />
-  <text x="1390" y="142" text-anchor="middle" font-size="11" font-weight="600" fill="#1E3A8A">10. Рендеринг</text>
+  <!-- 12. HTTP-ответ (JSON) (Nginx -> Службы данных) [Исправление 3] -->
+  <path d="M 1000 165 Q 1050 125 1100 165" fill="none" stroke="#1E3A8A" stroke-width="1.8" marker-end="url(#arrow-blue)" />
+  <text x="1050" y="132" text-anchor="middle" font-size="10.5" font-weight="600" fill="#1E3A8A">12. HTTP-ответ (JSON)</text>
+
+  <!-- 13. Обновление состояния (Службы данных -> Интерфейс) -->
+  <path d="M 1210 165 Q 1362 85 1515 165" fill="none" stroke="#1E3A8A" stroke-width="1.8" marker-end="url(#arrow-blue)" />
+  <text x="1362" y="105" text-anchor="middle" font-size="11" font-weight="600" fill="#1E3A8A">13. Обновление состояния</text>
+
+  <!-- 14. Рендеринг (Интерфейс -> Пользователь) -->
+  <path d="M 1620 165 Q 1680 125 1740 165" fill="none" stroke="#1E3A8A" stroke-width="1.8" marker-end="url(#arrow-blue)" />
+  <text x="1680" y="132" text-anchor="middle" font-size="10.5" font-weight="600" fill="#1E3A8A">14. Рендеринг</text>
+
+  <!-- ================= АВТОНОМНЫЙ ПУНКТИРНЫЙ КОНТУР (FALLBACK) ================= -->
+  <path d="M 1230 197 L 1290 197" fill="none" stroke="#D97706" stroke-width="1.6" stroke-dasharray="3 3" marker-end="url(#arrow-amber)" />
+  <text x="1260" y="188" text-anchor="middle" font-size="9" fill="#B45309">Сбой сети / &gt;2с</text>
+
+  <path d="M 1435 197 L 1495 197" fill="none" stroke="#D97706" stroke-width="1.6" stroke-dasharray="3 3" marker-end="url(#arrow-amber)" />
+  <text x="1465" y="188" text-anchor="middle" font-size="9" fill="#B45309">Автономные данные</text>
 </svg>
-

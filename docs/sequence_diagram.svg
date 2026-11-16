@@ -173,3 +173,4 @@
   <line x1="750" y1="985" x2="305" y2="985" stroke="#0284C7" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arrow-sky)" />
   <text x="527" y="977" text-anchor="middle" font-size="10" fill="#0284C7">30. 200 OK { token, user: verified } -> Вход в профиль</text>
 </svg>
+

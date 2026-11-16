@@ -18,3 +18,4 @@ class Command(BaseCommand):
         self.stdout.write(
             self.style.SUCCESS(f'Successfully deleted {count} completed flight(s) older than {days} days.')
         )
+

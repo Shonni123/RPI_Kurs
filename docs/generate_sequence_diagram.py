@@ -137,3 +137,4 @@ def generate_sequence_diagram_png(output_path='docs/sequence_diagram.png'):
 
 if __name__ == '__main__':
     generate_sequence_diagram_png()
+
