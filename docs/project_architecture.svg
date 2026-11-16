@@ -1,0 +1,230 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1680 1040" width="100%" height="100%" style="background:#ffffff; font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif;">
+  <defs>
+    <filter id="shadow" x="-3%" y="-4%" width="106%" height="110%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.06" />
+    </filter>
+    <marker id="arr-green" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#16A34A" />
+    </marker>
+    <marker id="arr-blue" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1E3A8A" />
+    </marker>
+    <marker id="arr-purple" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#7C3AED" />
+    </marker>
+    <marker id="arr-amber" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#B45309" />
+    </marker>
+    <marker id="arr-red" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#DC2626" />
+    </marker>
+  </defs>
+
+  <!-- Чистый белый фон -->
+  <rect width="100%" height="100%" fill="#ffffff" />
+
+  <!-- ================= 1. КЛИЕНТСКИЙ УРОВЕНЬ ================= -->
+  <rect x="40" y="30" width="1600" height="210" rx="6" fill="#F8FAFC" stroke="#64748B" stroke-width="1.5" />
+  <rect x="40" y="30" width="1600" height="34" rx="6" fill="#FFFFFF" stroke="#64748B" stroke-width="1.5" />
+  <text x="58" y="53" font-size="13" font-weight="bold" fill="#0F172A">1. Клиентский уровень (Frontend — React 19 Single Page Application)</text>
+
+  <!-- Карточка: Страницы -->
+  <g transform="translate(65, 75)" filter="url(#shadow)">
+    <rect width="350" height="145" rx="4" fill="#FFFFFF" stroke="#475569" stroke-width="1.2" />
+    <rect width="350" height="26" rx="4" fill="#F1F5F9" stroke="#475569" stroke-width="1.2" />
+    <text x="12" y="18" font-size="11.5" font-weight="bold" fill="#0F172A">Интерфейс и страницы (Pages)</text>
+    <text x="12" y="44" font-size="10.5" fill="#334155">• Landing (Hero, Features, Stats, FAQ)</text>
+    <text x="12" y="64" font-size="10.5" fill="#334155">• Flights (Табло рейсов, живой поиск)</text>
+    <text x="12" y="84" font-size="10.5" fill="#334155">• FlightDetail (/flights/:id, телеметрия)</text>
+    <text x="12" y="104" font-size="10.5" fill="#334155">• Airports (Каталог хабов), Favorites</text>
+    <text x="12" y="124" font-size="10.5" fill="#334155">• NotFound (404 авиационный экран)</text>
+  </g>
+
+  <!-- Карточка: Компоненты -->
+  <g transform="translate(445, 75)" filter="url(#shadow)">
+    <rect width="350" height="145" rx="4" fill="#FFFFFF" stroke="#475569" stroke-width="1.2" />
+    <rect width="350" height="26" rx="4" fill="#F1F5F9" stroke="#475569" stroke-width="1.2" />
+    <text x="12" y="18" font-size="11.5" font-weight="bold" fill="#0F172A">Компонентный уровень (UI Layer)</text>
+    <text x="12" y="44" font-size="10.5" fill="#334155">• FlightCard (Карточка рейса, бейджи)</text>
+    <text x="12" y="64" font-size="10.5" fill="#334155">• Filters (Капсулы статусов, авиакомпании)</text>
+    <text x="12" y="84" font-size="10.5" fill="#334155">• SearchBar (Быстрый поиск, автоочистка)</text>
+    <text x="12" y="104" font-size="10.5" fill="#334155">• LoadingSkeleton (Мерцающий скелетон)</text>
+    <text x="12" y="124" font-size="10.5" fill="#334155">• Drawer (Боковая навигация), Modal</text>
+  </g>
+
+  <!-- Карточка: Стейт -->
+  <g transform="translate(825, 75)" filter="url(#shadow)">
+    <rect width="350" height="145" rx="4" fill="#FFFFFF" stroke="#475569" stroke-width="1.2" />
+    <rect width="350" height="26" rx="4" fill="#F1F5F9" stroke="#475569" stroke-width="1.2" />
+    <text x="12" y="18" font-size="11.5" font-weight="bold" fill="#0F172A">Управление состоянием и роутинг</text>
+    <text x="12" y="44" font-size="10.5" fill="#334155">• React Router v7 (SPA маршрутизация)</text>
+    <text x="12" y="64" font-size="10.5" fill="#334155">• AuthContext (Сессия, статус верификации)</text>
+    <text x="12" y="84" font-size="10.5" fill="#334155">• FavoritesContext (Список избранного)</text>
+    <text x="12" y="104" font-size="10.5" fill="#334155">• LocalStorage API (Офлайн-сохранение)</text>
+    <text x="12" y="124" font-size="10.5" fill="#334155">• useMemo / useCallback (Оптимизация 60 FPS)</text>
+  </g>
+
+  <!-- Карточка: Сервисы -->
+  <g transform="translate(1205, 75)" filter="url(#shadow)">
+    <rect width="410" height="145" rx="4" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.4" />
+    <rect width="410" height="26" rx="4" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.4" />
+    <text x="12" y="18" font-size="11.5" font-weight="bold" fill="#1E3A8A">Сервисный слой данных (Services)</text>
+    <text x="12" y="44" font-size="10.5" fill="#1E3A8A">• src/services/api.ts (Клиент API)</text>
+    <text x="12" y="64" font-size="10.5" fill="#1E3A8A">• Axios / Fetch (Асинхронные HTTP запросы)</text>
+    <text x="12" y="84" font-size="10.5" fill="#1E3A8A">• Interceptors (Обработка ошибок, CORS)</text>
+    <text x="12" y="104" font-size="10.5" fill="#1E3A8A">• Mock Data Cache (Автономный fallback)</text>
+    <text x="12" y="124" font-size="10.5" fill="#1E3A8A">• Преобразование camelCase &lt;-&gt; snake_case</text>
+  </g>
+
+  <!-- ================= 2. СЕТЕВОЙ УРОВЕНЬ ================= -->
+  <rect x="40" y="280" width="1600" height="120" rx="6" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.5" />
+  <rect x="40" y="280" width="1600" height="34" rx="6" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.5" />
+  <text x="58" y="303" font-size="13" font-weight="bold" fill="#14532D">2. Сетевой уровень и веб-сервер (Gateway &amp; Web Server)</text>
+
+  <g transform="translate(65, 325)" filter="url(#shadow)">
+    <rect width="470" height="60" rx="4" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.2" />
+    <text x="12" y="22" font-size="11.5" font-weight="bold" fill="#14532D">Nginx (Static Web Server)</text>
+    <text x="12" y="42" font-size="10.5" fill="#334155">• Раздача статики фронтенда (HTML, JS, CSS, шрифты, gzip-сжатие)</text>
+  </g>
+
+  <g transform="translate(565, 325)" filter="url(#shadow)">
+    <rect width="510" height="60" rx="4" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.2" />
+    <text x="12" y="22" font-size="11.5" font-weight="bold" fill="#14532D">Nginx (Reverse Proxy &amp; Security Gateway)</text>
+    <text x="12" y="42" font-size="10.5" fill="#334155">• Проксирование /api/* на бэкенд Gunicorn, SSL termination, CORS</text>
+  </g>
+
+  <g transform="translate(1105, 325)" filter="url(#shadow)">
+    <rect width="510" height="60" rx="4" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.2" />
+    <text x="12" y="22" font-size="11.5" font-weight="bold" fill="#14532D">WSGI / Gunicorn (Application Server)</text>
+    <text x="12" y="42" font-size="10.5" fill="#334155">• WSGI-контейнер выполнения Python/Django, пул воркеров</text>
+  </g>
+
+  <!-- Стрелки 1 -> 2 -->
+  <line x1="300" y1="220" x2="300" y2="325" stroke="#16A34A" stroke-width="1.8" marker-start="url(#arr-green)" marker-end="url(#arr-green)" />
+  <text x="315" y="260" font-size="10" font-weight="bold" fill="#16A34A">HTTP (Статика)</text>
+
+  <line x1="1410" y1="220" x2="1410" y2="325" stroke="#1E3A8A" stroke-width="1.8" marker-start="url(#arr-blue)" marker-end="url(#arr-blue)" />
+  <text x="1425" y="260" font-size="10" font-weight="bold" fill="#1E3A8A">REST API (JSON / HTTP)</text>
+
+  <!-- ================= 3. СЕРВЕРНЫЙ УРОВЕНЬ ================= -->
+  <rect x="40" y="440" width="1600" height="260" rx="6" fill="#FAF5FF" stroke="#9333EA" stroke-width="1.5" />
+  <rect x="40" y="440" width="1600" height="34" rx="6" fill="#FFFFFF" stroke="#9333EA" stroke-width="1.5" />
+  <text x="58" y="463" font-size="13" font-weight="bold" fill="#581C87">3. Серверный уровень (Backend — Django 5 &amp; Django REST Framework)</text>
+
+  <g transform="translate(65, 490)" filter="url(#shadow)">
+    <rect width="350" height="190" rx="4" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.2" />
+    <rect width="350" height="26" rx="4" fill="#F3E8FF" stroke="#7C3AED" stroke-width="1.2" />
+    <text x="12" y="18" font-size="11.5" font-weight="bold" fill="#581C87">URL-маршрутизация и безопасность</text>
+    <text x="12" y="44" font-size="10.5" fill="#334155">• urls.py + DefaultRouter (DRF)</text>
+    <text x="12" y="64" font-size="10.5" fill="#334155">• /api/flights/, /api/airports/</text>
+    <text x="12" y="84" font-size="10.5" fill="#334155">• /api/auth/ (register, login, verify)</text>
+    <text x="12" y="104" font-size="10.5" fill="#334155">• Security Middleware, CORS Headers</text>
+    <text x="12" y="124" font-size="10.5" fill="#334155">• PBKDF2 Password Hashing (SHA256)</text>
+    <text x="12" y="144" font-size="10.5" fill="#334155">• Token / Session Authentication</text>
+  </g>
+
+  <g transform="translate(445, 490)" filter="url(#shadow)">
+    <rect width="360" height="190" rx="4" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.2" />
+    <rect width="360" height="26" rx="4" fill="#F3E8FF" stroke="#7C3AED" stroke-width="1.2" />
+    <text x="12" y="18" font-size="11.5" font-weight="bold" fill="#581C87">Контроллеры API (ViewSets)</text>
+    <text x="12" y="44" font-size="10.5" fill="#334155">• FlightViewSet (Выборка, фильтры, поиск)</text>
+    <text x="12" y="64" font-size="10.5" fill="#334155">• AirportViewSet (Список узловых хабов)</text>
+    <text x="12" y="84" font-size="10.5" fill="#334155">• AuthViewSet (Регистрация, 2FA вход)</text>
+    <text x="12" y="104" font-size="10.5" fill="#334155">• Фильтрация: search, airline, status</text>
+    <text x="12" y="124" font-size="10.5" fill="#334155">• Сортировка: по времени вылета / цене</text>
+    <text x="12" y="144" font-size="10.5" fill="#334155">• Валидация входных данных (DTO)</text>
+  </g>
+
+  <g transform="translate(835, 490)" filter="url(#shadow)">
+    <rect width="360" height="190" rx="4" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.2" />
+    <rect width="360" height="26" rx="4" fill="#F3E8FF" stroke="#7C3AED" stroke-width="1.2" />
+    <text x="12" y="18" font-size="11.5" font-weight="bold" fill="#581C87">Сериализаторы (DRF Serializers)</text>
+    <text x="12" y="44" font-size="10.5" fill="#334155">• FlightSerializer (Преобразование моделей)</text>
+    <text x="12" y="64" font-size="10.5" fill="#334155">• AirportSerializer (IATA, города, страны)</text>
+    <text x="12" y="84" font-size="10.5" fill="#334155">• UserProfileSerializer (Email, телефон)</text>
+    <text x="12" y="104" font-size="10.5" fill="#334155">• EmailVerificationCodeSerializer</text>
+    <text x="12" y="124" font-size="10.5" fill="#334155">• Форматирование реляционных связей</text>
+    <text x="12" y="144" font-size="10.5" fill="#334155">• Преобразование типов и валидаторы</text>
+  </g>
+
+  <g transform="translate(1225, 490)" filter="url(#shadow)">
+    <rect width="390" height="190" rx="4" fill="#FFFDF0" stroke="#D97706" stroke-width="1.2" />
+    <rect width="390" height="26" rx="4" fill="#FEF3C7" stroke="#D97706" stroke-width="1.2" />
+    <text x="12" y="18" font-size="11.5" font-weight="bold" fill="#92400E">Фоновые сервисы и бизнес-логика</text>
+    <text x="12" y="44" font-size="10.5" fill="#334155">• Flight Lifecycle Engine (Симуляция 24/7)</text>
+    <text x="12" y="64" font-size="10.5" fill="#334155">• Актуализация статусов по часам:</text>
+    <text x="24" y="84" font-size="10" fill="#64748B">scheduled -&gt; boarding -&gt; in_air -&gt; landed</text>
+    <text x="12" y="104" font-size="10.5" fill="#334155">• TTL Cleaner: удаление рейсов старше 14 дн.</text>
+    <text x="12" y="124" font-size="10.5" fill="#334155">• EmailVerification: генерация 6-значных кодов</text>
+    <text x="12" y="144" font-size="10.5" fill="#334155">• Cron / Background Tasks Демон</text>
+  </g>
+
+  <!-- Стрелка 2 -> 3 -->
+  <line x1="820" y1="385" x2="820" y2="440" stroke="#7C3AED" stroke-width="1.8" marker-start="url(#arr-purple)" marker-end="url(#arr-purple)" />
+  <text x="835" y="415" font-size="10" font-weight="bold" fill="#7C3AED">WSGI Вызовы</text>
+
+  <!-- ================= 4. СЛОЙ ДАННЫХ И ИНТЕГРАЦИЙ ================= -->
+  <rect x="40" y="740" width="1600" height="250" rx="6" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5" />
+  <rect x="40" y="740" width="1600" height="34" rx="6" fill="#FFFFFF" stroke="#D97706" stroke-width="1.5" />
+  <text x="58" y="763" font-size="13" font-weight="bold" fill="#78350F">4. Слой доступа к данным, СУБД и внешние интеграции</text>
+
+  <g transform="translate(65, 790)" filter="url(#shadow)">
+    <rect width="380" height="180" rx="4" fill="#FFFFFF" stroke="#B45309" stroke-width="1.4" />
+    <rect width="380" height="26" rx="4" fill="#FEF3C7" stroke="#B45309" stroke-width="1.4" />
+    <text x="12" y="18" font-size="11.5" font-weight="bold" fill="#78350F">Django ORM (Слой моделей)</text>
+    <text x="12" y="44" font-size="10.5" fill="#334155">• Абстракция базы данных и миграции</text>
+    <text x="12" y="64" font-size="10.5" fill="#334155">• QuerySet API (ленивая загрузка, кэш)</text>
+    <text x="12" y="84" font-size="10.5" fill="#334155">• Транзакции атомарности (atomic)</text>
+    <text x="12" y="104" font-size="10.5" fill="#334155">• Реляционные связи: 1:1, 1:N</text>
+    <text x="12" y="124" font-size="10.5" fill="#334155">• Автоматическая генерация SQL-запросов</text>
+    <text x="12" y="144" font-size="10.5" fill="#334155">• Модели: Flight, Airport, User, Code</text>
+  </g>
+
+  <g transform="translate(485, 790)" filter="url(#shadow)">
+    <rect width="400" height="180" rx="4" fill="#F1F5F9" stroke="#334155" stroke-width="1.4" />
+    <rect width="400" height="26" rx="4" fill="#E2E8F0" stroke="#334155" stroke-width="1.4" />
+    <text x="12" y="18" font-size="11.5" font-weight="bold" fill="#0F172A">СУБД SQLite 3 (Реляционная база данных)</text>
+    <text x="12" y="44" font-size="10.5" fill="#334155">• flights_flight (Рейсы, терминалы, статус, цена)</text>
+    <text x="12" y="64" font-size="10.5" fill="#334155">• flights_airport (Хабы, IATA коды, координаты)</text>
+    <text x="12" y="84" font-size="10.5" fill="#334155">• auth_user (Учетные записи, хэши паролей)</text>
+    <text x="12" y="104" font-size="10.5" fill="#334155">• accounts_userprofile (is_email_verified)</text>
+    <text x="12" y="124" font-size="10.5" fill="#334155">• accounts_emailverificationcode (TTL 15м)</text>
+    <text x="12" y="144" font-size="10.5" fill="#334155">• Индексы: IATA code, flight_number, status</text>
+  </g>
+
+  <g transform="translate(920, 790)" filter="url(#shadow)">
+    <rect width="330" height="180" rx="4" fill="#FFFFFF" stroke="#DC2626" stroke-width="1.4" />
+    <rect width="330" height="26" rx="4" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.4" />
+    <text x="12" y="18" font-size="11.5" font-weight="bold" fill="#991B1B">Яндекс SMTP (Почтовый шлюз)</text>
+    <text x="12" y="44" font-size="10.5" fill="#334155">• Сервер: smtp.yandex.ru</text>
+    <text x="12" y="64" font-size="10.5" fill="#334155">• Защищенный протокол: SSL / TLS</text>
+    <text x="12" y="84" font-size="10.5" fill="#334155">• Сетевой порт: 465 (SSL)</text>
+    <text x="12" y="104" font-size="10.5" fill="#334155">• Отправка 6-значных кодов 2FA</text>
+    <text x="12" y="124" font-size="10.5" fill="#334155">• Гарантированная доставка писем</text>
+  </g>
+
+  <g transform="translate(1280, 790)" filter="url(#shadow)">
+    <rect width="335" height="180" rx="4" fill="#FFFFFF" stroke="#0284C7" stroke-width="1.4" />
+    <rect width="335" height="26" rx="4" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.4" />
+    <text x="12" y="18" font-size="11.5" font-weight="bold" fill="#0369A1">Aviationstack API (Внешний шлюз)</text>
+    <text x="12" y="44" font-size="10.5" fill="#334155">• Поставщик реальных авиаданных</text>
+    <text x="12" y="64" font-size="10.5" fill="#334155">• REST API (JSON over HTTPS)</text>
+    <text x="12" y="84" font-size="10.5" fill="#334155">• Расписания рейсов и задержки</text>
+    <text x="12" y="104" font-size="10.5" fill="#334155">• Первоначальное наполнение БД</text>
+    <text x="12" y="124" font-size="10.5" fill="#334155">• Фоновые sync-команды Django</text>
+  </g>
+
+  <!-- Стрелки 3 -> 4 -->
+  <line x1="250" y1="700" x2="250" y2="740" stroke="#B45309" stroke-width="1.8" marker-start="url(#arr-amber)" marker-end="url(#arr-amber)" />
+  <text x="145" y="725" font-size="10" font-weight="bold" fill="#B45309">QuerySet / ORM API</text>
+
+  <line x1="1080" y1="700" x2="1080" y2="740" stroke="#DC2626" stroke-width="1.8" marker-start="url(#arr-red)" marker-end="url(#arr-red)" />
+  <text x="965" y="725" font-size="10" font-weight="bold" fill="#DC2626">SMTP SSL (465)</text>
+
+  <line x1="1450" y1="700" x2="1450" y2="740" stroke="#0284C7" stroke-width="1.8" marker-start="url(#arr-blue)" marker-end="url(#arr-blue)" />
+  <text x="1465" y="725" font-size="10" font-weight="bold" fill="#0284C7">Aviationstack HTTPS</text>
+
+  <!-- Стрелка ORM <-> SQLite -->
+  <line x1="445" y1="880" x2="485" y2="880" stroke="#B45309" stroke-width="1.8" marker-start="url(#arr-amber)" marker-end="url(#arr-amber)" />
+  <text x="450" y="870" font-size="10" font-weight="bold" fill="#B45309">SQL</text>
+</svg>

@@ -1,0 +1,128 @@
+<mxfile host="app.diagrams.net" modified="2026-11-16T22:08:00.000Z" agent="Mozilla/5.0" version="24.0.0">
+  <diagram name="Архитектура проекта" id="project-architecture-diagram">
+    <mxGraphModel dx="1800" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1120" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ================= 1. КЛИЕНТСКИЙ УРОВЕНЬ (FRONTEND SPA) ================= -->
+        <mxCell id="tier_1" value="1. Клиентский уровень (Frontend — React 19 Single Page Application)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=2;fillColor=#F8FAFC;strokeColor=#64748B;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=15;spacingTop=8;fontStyle=1;fontSize=13;fontColor=#0F172A;" vertex="1" parent="1">
+          <mxGeometry x="40" y="30" width="1600" height="210" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box_pages" value="&lt;b&gt;Интерфейс и страницы (Pages)&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;div align=&quot;left&quot; style=&quot;padding-left:4px;&quot;&gt;• Landing (Hero, Features, Stats, FAQ)&lt;br&gt;• Flights (Табло рейсов, живой поиск)&lt;br&gt;• FlightDetail (/flights/:id, телеметрия)&lt;br&gt;• Airports (Каталог хабов), Favorites&lt;br&gt;• NotFound (404 авиационный экран)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#FFFFFF;strokeColor=#475569;strokeWidth=1.2;align=center;verticalAlign=top;spacingTop=6;fontSize=11;fontColor=#1E293B;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="65" y="75" width="350" height="145" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box_components" value="&lt;b&gt;Компонентный уровень (UI Layer)&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;div align=&quot;left&quot; style=&quot;padding-left:4px;&quot;&gt;• FlightCard (Карточка рейса, бейджи)&lt;br&gt;• Filters (Капсулы статусов, авиакомпании)&lt;br&gt;• SearchBar (Быстрый поиск, автоочистка)&lt;br&gt;• LoadingSkeleton (Мерцающий скелетон)&lt;br&gt;• Drawer (Боковая навигация), Modal&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#FFFFFF;strokeColor=#475569;strokeWidth=1.2;align=center;verticalAlign=top;spacingTop=6;fontSize=11;fontColor=#1E293B;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="445" y="75" width="350" height="145" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box_state" value="&lt;b&gt;Управление состоянием и роутинг&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;div align=&quot;left&quot; style=&quot;padding-left:4px;&quot;&gt;• React Router v7 (SPA маршрутизация)&lt;br&gt;• AuthContext (Сессия, статус верификации)&lt;br&gt;• FavoritesContext (Список избранного)&lt;br&gt;• LocalStorage API (Офлайн-сохранение)&lt;br&gt;• useMemo / useCallback (Оптимизация 60 FPS)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#FFFFFF;strokeColor=#475569;strokeWidth=1.2;align=center;verticalAlign=top;spacingTop=6;fontSize=11;fontColor=#1E293B;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="825" y="75" width="350" height="145" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box_services" value="&lt;b&gt;Сервисный слой данных (Services)&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;div align=&quot;left&quot; style=&quot;padding-left:4px;&quot;&gt;• src/services/api.ts (Клиент API)&lt;br&gt;• Axios / Fetch (Асинхронные HTTP запросы)&lt;br&gt;• Interceptors (Обработка ошибок, CORS)&lt;br&gt;• Mock Data Cache (Автономный fallback)&lt;br&gt;• Преобразование camelCase &amp;lt;-&amp;gt; snake_case&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#EFF6FF;strokeColor=#2563EB;strokeWidth=1.4;align=center;verticalAlign=top;spacingTop=6;fontSize=11;fontColor=#1E3A8A;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1205" y="75" width="410" height="145" as="geometry" />
+        </mxCell>
+
+        <!-- ================= 2. СЕТЕВОЙ УРОВЕНЬ И ПРОКСИ (GATEWAY) ================= -->
+        <mxCell id="tier_2" value="2. Сетевой уровень и веб-сервер (Gateway &amp; Web Server)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=2;fillColor=#F0FDF4;strokeColor=#16A34A;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=15;spacingTop=8;fontStyle=1;fontSize=13;fontColor=#14532D;" vertex="1" parent="1">
+          <mxGeometry x="40" y="280" width="1600" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box_nginx_static" value="&lt;b&gt;Nginx (Static Web Server)&lt;/b&gt;&lt;br&gt;&lt;div align=&quot;left&quot; style=&quot;font-size:10.5px;color:#334155;padding-left:4px;&quot;&gt;• Раздача статики фронтенда (HTML, JS, CSS, шрифты)&lt;br&gt;• Сжатие Gzip / Brotli, кэширование статических ассетов&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#FFFFFF;strokeColor=#16A34A;strokeWidth=1.2;align=center;verticalAlign=top;spacingTop=6;fontSize=11.5;fontColor=#14532D;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="65" y="325" width="470" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box_nginx_proxy" value="&lt;b&gt;Nginx (Reverse Proxy &amp;amp; Security Gateway)&lt;/b&gt;&lt;br&gt;&lt;div align=&quot;left&quot; style=&quot;font-size:10.5px;color:#334155;padding-left:4px;&quot;&gt;• Проксирование /api/* на бэкенд Gunicorn/Django&lt;br&gt;• SSL/TLS Termination (HTTPS), заголовки безопасности CORS&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#FFFFFF;strokeColor=#16A34A;strokeWidth=1.2;align=center;verticalAlign=top;spacingTop=6;fontSize=11.5;fontColor=#14532D;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="565" y="325" width="510" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box_gunicorn" value="&lt;b&gt;WSGI / Gunicorn (Application Server)&lt;/b&gt;&lt;br&gt;&lt;div align=&quot;left&quot; style=&quot;font-size:10.5px;color:#334155;padding-left:4px;&quot;&gt;• WSGI-контейнер выполнения Python/Django&lt;br&gt;• Пул рабочих процессов (Workers), балансировка вызовов&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#FFFFFF;strokeColor=#16A34A;strokeWidth=1.2;align=center;verticalAlign=top;spacingTop=6;fontSize=11.5;fontColor=#14532D;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1105" y="325" width="510" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ================= 3. СЕРВЕРНЫЙ УРОВЕНЬ (DJANGO 5 & DRF) ================= -->
+        <mxCell id="tier_3" value="3. Серверный уровень (Backend — Django 5 &amp; Django REST Framework)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=2;fillColor=#FAF5FF;strokeColor=#9333EA;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=15;spacingTop=8;fontStyle=1;fontSize=13;fontColor=#581C87;" vertex="1" parent="1">
+          <mxGeometry x="40" y="440" width="1600" height="260" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box_router" value="&lt;b&gt;URL-маршрутизация и безопасность&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;div align=&quot;left&quot; style=&quot;padding-left:4px;&quot;&gt;• urls.py + DefaultRouter (DRF)&lt;br&gt;• /api/flights/, /api/airports/&lt;br&gt;• /api/auth/ (register, login, verify)&lt;br&gt;• Security Middleware, CORS Headers&lt;br&gt;• PBKDF2 Password Hashing (SHA256)&lt;br&gt;• Token / Session Authentication&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#FFFFFF;strokeColor=#7C3AED;strokeWidth=1.2;align=center;verticalAlign=top;spacingTop=6;fontSize=11;fontColor=#1E293B;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="65" y="490" width="350" height="190" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box_viewsets" value="&lt;b&gt;Контроллеры API (ViewSets)&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;div align=&quot;left&quot; style=&quot;padding-left:4px;&quot;&gt;• FlightViewSet (Выборка, фильтры, поиск)&lt;br&gt;• AirportViewSet (Список узловых хабов)&lt;br&gt;• AuthViewSet (Регистрация, 2FA вход)&lt;br&gt;• Обработка параметров: search, airline,&lt;br&gt;&amp;nbsp;&amp;nbsp;status, ordering (цена / вылет)&lt;br&gt;• Валидация входных данных (DTO)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#FFFFFF;strokeColor=#7C3AED;strokeWidth=1.2;align=center;verticalAlign=top;spacingTop=6;fontSize=11;fontColor=#1E293B;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="445" y="490" width="360" height="190" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box_serializers" value="&lt;b&gt;Сериализаторы (DRF Serializers)&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;div align=&quot;left&quot; style=&quot;padding-left:4px;&quot;&gt;• FlightSerializer (Преобразование моделей)&lt;br&gt;• AirportSerializer (IATA, города, страны)&lt;br&gt;• UserProfileSerializer (Email, телефон)&lt;br&gt;• EmailVerificationCodeSerializer&lt;br&gt;• Форматирование реляционных связей&lt;br&gt;• Преобразование типов и валидаторы&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#FFFFFF;strokeColor=#7C3AED;strokeWidth=1.2;align=center;verticalAlign=top;spacingTop=6;fontSize=11;fontColor=#1E293B;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="835" y="490" width="360" height="190" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box_engine" value="&lt;b&gt;Фоновые сервисы и бизнес-логика&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;div align=&quot;left&quot; style=&quot;padding-left:4px;&quot;&gt;• Flight Lifecycle Engine (Симуляция 24/7)&lt;br&gt;• Актуализация статусов по часам:&lt;br&gt;&amp;nbsp;&amp;nbsp;scheduled -&gt; boarding -&gt; in_air -&gt; landed&lt;br&gt;• TTL Cleaner: удаление рейсов старше 14 дн.&lt;br&gt;• EmailVerification: генерация 6-значных кодов&lt;br&gt;• Cron / Background Tasks Демон&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#FFFDF0;strokeColor=#D97706;strokeWidth=1.2;align=center;verticalAlign=top;spacingTop=6;fontSize=11;fontColor=#92400E;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1225" y="490" width="390" height="190" as="geometry" />
+        </mxCell>
+
+        <!-- ================= 4. СЛОЙ ДАННЫХ И ИНТЕГРАЦИЙ ================= -->
+        <mxCell id="tier_4" value="4. Слой доступа к данным, СУБД и внешние интеграции" style="rounded=1;whiteSpace=wrap;html=1;arcSize=2;fillColor=#FFFBEB;strokeColor=#D97706;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=15;spacingTop=8;fontStyle=1;fontSize=13;fontColor=#78350F;" vertex="1" parent="1">
+          <mxGeometry x="40" y="740" width="1600" height="250" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box_orm" value="&lt;b&gt;Django ORM (Object-Relational Mapping)&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;div align=&quot;left&quot; style=&quot;padding-left:4px;&quot;&gt;• Абстракция базы данных и миграции&lt;br&gt;• QuerySet API (ленивая загрузка, кэш)&lt;br&gt;• Транзакции атомарности (atomic)&lt;br&gt;• Реляционные связи: 1:1, 1:N&lt;br&gt;• Автоматическая генерация SQL-запросов&lt;br&gt;• Модели: Flight, Airport, User, Code&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#FFFFFF;strokeColor=#B45309;strokeWidth=1.4;align=center;verticalAlign=top;spacingTop=6;fontSize=11;fontColor=#1E293B;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="65" y="790" width="380" height="180" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box_db" value="&lt;b&gt;СУБД SQLite 3 (Реляционная база данных)&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;div align=&quot;left&quot; style=&quot;padding-left:4px;&quot;&gt;• flights_flight (Рейсы, терминалы, статус, цена)&lt;br&gt;• flights_airport (Хабы, IATA коды, координаты)&lt;br&gt;• auth_user (Учетные записи, хэши паролей)&lt;br&gt;• accounts_userprofile (is_email_verified)&lt;br&gt;• accounts_emailverificationcode (TTL 15м)&lt;br&gt;• Индексы: IATA code, flight_number, status&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#F1F5F9;strokeColor=#334155;strokeWidth=1.4;align=center;verticalAlign=top;spacingTop=6;fontSize=11;fontColor=#1E293B;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="485" y="790" width="400" height="180" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box_smtp" value="&lt;b&gt;Яндекс SMTP (Почтовый шлюз)&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;div align=&quot;left&quot; style=&quot;padding-left:4px;&quot;&gt;• Сервер: smtp.yandex.ru&lt;br&gt;• Защищенный протокол: SSL / TLS&lt;br&gt;• Сетевой порт: 465 (SSL)&lt;br&gt;• Отправка 6-значных кодов 2FA&lt;br&gt;• Гарантированная доставка писем&lt;br&gt;• Обработка ошибок SMTP соединений&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#FFFFFF;strokeColor=#DC2626;strokeWidth=1.4;align=center;verticalAlign=top;spacingTop=6;fontSize=11;fontColor=#1E293B;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="920" y="790" width="330" height="180" as="geometry" />
+        </mxCell>
+
+        <mxCell id="box_aviationstack" value="&lt;b&gt;Aviationstack API (Внешний шлюз)&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;div align=&quot;left&quot; style=&quot;padding-left:4px;&quot;&gt;• Внешний поставщик реальных авиаданных&lt;br&gt;• REST API (JSON over HTTPS)&lt;br&gt;• Расписания рейсов и фактические задержки&lt;br&gt;• Первоначальное наполнение базы данных&lt;br&gt;• Квотирование и защита от сбоев API&lt;br&gt;• Фоновые sync-команды Django&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#FFFFFF;strokeColor=#0284C7;strokeWidth=1.4;align=center;verticalAlign=top;spacingTop=6;fontSize=11;fontColor=#1E293B;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="790" width="335" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- ================= СВЯЗИ И СТРЕЛКИ МЕЖДУ УРОВНЯМИ ================= -->
+
+        <!-- 1. Frontend -> Nginx Static -->
+        <mxCell id="edge_static" value="HTTP (Статика)" style="edgeStyle=orthogonalEdgeStyle;curved=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#16A34A;strokeWidth=1.8;fontColor=#16A34A;fontStyle=1;fontSize=11;startArrow=classic;endArrow=classic;" edge="1" parent="1" source="box_pages" target="box_nginx_static">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 2. Services -> Nginx Reverse Proxy -->
+        <mxCell id="edge_api" value="REST API (JSON over HTTPS)" style="edgeStyle=orthogonalEdgeStyle;curved=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1E3A8A;strokeWidth=1.8;fontColor=#1E3A8A;fontStyle=1;fontSize=11;startArrow=classic;endArrow=classic;" edge="1" parent="1" source="box_services" target="box_nginx_proxy">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 3. Nginx -> Gunicorn -> Backend -->
+        <mxCell id="edge_wsgi" value="WSGI Вызовы" style="edgeStyle=orthogonalEdgeStyle;curved=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#7C3AED;strokeWidth=1.8;fontColor=#7C3AED;fontStyle=1;fontSize=11;startArrow=classic;endArrow=classic;" edge="1" parent="1" source="box_gunicorn" target="box_router">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 4. Backend ViewSets -> Django ORM -->
+        <mxCell id="edge_orm" value="QuerySet / ORM API" style="edgeStyle=orthogonalEdgeStyle;curved=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#B45309;strokeWidth=1.8;fontColor=#B45309;fontStyle=1;fontSize=11;startArrow=classic;endArrow=classic;" edge="1" parent="1" source="box_viewsets" target="box_orm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 5. Django ORM <-> SQLite 3 -->
+        <mxCell id="edge_sql" value="SQL-запросы / Данные" style="edgeStyle=orthogonalEdgeStyle;curved=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#334155;strokeWidth=1.8;fontColor=#334155;fontStyle=1;fontSize=11;startArrow=classic;endArrow=classic;" edge="1" parent="1" source="box_orm" target="box_db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 6. Backend -> SMTP -->
+        <mxCell id="edge_smtp" value="SMTP SSL (порт 465)" style="edgeStyle=orthogonalEdgeStyle;curved=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#DC2626;strokeWidth=1.8;fontColor=#DC2626;fontStyle=1;fontSize=11;startArrow=classic;endArrow=classic;" edge="1" parent="1" source="box_engine" target="box_smtp">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 7. Backend -> Aviationstack API -->
+        <mxCell id="edge_aviationstack" value="HTTPS Sync" style="edgeStyle=orthogonalEdgeStyle;curved=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0284C7;strokeWidth=1.8;fontColor=#0284C7;fontStyle=1;fontSize=11;startArrow=classic;endArrow=classic;" edge="1" parent="1" source="box_engine" target="box_aviationstack">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
