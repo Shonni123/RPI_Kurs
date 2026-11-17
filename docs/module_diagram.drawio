@@ -1,0 +1,156 @@
+<mxfile host="app.diagrams.net" modified="2026-11-17T16:59:00.000Z" agent="Mozilla/5.0" version="24.0.0">
+  <diagram name="Модульная диаграмма" id="module-diagram">
+    <mxGraphModel dx="1800" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1150" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ================= 1. ПОДСИСТЕМА FRONTEND (REACT 19 SPA) ================= -->
+        <mxCell id="sub_frontend" value="Подсистема клиентской части (Frontend Subsystem — React 19)" style="shape=folder;fontStyle=1;tabWidth=260;tabHeight=32;tabPosition=left;html=1;boundedLbl=1;fillColor=#F8FAFC;strokeColor=#2563EB;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=15;spacingTop=6;fontSize=12;fontColor=#1E3A8A;" vertex="1" parent="1">
+          <mxGeometry x="30" y="30" width="730" height="1060" as="geometry" />
+        </mxCell>
+
+        <!-- Компонент 1.1: Модуль страниц -->
+        <mxCell id="cmp_pages" value="«module: pages»&lt;br&gt;&lt;b&gt;Модуль страниц (Pages)&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;div align=&quot;left&quot; style=&quot;padding-left:4px;&quot;&gt;&lt;b&gt;Интерфейсы экранов:&lt;/b&gt;&lt;br&gt;• HomePage.tsx (Лендинг, Hero, FAQ)&lt;br&gt;• FlightsPage.tsx (Табло рейсов)&lt;br&gt;• FlightDetailPage.tsx (/flights/:id)&lt;br&gt;• AirportsPage.tsx (Каталог хабов)&lt;br&gt;• FavoritesPage.tsx (Избранное)&lt;br&gt;• UserProfilePage.tsx (Кабинет)&lt;br&gt;• AboutPage.tsx (О сервисе, стек)&lt;br&gt;• NotFoundPage.tsx (404 Not Found)&lt;br&gt;&lt;br&gt;&lt;b&gt;Взаимодействие:&lt;/b&gt;&lt;br&gt;• Рендерит компоненты UI&lt;br&gt;• Подписывается на Auth/Favorites&lt;br&gt;• Вызывает функции api.ts&lt;/div&gt;" style="shape=module;align=center;verticalAlign=top;spacingTop=6;html=1;fillColor=#FFFFFF;strokeColor=#3B82F6;strokeWidth=1.2;fontSize=10.5;fontColor=#1E293B;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="80" width="320" height="430" as="geometry" />
+        </mxCell>
+
+        <!-- Компонент 1.2: Модуль компонентов -->
+        <mxCell id="cmp_components" value="«module: components»&lt;br&gt;&lt;b&gt;Модуль компонентов (UI)&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;div align=&quot;left&quot; style=&quot;padding-left:4px;&quot;&gt;&lt;b&gt;Атомарные блоки UI:&lt;/b&gt;&lt;br&gt;• auth/ (AuthModal, LoginForm,&lt;br&gt;&amp;nbsp;&amp;nbsp;RegisterForm, EmailVerifyForm)&lt;br&gt;• flights/ (FlightCard, Filters,&lt;br&gt;&amp;nbsp;&amp;nbsp;SearchBar, StatusBadge, Sort)&lt;br&gt;• home/ (HeroSection, Stats,&lt;br&gt;&amp;nbsp;&amp;nbsp;FeaturesSection, FAQ, Newsletter)&lt;br&gt;• layout/ (Header, Footer, Drawer)&lt;br&gt;• common/ (LoadingSkeleton,&lt;br&gt;&amp;nbsp;&amp;nbsp;EmptyState, Button, Badge, Modal)&lt;br&gt;&lt;br&gt;&lt;b&gt;Характеристики:&lt;/b&gt;&lt;br&gt;• Чистые React.FC компоненты&lt;br&gt;• Стилизация Tailwind CSS v4&lt;br&gt;• 60 FPS адаптивный рендеринг&lt;/div&gt;" style="shape=module;align=center;verticalAlign=top;spacingTop=6;html=1;fillColor=#FFFFFF;strokeColor=#3B82F6;strokeWidth=1.2;fontSize=10.5;fontColor=#1E293B;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="80" width="340" height="430" as="geometry" />
+        </mxCell>
+
+        <!-- Компонент 1.3: Модуль состояния и роутинга -->
+        <mxCell id="cmp_state" value="«module: context &amp;amp; hooks»&lt;br&gt;&lt;b&gt;Модуль состояния и хуков&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;div align=&quot;left&quot; style=&quot;padding-left:4px;&quot;&gt;&lt;b&gt;Реактивные контексты:&lt;/b&gt;&lt;br&gt;• AuthContext.tsx&lt;br&gt;&amp;nbsp;&amp;nbsp;- Сессия, профиль пользователя&lt;br&gt;&amp;nbsp;&amp;nbsp;- login(), logout(), verify()&lt;br&gt;&amp;nbsp;&amp;nbsp;- Флаг is_email_verified&lt;br&gt;• FavoritesContext.tsx&lt;br&gt;&amp;nbsp;&amp;nbsp;- toggleFavorite(), isFavorite()&lt;br&gt;&amp;nbsp;&amp;nbsp;- Счётчик избранного в шапке&lt;br&gt;&lt;br&gt;&lt;b&gt;Кастомные хуки (hooks/):&lt;/b&gt;&lt;br&gt;• useFlights.ts (кэш, стейт табло)&lt;br&gt;• useDebounce.ts (оптимизация ввода)&lt;br&gt;• useLocalStorage.ts (офлайн-кэш)&lt;br&gt;&lt;br&gt;&lt;b&gt;Маршрутизация (Router v7):&lt;/b&gt;&lt;br&gt;• App.tsx (SPA дерево маршрутов)&lt;br&gt;• Динамический роут /flights/:id&lt;/div&gt;" style="shape=module;align=center;verticalAlign=top;spacingTop=6;html=1;fillColor=#FFFFFF;strokeColor=#3B82F6;strokeWidth=1.2;fontSize=10.5;fontColor=#1E293B;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="540" width="320" height="520" as="geometry" />
+        </mxCell>
+
+        <!-- Компонент 1.4: Модуль сервисов -->
+        <mxCell id="cmp_services" value="«module: api services»&lt;br&gt;&lt;b&gt;Модуль API-сервисов&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;div align=&quot;left&quot; style=&quot;padding-left:4px;&quot;&gt;&lt;b&gt;Сетевые сервисы доступа:&lt;/b&gt;&lt;br&gt;• api.ts (REST-клиент рейсов)&lt;br&gt;&amp;nbsp;&amp;nbsp;- fetchFlights(search, filter)&lt;br&gt;&amp;nbsp;&amp;nbsp;- fetchFlightById(id)&lt;br&gt;&amp;nbsp;&amp;nbsp;- fetchAirports()&lt;br&gt;• authApi.ts (Клиент авторизации)&lt;br&gt;&amp;nbsp;&amp;nbsp;- register(email, password)&lt;br&gt;&amp;nbsp;&amp;nbsp;- verifyEmail(email, code)&lt;br&gt;&amp;nbsp;&amp;nbsp;- login(email, password)&lt;br&gt;• mockFlights.ts (Offline Fallback)&lt;br&gt;&amp;nbsp;&amp;nbsp;- Автономный кэш при сбое сети&lt;br&gt;&lt;br&gt;&lt;b&gt;Интерфейсы данных (types/):&lt;/b&gt;&lt;br&gt;• Flight, Airport, UserProfile, Code&lt;br&gt;• Сериализация camel &amp;lt;-&amp;gt; snake&lt;br&gt;• Тайм-аут 2с и fallback переключение&lt;/div&gt;" style="shape=module;align=center;verticalAlign=top;spacingTop=6;html=1;fillColor=#EFF6FF;strokeColor=#1D4ED8;strokeWidth=1.4;fontSize=10.5;fontColor=#1E3A8A;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="540" width="340" height="520" as="geometry" />
+        </mxCell>
+
+        <!-- ================= 2. СЕТЕВОЙ ШЛЮЗ (NGINX GATEWAY) ================= -->
+        <mxCell id="sub_gateway" value="Сетевой шлюз (Gateway — Nginx)" style="shape=folder;fontStyle=1;tabWidth=180;tabHeight=32;tabPosition=left;html=1;boundedLbl=1;fillColor=#F0FDF4;strokeColor=#16A34A;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=15;spacingTop=6;fontSize=12;fontColor=#14532D;" vertex="1" parent="1">
+          <mxGeometry x="780" y="30" width="200" height="1060" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cmp_nginx_static" value="«web-server»&lt;br&gt;&lt;b&gt;Nginx Static Server&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;div align=&quot;left&quot; style=&quot;font-size:10px;padding-left:4px;&quot;&gt;&lt;b&gt;Раздача статики:&lt;/b&gt;&lt;br&gt;• index.html (SPA)&lt;br&gt;• assets/*.js бандл&lt;br&gt;• assets/*.css стили&lt;br&gt;• fonts/ (Benzin, TT)&lt;br&gt;&lt;br&gt;&lt;b&gt;Оптимизации:&lt;/b&gt;&lt;br&gt;• Сжатие Gzip / Brotli&lt;br&gt;• HTTP кэширование&lt;br&gt;• Редирект на index.html&lt;br&gt;&amp;nbsp;&amp;nbsp;для путей роутера&lt;/div&gt;" style="shape=module;align=center;verticalAlign=top;spacingTop=6;html=1;fillColor=#FFFFFF;strokeColor=#16A34A;strokeWidth=1.2;fontSize=10.5;fontColor=#14532D;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="795" y="160" width="170" height="330" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cmp_nginx_proxy" value="«reverse-proxy»&lt;br&gt;&lt;b&gt;Nginx Reverse Proxy&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;div align=&quot;left&quot; style=&quot;font-size:10px;padding-left:4px;&quot;&gt;&lt;b&gt;Шлюз API вызовов:&lt;/b&gt;&lt;br&gt;• Проксирование /api/*&lt;br&gt;&amp;nbsp;&amp;nbsp;на бэкенд Gunicorn&lt;br&gt;• SSL/TLS Termination&lt;br&gt;&amp;nbsp;&amp;nbsp;(Порт 443 / HTTPS)&lt;br&gt;• Заголовки CORS:&lt;br&gt;&amp;nbsp;&amp;nbsp;Access-Control-Allow-*&lt;br&gt;• Rate limiting защита&lt;br&gt;• Буферизация ответов&lt;/div&gt;" style="shape=module;align=center;verticalAlign=top;spacingTop=6;html=1;fillColor=#FFFFFF;strokeColor=#16A34A;strokeWidth=1.2;fontSize=10.5;fontColor=#14532D;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="795" y="570" width="170" height="390" as="geometry" />
+        </mxCell>
+
+        <!-- ================= 3. ПОДСИСТЕМА BACKEND (DJANGO 5 & DRF) ================= -->
+        <mxCell id="sub_backend" value="Подсистема серверной части (Backend Subsystem — Django 5 &amp; DRF)" style="shape=folder;fontStyle=1;tabWidth=280;tabHeight=32;tabPosition=left;html=1;boundedLbl=1;fillColor=#FAF5FF;strokeColor=#7C3AED;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=15;spacingTop=6;fontSize=12;fontColor=#581C87;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="30" width="770" height="1060" as="geometry" />
+        </mxCell>
+
+        <!-- Компонент 3.1: URL Router & Security -->
+        <mxCell id="cmp_router" value="«core: routing &amp;amp; security»&lt;br&gt;&lt;b&gt;Маршрутизация и ядро&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;div align=&quot;left&quot; style=&quot;padding-left:4px;&quot;&gt;• urls.py (Корневой диспетчер запросов)&lt;br&gt;• DefaultRouter DRF (/api/flights/, /airports/)&lt;br&gt;• Корневые паттерны /api/auth/*&lt;br&gt;• SecurityMiddleware, CorsMiddleware&lt;br&gt;• Хэширование паролей PBKDF2 (SHA256)&lt;br&gt;• Сессионная и JWT аутентификация&lt;/div&gt;" style="shape=module;align=center;verticalAlign=top;spacingTop=6;html=1;fillColor=#FFFFFF;strokeColor=#7C3AED;strokeWidth=1.2;fontSize=10.5;fontColor=#1E293B;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="80" width="340" height="245" as="geometry" />
+        </mxCell>
+
+        <!-- Компонент 3.2: Модуль Accounts -->
+        <mxCell id="cmp_accounts" value="«app: accounts»&lt;br&gt;&lt;b&gt;Модуль Accounts (Профили и 2FA)&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;div align=&quot;left&quot; style=&quot;padding-left:4px;&quot;&gt;• views.py (Register, VerifyEmail, Login)&lt;br&gt;• serializers.py (User, Profile, Code)&lt;br&gt;• models.py (UserProfile, Code)&lt;br&gt;• services.py (EmailService, Генератор)&lt;br&gt;• Генерация 6-значных кодов (TTL 15м)&lt;br&gt;• Связь 1:1 к auth_user, флаг verified&lt;/div&gt;" style="shape=module;align=center;verticalAlign=top;spacingTop=6;html=1;fillColor=#FFFFFF;strokeColor=#7C3AED;strokeWidth=1.2;fontSize=10.5;fontColor=#1E293B;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1390" y="80" width="360" height="245" as="geometry" />
+        </mxCell>
+
+        <!-- Компонент 3.3: Модуль Flights -->
+        <mxCell id="cmp_flights" value="«app: flights»&lt;br&gt;&lt;b&gt;Модуль Flights (Рейсы и хабы)&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;div align=&quot;left&quot; style=&quot;padding-left:4px;&quot;&gt;• views.py (FlightViewSet, AirportViewSet)&lt;br&gt;• serializers.py (Flight, Airport Serializers)&lt;br&gt;• models.py (Flight, Airport модели)&lt;br&gt;• Фильтры: search, airline, status&lt;br&gt;• Сортировка: по времени вылета / цене&lt;br&gt;• Формирование camelCase JSON DTO&lt;/div&gt;" style="shape=module;align=center;verticalAlign=top;spacingTop=6;html=1;fillColor=#FFFFFF;strokeColor=#7C3AED;strokeWidth=1.2;fontSize=10.5;fontColor=#1E293B;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="355" width="340" height="290" as="geometry" />
+        </mxCell>
+
+        <!-- Компонент 3.4: Модуль Services (24/7 Engine) -->
+        <mxCell id="cmp_services_backend" value="«services: lifecycle &amp;amp; sync»&lt;br&gt;&lt;b&gt;Модуль Services (Движок 24/7)&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;div align=&quot;left&quot; style=&quot;padding-left:4px;&quot;&gt;• services.py (FlightLifecycleEngine)&lt;br&gt;• Актуализация статусов бортов по часам:&lt;br&gt;&amp;nbsp;&amp;nbsp;scheduled -&gt; boarding -&gt; in_air -&gt; landed&lt;br&gt;• commands/cleanup_flights.py:&lt;br&gt;&amp;nbsp;&amp;nbsp;- Автоочистка рейсов старше 14 дней (TTL)&lt;br&gt;• services.py (AviationstackSyncClient):&lt;br&gt;&amp;nbsp;&amp;nbsp;- Синхронизация расписаний из API&lt;/div&gt;" style="shape=module;align=center;verticalAlign=top;spacingTop=6;html=1;fillColor=#FFFDF0;strokeColor=#D97706;strokeWidth=1.2;fontSize=10.5;fontColor=#92400E;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1390" y="355" width="360" height="290" as="geometry" />
+        </mxCell>
+
+        <!-- Компонент 3.5: Django ORM -->
+        <mxCell id="cmp_orm" value="«data access layer»&lt;br&gt;&lt;b&gt;Слой моделей и абстракции данных (Django ORM)&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;div align=&quot;left&quot; style=&quot;padding-left:4px;&quot;&gt;• QuerySet API (ленивая загрузка, транзакции atomic, валидация связей 1:1 и 1:N)&lt;br&gt;• Модели сущностей: Flight, Airport, UserProfile, EmailVerificationCode, auth_user&lt;br&gt;• Автоматическая генерация оптимизированных SQL-запросов к СУБД SQLite&lt;/div&gt;" style="shape=module;align=center;verticalAlign=top;spacingTop=6;html=1;fillColor=#FFFFFF;strokeColor=#B45309;strokeWidth=1.4;fontSize=10.5;fontColor=#1E293B;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="675" width="730" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- Компонент 3.6: База данных SQLite 3 -->
+        <mxCell id="cmp_db" value="«database: sqlite3»&lt;br&gt;&lt;b&gt;База данных SQLite 3&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;div align=&quot;left&quot; style=&quot;padding-left:4px;&quot;&gt;• flights_flight (Рейсы, терминал, цена)&lt;br&gt;• flights_airport (Хабы, IATA, город)&lt;br&gt;• auth_user (Хэши паролей PBKDF2)&lt;br&gt;• accounts_userprofile (is_email_verified)&lt;br&gt;• accounts_emailverificationcode (TTL 15м)&lt;br&gt;• Индексы: IATA code, flight_number, status&lt;/div&gt;" style="shape=module;align=center;verticalAlign=top;spacingTop=6;html=1;fillColor=#F1F5F9;strokeColor=#334155;strokeWidth=1.4;fontSize=10.5;fontColor=#0F172A;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="825" width="340" height="245" as="geometry" />
+        </mxCell>
+
+        <!-- Компонент 3.7: Внешние интерфейсы -->
+        <mxCell id="cmp_external" value="«external interfaces»&lt;br&gt;&lt;b&gt;Внешние сервисы и интеграции&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;div align=&quot;left&quot; style=&quot;padding-left:4px;&quot;&gt;&lt;b&gt;Внешние сетевые шлюзы:&lt;/b&gt;&lt;br&gt;• Яндекс SMTP (smtp.yandex.ru)&lt;br&gt;&amp;nbsp;&amp;nbsp;- Защищенный протокол SSL (порт 465)&lt;br&gt;&amp;nbsp;&amp;nbsp;- Отправка 6-значных кодов 2FA&lt;br&gt;• Aviationstack REST API&lt;br&gt;&amp;nbsp;&amp;nbsp;- Загрузка расписаний рейсов мира&lt;br&gt;&amp;nbsp;&amp;nbsp;- Первоначальный импорт данных&lt;/div&gt;" style="shape=module;align=center;verticalAlign=top;spacingTop=6;html=1;fillColor=#FFFFFF;strokeColor=#DC2626;strokeWidth=1.4;fontSize=10.5;fontColor=#991B1B;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1390" y="825" width="360" height="245" as="geometry" />
+        </mxCell>
+
+        <!-- ================= СВЯЗИ МЕЖДУ МОДУЛЯМИ ================= -->
+
+        <!-- 1. Pages -> UI Components -->
+        <mxCell id="edge_pages_cmp" value="«use»" style="edgeStyle=orthogonalEdgeStyle;dashed=1;html=1;strokeColor=#3B82F6;strokeWidth=1.5;fontColor=#3B82F6;fontSize=10;endArrow=open;endFill=0;" edge="1" parent="1" source="cmp_pages" target="cmp_components">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 2. Pages -> State -->
+        <mxCell id="edge_pages_state" value="«subscribe»" style="edgeStyle=orthogonalEdgeStyle;dashed=1;html=1;strokeColor=#3B82F6;strokeWidth=1.5;fontColor=#3B82F6;fontSize=10;endArrow=open;endFill=0;" edge="1" parent="1" source="cmp_pages" target="cmp_state">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 3. State -> Services -->
+        <mxCell id="edge_state_services" value="«call»" style="edgeStyle=orthogonalEdgeStyle;dashed=1;html=1;strokeColor=#1D4ED8;strokeWidth=1.5;fontColor=#1D4ED8;fontSize=10;endArrow=open;endFill=0;" edge="1" parent="1" source="cmp_state" target="cmp_services">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 4. Pages -> Nginx Static -->
+        <mxCell id="edge_pages_nginx" value="HTTP GET" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#16A34A;strokeWidth=1.6;fontColor=#16A34A;fontStyle=1;fontSize=10.5;endArrow=classic;" edge="1" parent="1" source="cmp_components" target="cmp_nginx_static">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 5. Services -> Nginx Proxy -->
+        <mxCell id="edge_services_nginx" value="/api/* JSON" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#1E3A8A;strokeWidth=1.6;fontColor=#1E3A8A;fontStyle=1;fontSize=10.5;endArrow=classic;" edge="1" parent="1" source="cmp_services" target="cmp_nginx_proxy">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 6. Nginx Proxy -> Router -->
+        <mxCell id="edge_nginx_router" value="WSGI Вызовы" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#7C3AED;strokeWidth=1.6;fontColor=#7C3AED;fontStyle=1;fontSize=10.5;endArrow=classic;" edge="1" parent="1" source="cmp_nginx_proxy" target="cmp_router">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 7. Router -> Accounts -->
+        <mxCell id="edge_router_accounts" value="«dispatch»" style="edgeStyle=orthogonalEdgeStyle;dashed=1;html=1;strokeColor=#7C3AED;strokeWidth=1.5;fontColor=#7C3AED;fontSize=10;endArrow=open;endFill=0;" edge="1" parent="1" source="cmp_router" target="cmp_accounts">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 8. Router -> Flights -->
+        <mxCell id="edge_router_flights" value="«dispatch»" style="edgeStyle=orthogonalEdgeStyle;dashed=1;html=1;strokeColor=#7C3AED;strokeWidth=1.5;fontColor=#7C3AED;fontSize=10;endArrow=open;endFill=0;" edge="1" parent="1" source="cmp_router" target="cmp_flights">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 9. Flights -> Services Backend -->
+        <mxCell id="edge_flights_engine" value="«invoke»" style="edgeStyle=orthogonalEdgeStyle;dashed=1;html=1;strokeColor=#D97706;strokeWidth=1.5;fontColor=#D97706;fontSize=10;endArrow=open;endFill=0;" edge="1" parent="1" source="cmp_flights" target="cmp_services_backend">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 10. Flights -> ORM -->
+        <mxCell id="edge_flights_orm" value="QuerySet" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#B45309;strokeWidth=1.6;fontColor=#B45309;fontStyle=1;fontSize=10.5;endArrow=classic;" edge="1" parent="1" source="cmp_flights" target="cmp_orm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 11. Accounts -> ORM -->
+        <mxCell id="edge_accounts_orm" value="QuerySet" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#B45309;strokeWidth=1.6;fontColor=#B45309;fontStyle=1;fontSize=10.5;endArrow=classic;" edge="1" parent="1" source="cmp_accounts" target="cmp_orm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 12. ORM -> SQLite -->
+        <mxCell id="edge_orm_db" value="SQL CRUD" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#334155;strokeWidth=1.6;fontColor=#334155;fontStyle=1;fontSize=10.5;endArrow=classic;" edge="1" parent="1" source="cmp_orm" target="cmp_db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 13. Accounts -> External (SMTP) -->
+        <mxCell id="edge_accounts_smtp" value="SMTP SSL 465" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#DC2626;strokeWidth=1.6;fontColor=#DC2626;fontStyle=1;fontSize=10.5;endArrow=classic;" edge="1" parent="1" source="cmp_accounts" target="cmp_external">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
