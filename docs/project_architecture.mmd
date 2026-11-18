@@ -1,0 +1,40 @@
+flowchart TB
+    subgraph CLIENT["1. Клиентский уровень (Client Tier)"]
+        BROWSER["Браузер пользователя (Desktop / Mobile)"]
+        SPA["React 19 SPA (Vite 8.2, React Router v7, Tailwind CSS)"]
+        BROWSER -->|Взаимодействие с интерфейсом| SPA
+    end
+
+    subgraph GATEWAY["2. Веб-сервер и шлюз (Gateway Tier)"]
+        NGINX["Nginx 1.25 Alpine (Reverse Proxy / Раздача статики)"]
+    end
+
+    subgraph APP["3. Уровень приложений (Application Tier)"]
+        DJANGO["Python 3.12 + Django 5 & DRF REST API (Port 8000)"]
+        SERVICES["Фоновые сервисы (Flight Lifecycle Engine 24/7)"]
+        DJANGO -.->|Асинхронный запуск| SERVICES
+    end
+
+    subgraph DATA["4. Уровень хранения данных (Data Storage Tier)"]
+        ORM["Django ORM (Слой моделей и QuerySet API)"]
+        SQLITE[("Встроенная СУБД SQLite 3 (db.sqlite3)")]
+        ORM -->|SQL-запросы (CRUD)| SQLITE
+    end
+
+    subgraph EXT["5. Внешние сервисы (External Services)"]
+        YANDEX["Яндекс Почта (SMTP SSL порт 465 / TLS :587)"]
+        AVIATION["Aviationstack API (Внешний REST API поставщика рейсов)"]
+    end
+
+    subgraph INFRA["6. Контейнеризация и инфраструктура (Infrastructure)"]
+        DOCKER["Docker Compose (Frontend + Backend + Volume)"]
+    end
+
+    SPA -->|HTTPS / Раздача статики и REST API| NGINX
+    NGINX -->|Проксирование /api/ на порт 8000| DJANGO
+    DJANGO -->|Запросы через QuerySet API| ORM
+    DJANGO -.->|SMTP SSL :465 отправка кодов 2FA| YANDEX
+    SERVICES -.->|Синхронизация рейсов / HTTPS| AVIATION
+    DOCKER -.->|Управление контейнером| NGINX
+    DOCKER -.->|Управление контейнером| DJANGO
+    DOCKER -.->|Монтирование тома данных backend_data| SQLITE

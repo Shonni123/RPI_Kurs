@@ -1,0 +1,57 @@
+flowchart TD
+    subgraph LAYER_PRES["1. Слой представления (Presentation Layer)"]
+        subgraph MOD_PAGES["Модуль страниц (Pages)"]
+            P_HOME["HomePage / LandingPage"]
+            P_FLIGHTS["FlightsPage / FlightDetailPage"]
+            P_EXTRA["AirportsPage / FavoritesPage / ProfilePage"]
+        end
+        subgraph MOD_UI["Модуль UI-компонентов (Components)"]
+            UI_NAV["Navbar / Footer"]
+            UI_CARD["FlightCard / Filters / SearchBar"]
+            UI_MODAL["AuthModal / VerifyCodeModal"]
+        end
+    end
+
+    subgraph LAYER_STATE["2. Слой состояния и хуков (State & Logic Layer)"]
+        CTX["Глобальное состояние (AuthContext / Favorites)"]
+        subgraph MOD_HOOKS["Хуки предметной логики"]
+            H_FLIGHTS["useFlights (Каталог и фильтрация)"]
+            H_FLIGHT["useFlight (Детальная информация)"]
+            H_AUTH["useAuth (Авторизация и 2FA)"]
+        end
+    end
+
+    subgraph LAYER_SVC["3. Слой сетевых служб (Data Services Layer)"]
+        API_CLIENT["Универсальный сетевой клиент (api.ts)"]
+        subgraph MOD_SVC["Службы предметных данных"]
+            S_FLIGHT["flightService"]
+            S_AUTH["authService"]
+            S_AIRPORT["airportService"]
+        end
+    end
+
+    subgraph LAYER_BE["4. Слой серверной логики (Backend Application Layer)"]
+        MID["Middleware (CORS, Django JSON Parser)"]
+        subgraph MOD_ROUTERS["Контроллеры REST API (backend/urls.py)"]
+            R_FLIGHTS["/api/flights Контроллер"]
+            R_AIRPORTS["/api/airports Контроллер"]
+            R_AUTH["/api/auth Контроллер"]
+        end
+    end
+
+    subgraph LAYER_DATA["5. Слой доступа к базе данных (Database Access Layer)"]
+        DB_MOD["Модуль базы данных (Django ORM / models.py)"]
+        DB_STORE[("SQLite 3 СУБД (flights.db)")]
+    end
+
+    %% Четкие межслойные связи сверху вниз
+    MOD_PAGES --> MOD_UI
+    MOD_PAGES --> CTX
+    MOD_PAGES --> MOD_HOOKS
+    MOD_HOOKS --> MOD_SVC
+    MOD_SVC --> API_CLIENT
+
+    API_CLIENT -->|HTTP REST JSON| MID
+    MID --> MOD_ROUTERS
+    MOD_ROUTERS --> DB_MOD
+    DB_MOD --> DB_STORE
