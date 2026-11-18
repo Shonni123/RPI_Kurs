@@ -1,4 +1,4 @@
-# Модульная диаграмма программного комплекса (UML Component / Module Diagram)
+# Модульная диаграмма программного комплекса (Modular Diagram)
 
 В данном документе представлена **Модульная диаграмма** веб-сервиса **Flight Tracker** («Разработка веб-интерфейса для информационного сервиса об авиарейсах на React»), спроектированная в строгом соответствии с 5-слойной моделью декомпозиции программной инженерии по дисциплине «Разработка программных интерфейсов» (РПИ).
 
@@ -21,48 +21,47 @@
 flowchart TD
     subgraph LAYER_PRES["1. Слой представления (Presentation Layer)"]
         subgraph MOD_PAGES["Модуль страниц (Pages)"]
-            P_HOME["HomePage (Лендинг, промо-блоки, FAQ)"]
+            P_HOME["HomePage / LandingPage"]
             P_FLIGHTS["FlightsPage / FlightDetailPage"]
-            P_EXTRA["AirportsPage / FavoritesPage / UserProfilePage"]
+            P_EXTRA["AirportsPage / FavoritesPage / ProfilePage"]
         end
         subgraph MOD_UI["Модуль UI-компонентов (Components)"]
-            UI_NAV["Navbar / TopNav / Footer"]
-            UI_FLIGHT["FlightCard / StatusBadge / SearchBar"]
-            UI_AUTH["AuthModal (Регистрация, 2FA код) / Common"]
+            UI_NAV["Navbar / Footer"]
+            UI_CARD["FlightCard / Filters / SearchBar"]
+            UI_MODAL["AuthModal / VerifyCodeModal"]
         end
     end
 
     subgraph LAYER_STATE["2. Слой состояния и хуков (State & Logic Layer)"]
         CTX["Глобальное состояние (AuthContext / Favorites)"]
         subgraph MOD_HOOKS["Хуки предметной логики"]
-            H_FLIGHTS["useFlights (Каталог, фильтры, автообновление)"]
-            H_DETAIL["useFlightDetail (Телеметрия и статус рейса)"]
-            H_FAV["useFavorites (Локальное сохранение рейсов)"]
+            H_FLIGHTS["useFlights (Каталог и фильтрация)"]
+            H_FLIGHT["useFlight (Детальная информация)"]
+            H_AUTH["useAuth (Авторизация и 2FA)"]
         end
     end
 
     subgraph LAYER_SVC["3. Слой сетевых служб (Data Services Layer)"]
-        API_CLIENT["Универсальный сетевой клиент (api.ts / Axios)"]
+        API_CLIENT["Универсальный сетевой клиент (api.ts)"]
         subgraph MOD_SVC["Службы предметных данных"]
-            S_FLIGHTS["flightService (Рейсы, фильтрация, детали)"]
-            S_AUTH["authApi (Регистрация, 2FA подтверждение)"]
-            S_AIRPORT["airportService (Каталог узловых хабов)"]
+            S_FLIGHT["flightService"]
+            S_AUTH["authService"]
+            S_AIRPORT["airportService"]
         end
     end
 
     subgraph LAYER_BE["4. Слой серверной логики (Backend Application Layer)"]
-        MID["Middleware (CORS, Django JSON Parser, PBKDF2 Auth)"]
+        MID["Middleware (CORS, Django JSON Parser)"]
         subgraph MOD_ROUTERS["Контроллеры REST API (backend/urls.py)"]
-            R_FLIGHTS["/api/flights Контроллер (FlightViewSet)"]
-            R_AIRPORTS["/api/airports Контроллер (AirportViewSet)"]
-            R_AUTH["/api/auth Контроллер (AuthViewSet / 2FA)"]
+            R_FLIGHTS["/api/flights Контроллер"]
+            R_AIRPORTS["/api/airports Контроллер"]
+            R_AUTH["/api/auth Контроллер"]
         end
-        ENGINE["Фоновые сервисы (Flight Lifecycle Engine 24/7)"]
     end
 
     subgraph LAYER_DATA["5. Слой доступа к базе данных (Database Access Layer)"]
-        DB_MOD["Слой Django ORM (models.py / QuerySet API)"]
-        DB_STORE[("SQLite 3 СУБД (db.sqlite3)")]
+        DB_MOD["Модуль базы данных (Django ORM / models.py)"]
+        DB_STORE[("SQLite 3 СУБД (flights.db)")]
     end
 
     %% Четкие межслойные связи сверху вниз
@@ -75,34 +74,34 @@ flowchart TD
     API_CLIENT -->|HTTP REST JSON| MID
     MID --> MOD_ROUTERS
     MOD_ROUTERS --> DB_MOD
-    ENGINE --> DB_MOD
     DB_MOD --> DB_STORE
 ```
 
 ---
 
-## 3. Детальное описание 5 модульных слоёв
+## 3. Описание слоёв и модулей
 
-### 1. Слой представления (Presentation Layer)
-* **Модуль страниц (`src/pages/`):** Входные точки маршрутизации SPA приложения (`HomePage`, `FlightsPage`, `FlightDetailPage`, `AirportsPage`, `FavoritesPage`, `UserProfilePage`).
-* **Модуль UI-компонентов (`src/components/`):** Визуальные элементы интерфейса: каркасная навигация (`Navbar`, `Footer`, `TopNav`), виджеты рейсов (`FlightCard`, `StatusBadge`, `SearchBar`), модальные окна аутентификации и подтверждения почты (`AuthModal`), вспомогательные состояния (`LoadingSkeleton`, `ErrorState`, `EmptyState`).
+1. **Слой представления (Presentation Layer):**
+   - **Модуль страниц (`Pages`):** `HomePage / LandingPage`, `FlightsPage / FlightDetailPage`, `AirportsPage / FavoritesPage / ProfilePage`.
+   - **Модуль UI-компонентов (`Components`):** `Navbar / Footer`, `FlightCard / Filters / SearchBar`, `AuthModal / VerifyCodeModal`.
+   - Отображение компонентов на страницах: `MOD_PAGES --> MOD_UI`.
 
-### 2. Слой состояния и хуков (State & Logic Layer)
-* **Глобальное состояние (`src/context/`):** `AuthContext` для сквозного контроля сессии пользователя и флага верификации почты; `localStorage` для кэширования избранных рейсов и токенов; `react-router-dom v7` для управления маршрутами.
-* **Пользовательские хуки (`src/hooks/`):** Инкапсулируют бизнес-логику интерфейса: `useFlights` (выборка, фильтрация, таймеры автообновления), `useFlightDetail` (детализация и расчёт времени), `useFavorites` (сохранение в локальное хранилище), `useDebounce` (отложенный поисковый ввод).
+2. **Слой состояния и хуков (State & Logic Layer):**
+   - **Глобальное состояние (`AuthContext / Favorites`):** сквозной контекст авторизации, статуса верификации email и локального хранилища `localStorage`.
+   - **Хуки предметной логики (`Hooks`):** `useFlights` (каталог и фильтрация), `useFlight` (детальная информация о рейсе), `useAuth` (авторизация и двухфакторное подтверждение почты).
+   - Вызовы со слоя страниц: `MOD_PAGES --> CTX`, `MOD_PAGES --> MOD_HOOKS`.
 
-### 3. Слой сетевых служб (Data Services Layer)
-* **Сетевой клиент (`src/services/api.ts`):** Универсальный HTTP-клиент (Axios/Fetch) с централизованной настройкой базового URL (`/api/`), интерцепторами заголовков, обработкой кодов 401/403/500 и механизмом fallback-кэширования.
-* **Службы предметных данных:**
-  - `flightService`: методы получения списка рейсов, пагинации, поиска по городам и получения рейса по идентификатору.
-  - `authApi`: методы регистрации, отправки и проверки 6-значного кода подтверждения email, входа и выхода.
-  - `airportService`: поставщик справочника узловых аэропортов.
+3. **Слой сетевых служб (Data Services Layer):**
+   - **Универсальный сетевой клиент (`api.ts`):** инкапсулирует вызовы HTTP/REST через Axios/Fetch, интерцепторы авторизационных заголовков и обработку ошибок.
+   - **Службы предметных данных:** `flightService`, `authService`, `airportService`.
+   - Поток делегирования: `MOD_HOOKS --> MOD_SVC` и `MOD_SVC --> API_CLIENT`.
 
-### 4. Слой серверной логики (Backend Application Layer)
-* **Маршрутизация и Middleware (`backend/urls.py`):** Диспетчер `DefaultRouter`, проверка CORS заголовков, парсер JSON-тел запросов, шифрование паролей PBKDF2.
-* **REST API Контроллеры (ViewSets):** `FlightViewSet`, `AirportViewSet`, `AuthViewSet` — обработка входящих HTTP-запросов, валидация через сериализаторы `ModelSerializer`.
-* **Фоновые сервисы движка (`backend/services/flight_lifecycle.py`):** Движок жизненного цикла рейсов 24/7 (симуляция полетов), планировщик очистки архива `cleanup_archived_flights` (старше 14 дней), генератор одноразовых кодов email.
+4. **Слой серверной логики (Backend Application Layer):**
+   - **Middleware:** CORS заголовки, парсер JSON-тел запросов, хэширование паролей PBKDF2.
+   - **Контроллеры REST API (`backend/urls.py`):** `/api/flights Контроллер`, `/api/airports Контроллер`, `/api/auth Контроллер`.
+   - Обращение сетевого клиента: `API_CLIENT -->|HTTP REST JSON| MID` и `MID --> MOD_ROUTERS`.
 
-### 5. Слой доступа к базе данных (Database Access Layer)
-* **Слой Django ORM (`models.py`, QuerySet API):** Обеспечивает безопасное объектно-реляционное взаимодействие, исключает возможность SQL-инъекций, гарантирует транзакционность (ACID).
-* **СУБД SQLite 3 (`db.sqlite3`):** Локальная реляционная база данных, хранящая таблицы `Flight`, `Airport`, `UserProfile`, `EmailVerificationCode`.
+5. **Слой доступа к базе данных (Database Access Layer):**
+   - **Модуль базы данных:** `Django ORM / models.py` — слой моделей, валидации и QuerySet API.
+   - **СУБД:** встроенная реляционная база данных `SQLite 3` (`flights.db`).
+   - Доступ к данным: `MOD_ROUTERS --> DB_MOD` и `DB_MOD --> DB_STORE`.

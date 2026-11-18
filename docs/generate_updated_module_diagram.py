@@ -533,3 +533,4 @@ if __name__ == "__main__":
     generate_drawio_xml()
     generate_module_png()
     generate_module_svg()
+
