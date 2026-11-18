@@ -288,3 +288,4 @@
   <line x1="760" y1="720" x2="820" y2="720" stroke="#1E3A8A" stroke-width="1.6" marker-end="url(#arr-blue)" />
   <text x="765" y="710" font-size="9.5" font-weight="bold" fill="#1E3A8A">/api/* JSON</text>
 </svg>
+

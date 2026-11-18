@@ -215,3 +215,4 @@ def generate_architecture_diagram_png(output_path='docs/project_architecture.png
 
 if __name__ == '__main__':
     generate_architecture_diagram_png()
+
