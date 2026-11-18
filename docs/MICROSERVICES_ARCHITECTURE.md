@@ -107,3 +107,4 @@ flowchart TB
    - Обеспечивает слабую связанность (loose coupling) микросервисов.
    - Топик `user-registered` инициирует отправку 2FA-письма через Notification Service.
    - Топик `flight-status-changed` инициирует сброс устаревшего кэша в каталоге рейсов и отправку оповещений.
+
