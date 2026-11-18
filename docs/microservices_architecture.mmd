@@ -1,0 +1,41 @@
+flowchart TB
+    subgraph PANEL_MONOLITH["ФАКТИЧЕСКАЯ АРХИТЕКТУРА: 3-Звенный Клиент-Серверный Монолит"]
+        direction TB
+        M_CLIENT["Frontend Клиент (React 19 SPA + Vite 8.2)"]
+        M_SERVER["Монолитный Backend (Python 3.12 + Django 5 & DRF)"]
+        M_DB[("Встроенная база данных (SQLite 3 db.sqlite3)")]
+
+        M_CLIENT -->|HTTP REST на единый сервер| M_SERVER
+        M_SERVER -->|Прямой доступ через Django ORM| M_DB
+
+        subgraph M_BENEFITS["Преимущества монолита для курсового проекта"]
+            B1["Быстрый запуск одной командой (Docker Compose)"]
+            B2["Нулевые сетевые задержки и простота отладки"]
+            B3["Строгие ACID-транзакции без распределенности"]
+        end
+    end
+
+    subgraph PANEL_MICRO["ЦЕЛЕВАЯ ПРОЕКТНАЯ СХЕМА: Декомпозиция при масштабировании (>100k MAU)"]
+        direction TB
+        GW["API Gateway (Nginx / Kong) - Единый шлюз, SSL, балансировка"]
+
+        subgraph MS_SERVICES["Пул автономных микросервисов со своими БД (Database-per-Service)"]
+            MS_FLIGHTS["Flight Service (Каталог и поиск рейсов) + PostgreSQL / Redis Cache"]
+            MS_AUTH["Auth & User Service (Управление профилями) + PostgreSQL"]
+            MS_TRACK["Flight Telemetry & Lifecycle Service + TimescaleDB"]
+            MS_NOTIF["Notification Service (Email 2FA / Webhook / Push)"]
+        end
+
+        BUS["Шина событий (Apache Kafka / RabbitMQ)"]
+
+        GW --> MS_FLIGHTS
+        GW --> MS_AUTH
+        GW --> MS_TRACK
+
+        MS_AUTH -.->|Событие UserRegistered (2FA)| BUS
+        MS_TRACK -.->|Событие FlightStatusChanged| BUS
+        BUS -.->|Отправка email с кодом 2FA| MS_NOTIF
+        BUS -.->|Инвалидация кэша расписаний| MS_FLIGHTS
+    end
+
+    PANEL_MONOLITH -.->|Эволюционный переход при росте нагрузки| PANEL_MICRO

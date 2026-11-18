@@ -17,3 +17,4 @@ encoded = encode_diagram(test_xml)
 decoded = decode_diagram(encoded)
 assert decoded == test_xml
 print("Success! Compression and decompression match draw.io standard format.")
+

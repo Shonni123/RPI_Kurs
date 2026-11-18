@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1350 820" width="100%" height="100%" style="background:#FFFFFF; font-family: Arial, sans-serif;">
+  <defs>
+    <marker id="arrow-gray" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#475569" />
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563EB" />
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669" />
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#7C3AED" />
+    </marker>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#D97706" />
+    </marker>
+  </defs>
+
+  <!-- МОНОЛИТ -->
+  <rect x="40" y="30" width="560" height="740" rx="6" fill="#F8FAFC" stroke="#475569" stroke-width="1.4" />
+  <rect x="40" y="30" width="560" height="26" rx="6" fill="#FFFFFF" stroke="#475569" stroke-width="1.4" />
+  <text x="52" y="48" font-size="12" font-weight="bold" fill="#0F172A">ФАКТИЧЕСКАЯ АРХИТЕКТУРА: 3-Звенный Клиент-Серверный Монолит</text>
+
+  <rect x="70" y="75" width="500" height="50" rx="4" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5" />
+  <text x="85" y="96" font-size="11" font-weight="bold" fill="#0F172A">Frontend Клиент (React 19 SPA)</text>
+  <text x="85" y="112" font-size="9.5" fill="#475569">Vite 8.2, React Router v7, Tailwind CSS, LocalStorage кэш</text>
+
+  <rect x="70" y="165" width="500" height="68" rx="4" fill="#FFFFFF" stroke="#0284C7" stroke-width="1.5" />
+  <text x="85" y="185" font-size="11" font-weight="bold" fill="#0F172A">Монолитный Backend (Python 3.12 + Django 5 &amp; DRF)</text>
+  <text x="85" y="202" font-size="9.5" fill="#475569">DefaultRouter, FlightViewSet, AirportViewSet, AuthViewSet (2FA)</text>
+  <text x="85" y="218" font-size="9.5" fill="#0369A1">Встроенный фоновый движок симуляции полетов (24/7 Engine)</text>
+
+  <path d="M 70 283 C 70 273, 570 273, 570 283 L 570 330 C 570 340, 70 340, 70 330 Z" fill="#FFFFFF" stroke="#DC2626" stroke-width="1.4" />
+  <path d="M 70 283 C 70 293, 570 293, 570 283" fill="none" stroke="#DC2626" stroke-width="1.4" />
+  <text x="90" y="305" font-size="11" font-weight="bold" fill="#991B1B">Встроенная база данных (SQLite 3 db.sqlite3)</text>
+  <text x="90" y="322" font-size="9.5" fill="#475569">Таблицы: flights, airports, user_profile, email_verification_code</text>
+
+  <line x1="320" y1="125" x2="320" y2="157" stroke="#2563EB" stroke-width="1.8" marker-end="url(#arrow-blue)" />
+  <text x="328" y="145" font-size="9.5" font-weight="bold" fill="#2563EB">HTTP REST</text>
+
+  <line x1="320" y1="233" x2="320" y2="267" stroke="#7C3AED" stroke-width="1.8" marker-end="url(#arrow-purple)" />
+  <text x="328" y="255" font-size="9.5" font-weight="bold" fill="#7C3AED">Django ORM</text>
+
+  <!-- Преимущества монолита -->
+  <rect x="70" y="380" width="500" height="360" rx="4" fill="#FFFFFF" stroke="#059669" stroke-width="1.2" />
+  <rect x="70" y="380" width="500" height="22" rx="4" fill="#F8FAFC" stroke="#059669" stroke-width="1.2" />
+  <text x="80" y="396" font-size="11" font-weight="bold" fill="#047857">Преимущества монолита для курсового проекта</text>
+
+  <rect x="90" y="420" width="460" height="85" rx="3" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1" />
+  <text x="105" y="442" font-size="10.5" font-weight="bold" fill="#0F172A">Быстрый запуск одной командой</text>
+  <text x="105" y="460" font-size="9" fill="#334155">• Оркестрация через docker-compose up за 30 секунд</text>
+  <text x="105" y="475" font-size="9" fill="#334155">• Единый репозиторий без рассинхронизации версий контрактов</text>
+  <text x="105" y="490" font-size="9" fill="#334155">• Отсутствие необходимости в Service Discovery и Consul</text>
+
+  <rect x="90" y="525" width="460" height="85" rx="3" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1" />
+  <text x="105" y="547" font-size="10.5" font-weight="bold" fill="#0F172A">Нулевые сетевые задержки вызовов</text>
+  <text x="105" y="565" font-size="9" fill="#334155">• Прямой in-process вызов контроллеров и моделей без сети</text>
+  <text x="105" y="580" font-size="9" fill="#334155">• Нет накладных расходов на сетевую сериализацию gRPC/HTTP</text>
+  <text x="105" y="595" font-size="9" fill="#334155">• Удобная отладка и логирование в едином потоке сервера</text>
+
+  <rect x="90" y="630" width="460" height="85" rx="3" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1" />
+  <text x="105" y="652" font-size="10.5" font-weight="bold" fill="#0F172A">ACID-транзакции без распределенности</text>
+  <text x="105" y="670" font-size="9" fill="#334155">• Строгая согласованность данных (Consistency) из коробки</text>
+  <text x="105" y="685" font-size="9" fill="#334155">• Нет риска частичных отказов и сложных откатов (Saga pattern)</text>
+  <text x="105" y="700" font-size="9" fill="#334155">• Локальный транзакционный журнал SQLite 3 (WAL mode)</text>
+
+  <!-- МИКРОСЕРВИСЫ -->
+  <rect x="670" y="30" width="640" height="740" rx="6" fill="#F8FAFC" stroke="#475569" stroke-width="1.4" />
+  <rect x="670" y="30" width="640" height="26" rx="6" fill="#FFFFFF" stroke="#475569" stroke-width="1.4" />
+  <text x="682" y="48" font-size="12" font-weight="bold" fill="#0F172A">ЦЕЛЕВАЯ ПРОЕКТНАЯ СХЕМА: Декомпозиция при масштабировании (&gt;100k MAU)</text>
+
+  <rect x="700" y="75" width="580" height="50" rx="4" fill="#FFFFFF" stroke="#059669" stroke-width="1.5" />
+  <text x="715" y="96" font-size="11" font-weight="bold" fill="#0F172A">API Gateway (Nginx / Kong / Traefik)</text>
+  <text x="715" y="112" font-size="9.5" fill="#475569">Единый шлюз, SSL-терминация, балансировка нагрузки, Rate Limiting, JWT-аудит</text>
+
+  <rect x="700" y="150" width="580" height="370" rx="4" fill="#FFFFFF" stroke="#0284C7" stroke-width="1.2" />
+  <rect x="700" y="150" width="580" height="22" rx="4" fill="#F8FAFC" stroke="#0284C7" stroke-width="1.2" />
+  <text x="710" y="166" font-size="11" font-weight="bold" fill="#0369A1">Пул автономных микросервисов со своими БД (Database-per-Service)</text>
+
+  <rect x="720" y="185" width="540" height="68" rx="3" fill="#F0F9FF" stroke="#BAE6FD" stroke-width="1" />
+  <text x="735" y="206" font-size="10.5" font-weight="bold" fill="#0F172A">Flight Catalog Service + PostgreSQL / Redis Cache</text>
+  <text x="735" y="223" font-size="9" fill="#475569">Поиск, расписание, фильтрация по статусам, IATA аэропорты</text>
+  <text x="735" y="238" font-size="9" fill="#0284C7">Кэширование горячих поисковых запросов в Redis (TTL 60s)</text>
+
+  <rect x="720" y="265" width="540" height="68" rx="3" fill="#F0F9FF" stroke="#BAE6FD" stroke-width="1" />
+  <text x="735" y="286" font-size="10.5" font-weight="bold" fill="#0F172A">Auth &amp; User Service + PostgreSQL</text>
+  <text x="735" y="303" font-size="9" fill="#475569">Регистрация, хэширование паролей, профили пользователей</text>
+  <text x="735" y="318" font-size="9" fill="#7C3AED">Управление сессиями и выдача JWT access/refresh токенов</text>
+
+  <rect x="720" y="345" width="540" height="68" rx="3" fill="#F0F9FF" stroke="#BAE6FD" stroke-width="1" />
+  <text x="735" y="366" font-size="10.5" font-weight="bold" fill="#0F172A">Flight Telemetry &amp; Lifecycle Service + TimescaleDB</text>
+  <text x="735" y="383" font-size="9" fill="#475569">Фоновый движок симуляции полетов, расчет высоты, скорости и координат</text>
+  <text x="735" y="398" font-size="9" fill="#D97706">Оптимизированная Time-series база данных для временных рядов</text>
+
+  <rect x="720" y="425" width="540" height="68" rx="3" fill="#F0F9FF" stroke="#BAE6FD" stroke-width="1" />
+  <text x="735" y="446" font-size="10.5" font-weight="bold" fill="#0F172A">Notification Service (Email 2FA / Webhook / Push)</text>
+  <text x="735" y="463" font-size="9" fill="#475569">Асинхронная отправка 6-значных кодов подтверждения через Yandex SMTP</text>
+  <text x="735" y="478" font-size="9" fill="#EA580C">Push-уведомления пассажиров о задержке и посадке рейсов</text>
+
+  <rect x="700" y="545" width="580" height="55" rx="4" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5" />
+  <text x="715" y="567" font-size="11" font-weight="bold" fill="#78350F">Шина событий (Apache Kafka / RabbitMQ Event Broker)</text>
+  <text x="715" y="585" font-size="9.5" fill="#92400E">Асинхронный брокер событий, pub/sub топики: user-events, flight-status-events</text>
+
+  <!-- СВЯЗИ В МИКРОСЕРВИСАХ -->
+  <line x1="780" y1="125" x2="780" y2="177" stroke="#059669" stroke-width="1.5" marker-end="url(#arrow-green)" />
+  <path d="M 990 125 L 990 257" fill="none" stroke="#059669" stroke-width="1.5" marker-end="url(#arrow-green)" />
+  <path d="M 1200 125 L 1200 337" fill="none" stroke="#059669" stroke-width="1.5" marker-end="url(#arrow-green)" />
+
+  <path d="M 750 333 L 750 537" fill="none" stroke="#D97706" stroke-width="1.3" stroke-dasharray="3,3" marker-end="url(#arrow-orange)" />
+  <text x="758" y="520" font-size="8.5" font-weight="bold" fill="#D97706">UserRegistered</text>
+
+  <path d="M 1180 413 L 1180 537" fill="none" stroke="#D97706" stroke-width="1.3" stroke-dasharray="3,3" marker-end="url(#arrow-orange)" />
+  <text x="1070" y="525" font-size="8.5" font-weight="bold" fill="#D97706">FlightStatusChanged</text>
+
+  <path d="M 990 545 L 990 501" fill="none" stroke="#EA580C" stroke-width="1.3" stroke-dasharray="3,3" marker-end="url(#arrow-orange)" />
+  <text x="998" y="525" font-size="8.5" font-weight="bold" fill="#EA580C">Отправка 2FA</text>
+
+  <path d="M 715 545 L 715 261" fill="none" stroke="#2563EB" stroke-width="1.3" stroke-dasharray="3,3" marker-end="url(#arrow-blue)" />
+  <text x="635" y="300" font-size="8" font-weight="bold" fill="#2563EB">Инвалидация кэша</text>
+
+  <!-- ЭВОЛЮЦИОННЫЙ ПЕРЕХОД -->
+  <line x1="600" y1="400" x2="662" y2="400" stroke="#475569" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrow-gray)" />
+  <text x="590" y="390" font-size="9.5" font-weight="bold" fill="#334155">Эволюция (&gt;100k MAU)</text>
+</svg>

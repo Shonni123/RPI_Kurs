@@ -10,3 +10,4 @@ def make_drawio_file(graph_model_xml, diagram_id="module-diagram", diagram_name=
   <diagram id="{diagram_id}" name="{diagram_name}">{b64_payload}</diagram>
 </mxfile>'''
     return file_content
+
