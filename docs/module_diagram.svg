@@ -1,291 +1,178 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1140" width="100%" height="100%" style="background:#ffffff; font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 920" width="100%" height="100%" style="background:#FFFFFF; font-family: Arial, sans-serif;">
   <defs>
-    <filter id="shadow" x="-3%" y="-4%" width="106%" height="110%">
-      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.06" />
-    </filter>
-    <marker id="arr-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1E3A8A" />
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563EB" />
     </marker>
-    <marker id="arr-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#16A34A" />
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#7C3AED" />
     </marker>
-    <marker id="arr-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#7C3AED" />
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669" />
     </marker>
-    <marker id="arr-amber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#B45309" />
+    <marker id="arrow-sky" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0284C7" />
     </marker>
-    <marker id="arr-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#DC2626" />
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#D97706" />
     </marker>
   </defs>
 
-  <!-- Чистый белый фон для отчета и документов -->
-  <rect width="100%" height="100%" fill="#ffffff" />
+  <!-- 1. СЛОЙ ПРЕДСТАВЛЕНИЯ -->
+  <rect x="50" y="30" width="1200" height="140" rx="6" fill="#F8FAFC" stroke="#64748B" stroke-width="1.4" />
+  <rect x="50" y="30" width="1200" height="26" rx="6" fill="#FFFFFF" stroke="#64748B" stroke-width="1.4" />
+  <text x="64" y="48" font-size="12" font-weight="bold" fill="#0F172A">1. Слой представления (Presentation Layer)</text>
 
-  <!-- ================= 1. ПОДСИСТЕМА FRONTEND ================= -->
-  <rect x="30" y="30" width="750" height="1070" rx="6" fill="#F8FAFC" stroke="#2563EB" stroke-width="1.5" />
-  <rect x="30" y="30" width="750" height="34" rx="6" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5" />
-  <text x="48" y="53" font-size="13" font-weight="bold" fill="#1E3A8A">Подсистема клиентской части (Frontend Subsystem — React 19 SPA)</text>
+  <rect x="70" y="65" width="520" height="95" rx="4" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.2" />
+  <rect x="70" y="65" width="520" height="22" rx="4" fill="#F8FAFC" stroke="#2563EB" stroke-width="1.2" />
+  <text x="80" y="80" font-size="11" font-weight="bold" fill="#1D4ED8">Модуль страниц (Pages)</text>
+  <rect x="85" y="93" width="230" height="26" rx="3" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1" />
+  <text x="95" y="110" font-size="10" font-weight="bold" fill="#0F172A">HomePage (Лендинг, промо, FAQ)</text>
+  <rect x="330" y="93" width="245" height="26" rx="3" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1" />
+  <text x="340" y="110" font-size="10" font-weight="bold" fill="#0F172A">FlightsPage / FlightDetailPage</text>
+  <rect x="85" y="125" width="490" height="26" rx="3" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1" />
+  <text x="95" y="142" font-size="10" font-weight="bold" fill="#0F172A">AirportsPage / FavoritesPage / UserProfilePage</text>
 
-  <!-- Компонент: Pages -->
-  <g transform="translate(50, 80)" filter="url(#shadow)">
-    <rect width="340" height="440" rx="4" fill="#FFFFFF" stroke="#3B82F6" stroke-width="1.2" />
-    <rect width="340" height="36" rx="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2" />
-    <!-- UML Icon -->
-    <rect x="310" y="8" width="16" height="20" fill="#FFFFFF" stroke="#3B82F6" stroke-width="1" />
-    <rect x="306" y="11" width="8" height="5" fill="#FFFFFF" stroke="#3B82F6" stroke-width="1" />
-    <rect x="306" y="19" width="8" height="5" fill="#FFFFFF" stroke="#3B82F6" stroke-width="1" />
-    <text x="12" y="15" font-size="9" font-weight="bold" fill="#64748B">«module: pages»</text>
-    <text x="12" y="29" font-size="11.5" font-weight="bold" fill="#0F172A">Модуль страниц (Pages)</text>
+  <rect x="670" y="65" width="560" height="95" rx="4" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.2" />
+  <rect x="670" y="65" width="560" height="22" rx="4" fill="#F8FAFC" stroke="#2563EB" stroke-width="1.2" />
+  <text x="680" y="80" font-size="11" font-weight="bold" fill="#1D4ED8">Модуль UI-компонентов (Components)</text>
+  <rect x="685" y="93" width="250" height="26" rx="3" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1" />
+  <text x="695" y="110" font-size="10" font-weight="bold" fill="#0F172A">Navbar / TopNav / Footer (Навигация)</text>
+  <rect x="950" y="93" width="265" height="26" rx="3" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1" />
+  <text x="960" y="110" font-size="10" font-weight="bold" fill="#0F172A">FlightCard / StatusBadge / SearchBar</text>
+  <rect x="685" y="125" width="530" height="26" rx="3" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1" />
+  <text x="695" y="142" font-size="10" font-weight="bold" fill="#0F172A">AuthModal (Регистрация, 2FA код) / LoadingSkeleton, ErrorState</text>
 
-    <text x="12" y="58" font-size="10.5" font-weight="bold" fill="#1E293B">Интерфейсы пользовательских экранов:</text>
-    <text x="12" y="78" font-size="10" fill="#334155">• HomePage.tsx (Лендинг, Hero, FAQ)</text>
-    <text x="12" y="98" font-size="10" fill="#334155">• FlightsPage.tsx (Табло рейсов, поиск)</text>
-    <text x="12" y="118" font-size="10" fill="#334155">• FlightDetailPage.tsx (/flights/:id)</text>
-    <text x="12" y="138" font-size="10" fill="#334155">• AirportsPage.tsx (Каталог хабов)</text>
-    <text x="12" y="158" font-size="10" fill="#334155">• FavoritesPage.tsx (Избранные рейсы)</text>
-    <text x="12" y="178" font-size="10" fill="#334155">• UserProfilePage.tsx (Личный кабинет)</text>
-    <text x="12" y="198" font-size="10" fill="#334155">• AboutPage.tsx (О сервисе, архитектура)</text>
-    <text x="12" y="218" font-size="10" fill="#334155">• NotFoundPage.tsx (404 авиационный экран)</text>
+  <line x1="590" y1="112" x2="662" y2="112" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arrow-blue)" />
+  <text x="598" y="105" font-size="9.5" font-weight="bold" fill="#2563EB">Отображение</text>
 
-    <text x="12" y="250" font-size="10.5" font-weight="bold" fill="#1E293B">Взаимодействие с подсистемами:</text>
-    <text x="12" y="270" font-size="10" fill="#475569">- Рендерит атомарные UI-компоненты</text>
-    <text x="12" y="290" font-size="10" fill="#475569">- Подписывается на Auth и Favorites стейт</text>
-    <text x="12" y="310" font-size="10" fill="#475569">- Инициирует запросы к API сервисам</text>
-  </g>
+  <!-- 2. СЛОЙ СОСТОЯНИЯ И ХУКОВ -->
+  <rect x="50" y="200" width="1200" height="125" rx="6" fill="#F8FAFC" stroke="#64748B" stroke-width="1.4" />
+  <rect x="50" y="200" width="1200" height="26" rx="6" fill="#FFFFFF" stroke="#64748B" stroke-width="1.4" />
+  <text x="64" y="218" font-size="12" font-weight="bold" fill="#0F172A">2. Слой состояния и хуков (State &amp; Logic Layer)</text>
 
-  <!-- Компонент: UI Components -->
-  <g transform="translate(410, 80)" filter="url(#shadow)">
-    <rect width="350" height="440" rx="4" fill="#FFFFFF" stroke="#3B82F6" stroke-width="1.2" />
-    <rect width="350" height="36" rx="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2" />
-    <rect x="320" y="8" width="16" height="20" fill="#FFFFFF" stroke="#3B82F6" stroke-width="1" />
-    <rect x="316" y="11" width="8" height="5" fill="#FFFFFF" stroke="#3B82F6" stroke-width="1" />
-    <rect x="316" y="19" width="8" height="5" fill="#FFFFFF" stroke="#3B82F6" stroke-width="1" />
-    <text x="12" y="15" font-size="9" font-weight="bold" fill="#64748B">«module: components»</text>
-    <text x="12" y="29" font-size="11.5" font-weight="bold" fill="#0F172A">Модуль компонентов (UI)</text>
+  <rect x="70" y="235" width="420" height="78" rx="4" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.4" />
+  <text x="82" y="254" font-size="11" font-weight="bold" fill="#0F172A">Глобальное состояние (State)</text>
+  <text x="82" y="271" font-size="9.5" fill="#334155">• AuthContext (Пользователь, JWT/сессия, 2FA статус)</text>
+  <text x="82" y="287" font-size="9.5" fill="#334155">• LocalStorage (Кэш авторизации, избранные рейсы)</text>
+  <text x="82" y="303" font-size="9.5" fill="#334155">• React Router v7 (Диспетчеризация маршрутов)</text>
 
-    <text x="12" y="58" font-size="10.5" font-weight="bold" fill="#1E293B">Атомарные блоки пользовательского UI:</text>
-    <text x="12" y="78" font-size="10" fill="#334155">• auth/ (AuthModal, LoginForm, Register,</text>
-    <text x="20" y="94" font-size="9.5" fill="#475569">EmailVerificationForm, 6 ячеек кода)</text>
-    <text x="12" y="114" font-size="10" fill="#334155">• flights/ (FlightCard, StatusBadge,</text>
-    <text x="20" y="130" font-size="9.5" fill="#475569">Filters, SearchBar, SortDropdown)</text>
-    <text x="12" y="150" font-size="10" fill="#334155">• home/ (HeroSection, StatsSection,</text>
-    <text x="20" y="166" font-size="9.5" fill="#475569">FeaturesSection, FAQSection, Newsletter)</text>
-    <text x="12" y="186" font-size="10" fill="#334155">• layout/ (Header, Footer, DrawerMenu)</text>
-    <text x="12" y="206" font-size="10" fill="#334155">• common/ (LoadingSkeleton, EmptyState,</text>
-    <text x="20" y="222" font-size="9.5" fill="#475569">Button, Badge, Modal)</text>
+  <rect x="530" y="235" width="700" height="78" rx="4" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.2" />
+  <rect x="530" y="235" width="700" height="22" rx="4" fill="#F8FAFC" stroke="#7C3AED" stroke-width="1.2" />
+  <text x="540" y="250" font-size="11" font-weight="bold" fill="#6D28D9">Хуки предметной логики</text>
+  <rect x="545" y="265" width="270" height="38" rx="3" fill="#F5F3FF" stroke="#C4B5FD" stroke-width="1" />
+  <text x="555" y="281" font-size="10" font-weight="bold" fill="#0F172A">useFlights</text>
+  <text x="555" y="295" font-size="9" fill="#475569">Каталог, фильтры, автообновление</text>
 
-    <text x="12" y="250" font-size="10.5" font-weight="bold" fill="#1E293B">Характеристики слоя:</text>
-    <text x="12" y="270" font-size="10" fill="#475569">- Чистые React.FC функциональные компоненты</text>
-    <text x="12" y="290" font-size="10" fill="#475569">- Дизайн-система Tailwind CSS v4</text>
-    <text x="12" y="310" font-size="10" fill="#475569">- Доступность по стандартам WCAG 2.1</text>
-  </g>
+  <rect x="830" y="265" width="220" height="38" rx="3" fill="#F5F3FF" stroke="#C4B5FD" stroke-width="1" />
+  <text x="840" y="281" font-size="10" font-weight="bold" fill="#0F172A">useFavorites / useDebounce</text>
+  <text x="840" y="295" font-size="9" fill="#475569">Избранное, отложенный ввод</text>
 
-  <!-- Компонент: State -->
-  <g transform="translate(50, 545)" filter="url(#shadow)">
-    <rect width="340" height="530" rx="4" fill="#FFFFFF" stroke="#3B82F6" stroke-width="1.2" />
-    <rect width="340" height="36" rx="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2" />
-    <rect x="310" y="8" width="16" height="20" fill="#FFFFFF" stroke="#3B82F6" stroke-width="1" />
-    <rect x="306" y="11" width="8" height="5" fill="#FFFFFF" stroke="#3B82F6" stroke-width="1" />
-    <rect x="306" y="19" width="8" height="5" fill="#FFFFFF" stroke="#3B82F6" stroke-width="1" />
-    <text x="12" y="15" font-size="9" font-weight="bold" fill="#64748B">«module: context &amp; hooks»</text>
-    <text x="12" y="29" font-size="11.5" font-weight="bold" fill="#0F172A">Модуль состояния (State)</text>
+  <rect x="1065" y="265" width="150" height="38" rx="3" fill="#F5F3FF" stroke="#C4B5FD" stroke-width="1" />
+  <text x="1075" y="281" font-size="10" font-weight="bold" fill="#0F172A">useAuth</text>
+  <text x="1075" y="295" font-size="9" fill="#475569">Сессия, токен, 2FA</text>
 
-    <text x="12" y="58" font-size="10.5" font-weight="bold" fill="#1E293B">Реактивные контексты:</text>
-    <text x="12" y="78" font-size="10" fill="#334155">• AuthContext.tsx</text>
-    <text x="20" y="94" font-size="9.5" fill="#475569">- Сессия, токен, профиль пользователя</text>
-    <text x="20" y="110" font-size="9.5" fill="#475569">- login(), logout(), verifyEmail()</text>
-    <text x="20" y="126" font-size="9.5" fill="#475569">- Статус is_email_verified</text>
-    <text x="12" y="146" font-size="10" fill="#334155">• FavoritesContext.tsx</text>
-    <text x="20" y="162" font-size="9.5" fill="#475569">- toggleFavorite(), isFavorite()</text>
-    <text x="20" y="178" font-size="9.5" fill="#475569">- Синхронизация со счётчиком шапки</text>
+  <!-- 3. СЛОЙ СЕТЕВЫХ СЛУЖБ -->
+  <rect x="50" y="355" width="1200" height="125" rx="6" fill="#F8FAFC" stroke="#64748B" stroke-width="1.4" />
+  <rect x="50" y="355" width="1200" height="26" rx="6" fill="#FFFFFF" stroke="#64748B" stroke-width="1.4" />
+  <text x="64" y="373" font-size="12" font-weight="bold" fill="#0F172A">3. Слой сетевых служб (Data Services Layer)</text>
 
-    <text x="12" y="208" font-size="10.5" font-weight="bold" fill="#1E293B">Кастомные хуки (hooks/):</text>
-    <text x="12" y="228" font-size="10" fill="#334155">• useFlights.ts (кэширование, стейт табло)</text>
-    <text x="12" y="248" font-size="10" fill="#334155">• useDebounce.ts (оптимизация ввода)</text>
-    <text x="12" y="268" font-size="10" fill="#334155">• useLocalStorage.ts (персистентность)</text>
+  <rect x="70" y="390" width="420" height="78" rx="4" fill="#FFFFFF" stroke="#059669" stroke-width="1.4" />
+  <text x="82" y="409" font-size="11" font-weight="bold" fill="#0F172A">Универсальный сетевой клиент</text>
+  <text x="82" y="426" font-size="9.5" fill="#334155">• api.ts (Axios / Fetch экземпляр)</text>
+  <text x="82" y="442" font-size="9.5" fill="#334155">• Базовый URL, перехватчики заголовков (headers)</text>
+  <text x="82" y="458" font-size="9.5" fill="#334155">• Обработка ошибок 401/403/500, fallback-кэш</text>
 
-    <text x="12" y="298" font-size="10.5" font-weight="bold" fill="#1E293B">Маршрутизация (Router v7):</text>
-    <text x="12" y="318" font-size="10" fill="#334155">• App.tsx (SPA дерево маршрутов)</text>
-    <text x="12" y="338" font-size="10" fill="#334155">• Динамический роут /flights/:id</text>
-  </g>
+  <rect x="530" y="390" width="700" height="78" rx="4" fill="#FFFFFF" stroke="#059669" stroke-width="1.2" />
+  <rect x="530" y="390" width="700" height="22" rx="4" fill="#F8FAFC" stroke="#059669" stroke-width="1.2" />
+  <text x="540" y="405" font-size="11" font-weight="bold" fill="#047857">Службы предметных данных</text>
 
-  <!-- Компонент: Services -->
-  <g transform="translate(410, 545)" filter="url(#shadow)">
-    <rect width="350" height="530" rx="4" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="1.4" />
-    <rect width="350" height="36" rx="4" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="1.4" />
-    <rect x="320" y="8" width="16" height="20" fill="#FFFFFF" stroke="#1D4ED8" stroke-width="1" />
-    <rect x="316" y="11" width="8" height="5" fill="#FFFFFF" stroke="#1D4ED8" stroke-width="1" />
-    <rect x="316" y="19" width="8" height="5" fill="#FFFFFF" stroke="#1D4ED8" stroke-width="1" />
-    <text x="12" y="15" font-size="9" font-weight="bold" fill="#1E3A8A">«module: api services»</text>
-    <text x="12" y="29" font-size="11.5" font-weight="bold" fill="#1E3A8A">Модуль API-сервисов</text>
+  <rect x="545" y="420" width="210" height="38" rx="3" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1" />
+  <text x="555" y="436" font-size="10" font-weight="bold" fill="#0F172A">flightService</text>
+  <text x="555" y="450" font-size="9" fill="#475569">Поиск, фильтры, детали рейса</text>
 
-    <text x="12" y="58" font-size="10.5" font-weight="bold" fill="#1E3A8A">Сетевые сервисы доступа:</text>
-    <text x="12" y="78" font-size="10" fill="#1E3A8A">• api.ts (REST-клиент рейсов)</text>
-    <text x="20" y="94" font-size="9.5" fill="#1E40AF">- fetchFlights(search, filter)</text>
-    <text x="20" y="110" font-size="9.5" fill="#1E40AF">- fetchFlightById(id)</text>
-    <text x="20" y="126" font-size="9.5" fill="#1E40AF">- fetchAirports()</text>
-    <text x="12" y="146" font-size="10" fill="#1E3A8A">• authApi.ts (Клиент авторизации)</text>
-    <text x="20" y="162" font-size="9.5" fill="#1E40AF">- register(email, password)</text>
-    <text x="20" y="178" font-size="9.5" fill="#1E40AF">- verifyEmail(email, code)</text>
-    <text x="20" y="194" font-size="9.5" fill="#1E40AF">- login(email, password)</text>
-    <text x="12" y="214" font-size="10" fill="#1E3A8A">• mockFlights.ts (Offline Fallback)</text>
-    <text x="20" y="230" font-size="9.5" fill="#1E40AF">- Резервный кэш рейсов при сбое</text>
+  <rect x="770" y="420" width="230" height="38" rx="3" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1" />
+  <text x="780" y="436" font-size="10" font-weight="bold" fill="#0F172A">authApi</text>
+  <text x="780" y="450" font-size="9" fill="#475569">Регистрация, 2FA код, вход</text>
 
-    <text x="12" y="260" font-size="10.5" font-weight="bold" fill="#1E3A8A">Сетевая конфигурация:</text>
-    <text x="12" y="280" font-size="10" fill="#1E40AF">• Axios instance c базовым URL</text>
-    <text x="12" y="300" font-size="10" fill="#1E40AF">• Преобразование snake &lt;-&gt; camel</text>
-    <text x="12" y="320" font-size="10" fill="#1E40AF">• Тайм-аут 2с и fallback-переключение</text>
-  </g>
+  <rect x="1015" y="420" width="200" height="38" rx="3" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1" />
+  <text x="1025" y="436" font-size="10" font-weight="bold" fill="#0F172A">airportService</text>
+  <text x="1025" y="450" font-size="9" fill="#475569">Хабы, IATA справочник</text>
 
-  <!-- ================= 2. СЕТЕВОЙ ШЛЮЗ NGINX ================= -->
-  <rect x="805" y="30" width="205" height="1070" rx="6" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.5" />
-  <rect x="805" y="30" width="205" height="34" rx="6" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.5" />
-  <text x="818" y="53" font-size="12" font-weight="bold" fill="#14532D">Сетевой шлюз (Nginx)</text>
+  <!-- 4. СЛОЙ СЕРВЕРНОЙ ЛОГИКИ -->
+  <rect x="50" y="510" width="1200" height="185" rx="6" fill="#F8FAFC" stroke="#64748B" stroke-width="1.4" />
+  <rect x="50" y="510" width="1200" height="26" rx="6" fill="#FFFFFF" stroke="#64748B" stroke-width="1.4" />
+  <text x="64" y="528" font-size="12" font-weight="bold" fill="#0F172A">4. Слой серверной логики (Backend Application Layer)</text>
 
-  <g transform="translate(820, 160)" filter="url(#shadow)">
-    <rect width="175" height="330" rx="4" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.2" />
-    <rect width="175" height="32" rx="4" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.2" />
-    <text x="8" y="13" font-size="8.5" font-weight="bold" fill="#15803D">«web-server»</text>
-    <text x="8" y="26" font-size="10.5" font-weight="bold" fill="#14532D">Nginx Static Server</text>
-    <text x="8" y="50" font-size="9.5" font-weight="bold" fill="#1E293B">Раздача статики:</text>
-    <text x="8" y="68" font-size="9" fill="#334155">• index.html (SPA)</text>
-    <text x="8" y="86" font-size="9" fill="#334155">• assets/*.js (Бандл)</text>
-    <text x="8" y="104" font-size="9" fill="#334155">• assets/*.css (Стили)</text>
-    <text x="8" y="122" font-size="9" fill="#334155">• fonts/ (Benzin, TT)</text>
-    <text x="8" y="150" font-size="9.5" font-weight="bold" fill="#1E293B">Оптимизации:</text>
-    <text x="8" y="168" font-size="9" fill="#334155">• Gzip / Brotli</text>
-    <text x="8" y="186" font-size="9" fill="#334155">• Кэширование</text>
-    <text x="8" y="204" font-size="9" fill="#334155">• Fallback index.html</text>
-  </g>
+  <rect x="70" y="545" width="420" height="65" rx="4" fill="#FFFFFF" stroke="#0284C7" stroke-width="1.4" />
+  <text x="82" y="564" font-size="11" font-weight="bold" fill="#0F172A">Middleware &amp; Маршрутизация</text>
+  <text x="82" y="581" font-size="9.5" fill="#334155">• backend/urls.py (DefaultRouter)</text>
+  <text x="82" y="597" font-size="9.5" fill="#334155">• CORS Middleware, Django JSON Parser, PBKDF2</text>
 
-  <g transform="translate(820, 570)" filter="url(#shadow)">
-    <rect width="175" height="390" rx="4" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.2" />
-    <rect width="175" height="32" rx="4" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.2" />
-    <text x="8" y="13" font-size="8.5" font-weight="bold" fill="#15803D">«reverse-proxy»</text>
-    <text x="8" y="26" font-size="10.5" font-weight="bold" fill="#14532D">Nginx Reverse Proxy</text>
-    <text x="8" y="50" font-size="9.5" font-weight="bold" fill="#1E293B">Маршрутизация:</text>
-    <text x="8" y="68" font-size="9" fill="#334155">• Проксирование /api/*</text>
-    <text x="8" y="86" font-size="9" fill="#334155">• SSL/TLS Termination</text>
-    <text x="8" y="104" font-size="9" fill="#334155">• CORS заголовки</text>
-    <text x="8" y="122" font-size="9" fill="#334155">• Rate limiting защита</text>
-    <text x="8" y="140" font-size="9" fill="#334155">• Буферизация ответа</text>
-  </g>
+  <rect x="530" y="545" width="700" height="65" rx="4" fill="#FFFFFF" stroke="#0284C7" stroke-width="1.2" />
+  <rect x="530" y="545" width="700" height="22" rx="4" fill="#F8FAFC" stroke="#0284C7" stroke-width="1.2" />
+  <text x="540" y="560" font-size="11" font-weight="bold" fill="#0369A1">Контроллеры REST API (ViewSets)</text>
 
-  <!-- ================= 3. ПОДСИСТЕМА BACKEND ================= -->
-  <rect x="1035" y="30" width="735" height="1070" rx="6" fill="#FAF5FF" stroke="#7C3AED" stroke-width="1.5" />
-  <rect x="1035" y="30" width="735" height="34" rx="6" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.5" />
-  <text x="1050" y="53" font-size="13" font-weight="bold" fill="#581C87">Подсистема серверной части (Backend Subsystem — Django 5 &amp; DRF)</text>
+  <rect x="545" y="572" width="210" height="32" rx="3" fill="#E0F2FE" stroke="#BAE6FD" stroke-width="1" />
+  <text x="555" y="587" font-size="9.5" font-weight="bold" fill="#0F172A">/api/flights Контроллер</text>
+  <text x="555" y="599" font-size="8.5" fill="#475569">(FlightViewSet, Serializers)</text>
 
-  <!-- Компонент: Router & Security -->
-  <g transform="translate(1055, 80)" filter="url(#shadow)">
-    <rect width="330" height="245" rx="4" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.2" />
-    <rect width="330" height="32" rx="4" fill="#F3E8FF" stroke="#7C3AED" stroke-width="1.2" />
-    <text x="10" y="13" font-size="8.5" font-weight="bold" fill="#6B21A8">«core: urls.py»</text>
-    <text x="10" y="26" font-size="11" font-weight="bold" fill="#581C87">URL Router &amp; Security</text>
-    <text x="10" y="50" font-size="9.5" fill="#334155">• backend/urls.py (Корневой роутер)</text>
-    <text x="10" y="68" font-size="9.5" fill="#334155">• DefaultRouter DRF (/api/flights/)</text>
-    <text x="10" y="86" font-size="9.5" fill="#334155">• Корневые паттерны /api/auth/*</text>
-    <text x="10" y="104" font-size="9.5" fill="#334155">• SecurityMiddleware, CorsMiddleware</text>
-    <text x="10" y="122" font-size="9.5" fill="#334155">• PBKDF2 Password Hashing (SHA256)</text>
-    <text x="10" y="140" font-size="9.5" fill="#334155">• Сессионная и JWT аутентификация</text>
-  </g>
+  <rect x="770" y="572" width="230" height="32" rx="3" fill="#E0F2FE" stroke="#BAE6FD" stroke-width="1" />
+  <text x="780" y="587" font-size="9.5" font-weight="bold" fill="#0F172A">/api/auth Контроллер</text>
+  <text x="780" y="599" font-size="8.5" fill="#475569">(AuthViewSet, 2FA Verify)</text>
 
-  <!-- Компонент: Accounts App -->
-  <g transform="translate(1415, 80)" filter="url(#shadow)">
-    <rect width="335" height="245" rx="4" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.2" />
-    <rect width="335" height="32" rx="4" fill="#F3E8FF" stroke="#7C3AED" stroke-width="1.2" />
-    <text x="10" y="13" font-size="8.5" font-weight="bold" fill="#6B21A8">«app: accounts»</text>
-    <text x="10" y="26" font-size="11" font-weight="bold" fill="#581C87">Модуль Accounts (Профили, 2FA)</text>
-    <text x="10" y="50" font-size="9.5" fill="#334155">• views.py (Register, VerifyEmail, Login)</text>
-    <text x="10" y="68" font-size="9.5" fill="#334155">• serializers.py (User, Profile, Code)</text>
-    <text x="10" y="86" font-size="9.5" fill="#334155">• models.py (UserProfile, Code)</text>
-    <text x="10" y="104" font-size="9.5" fill="#334155">• services.py (EmailService, Генерация)</text>
-    <text x="10" y="122" font-size="9.5" fill="#334155">• 6-значные коды с TTL 15 минут</text>
-    <text x="10" y="140" font-size="9.5" fill="#334155">• Связь 1:1 к auth_user, флаг verified</text>
-  </g>
+  <rect x="1015" y="572" width="200" height="32" rx="3" fill="#E0F2FE" stroke="#BAE6FD" stroke-width="1" />
+  <text x="1025" y="587" font-size="9.5" font-weight="bold" fill="#0F172A">/api/airports Контроллер</text>
+  <text x="1025" y="599" font-size="8.5" fill="#475569">(AirportViewSet)</text>
 
-  <!-- Компонент: Flights App -->
-  <g transform="translate(1055, 355)" filter="url(#shadow)">
-    <rect width="330" height="290" rx="4" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.2" />
-    <rect width="330" height="32" rx="4" fill="#F3E8FF" stroke="#7C3AED" stroke-width="1.2" />
-    <text x="10" y="13" font-size="8.5" font-weight="bold" fill="#6B21A8">«app: flights»</text>
-    <text x="10" y="26" font-size="11" font-weight="bold" fill="#581C87">Модуль Flights (Рейсы и хабы)</text>
-    <text x="10" y="50" font-size="9.5" fill="#334155">• views.py (FlightViewSet, AirportViewSet)</text>
-    <text x="10" y="68" font-size="9.5" fill="#334155">• serializers.py (Flight, Airport Serializers)</text>
-    <text x="10" y="86" font-size="9.5" fill="#334155">• models.py (Flight, Airport модели)</text>
-    <text x="10" y="104" font-size="9.5" fill="#334155">• Фильтрация: search, airline, status</text>
-    <text x="10" y="122" font-size="9.5" fill="#334155">• Сортировка: по времени вылета / цене</text>
-    <text x="10" y="140" font-size="9.5" fill="#334155">• Формирование camelCase JSON DTO</text>
-  </g>
+  <rect x="70" y="622" width="1160" height="60" rx="4" fill="#FFFFFF" stroke="#D97706" stroke-width="1.4" />
+  <text x="82" y="641" font-size="11" font-weight="bold" fill="#92400E">Фоновые сервисы движка (services/flight_lifecycle.py)</text>
+  <text x="82" y="658" font-size="9.5" fill="#334155">• Flight Lifecycle Engine 24/7 (симуляция этапов рейсов: Scheduled -> Boarding -> Departed -> En Route -> Landed -> Arrived)</text>
+  <text x="82" y="673" font-size="9.5" fill="#334155">• cleanup_archived_flights (очистка архивных рейсов старше 14 дней), генератор и валидатор 6-значных 2FA кодов</text>
 
-  <!-- Компонент: Services / Engine 24/7 -->
-  <g transform="translate(1415, 355)" filter="url(#shadow)">
-    <rect width="335" height="290" rx="4" fill="#FFFDF0" stroke="#D97706" stroke-width="1.2" />
-    <rect width="335" height="32" rx="4" fill="#FEF3C7" stroke="#D97706" stroke-width="1.2" />
-    <text x="10" y="13" font-size="8.5" font-weight="bold" fill="#B45309">«services: lifecycle»</text>
-    <text x="10" y="26" font-size="11" font-weight="bold" fill="#92400E">Модуль Services (Движок 24/7)</text>
-    <text x="10" y="50" font-size="9.5" fill="#334155">• services.py (FlightLifecycleEngine)</text>
-    <text x="10" y="68" font-size="9.5" fill="#334155">• Актуализация статусов по часам:</text>
-    <text x="18" y="84" font-size="9" fill="#475569">scheduled -&gt; boarding -&gt; in_air -&gt; landed</text>
-    <text x="10" y="102" font-size="9.5" fill="#334155">• commands/cleanup_flights.py:</text>
-    <text x="18" y="118" font-size="9" fill="#475569">- автоочистка рейсов старше 14 дней (TTL)</text>
-    <text x="10" y="136" font-size="9.5" fill="#334155">• services.py (AviationstackSyncClient):</text>
-    <text x="18" y="152" font-size="9" fill="#475569">- загрузка реальных рейсов из API</text>
-  </g>
+  <!-- 5. СЛОЙ ДОСТУПА К ДАННЫМ -->
+  <rect x="50" y="725" width="1200" height="120" rx="6" fill="#F8FAFC" stroke="#64748B" stroke-width="1.4" />
+  <rect x="50" y="725" width="1200" height="26" rx="6" fill="#FFFFFF" stroke="#64748B" stroke-width="1.4" />
+  <text x="64" y="743" font-size="12" font-weight="bold" fill="#0F172A">5. Слой доступа к базе данных (Database Access Layer)</text>
 
-  <!-- Компонент: Django ORM -->
-  <g transform="translate(1055, 675)" filter="url(#shadow)">
-    <rect width="695" height="120" rx="4" fill="#FFFFFF" stroke="#B45309" stroke-width="1.4" />
-    <rect width="695" height="32" rx="4" fill="#FEF3C7" stroke="#B45309" stroke-width="1.4" />
-    <text x="12" y="13" font-size="8.5" font-weight="bold" fill="#B45309">«data access layer»</text>
-    <text x="12" y="26" font-size="11" font-weight="bold" fill="#78350F">Слой моделей и абстракции данных (Django ORM)</text>
-    <text x="12" y="50" font-size="9.5" fill="#334155">• QuerySet API (ленивая загрузка, транзакции atomic, валидация связей 1:1 и 1:N)</text>
-    <text x="12" y="68" font-size="9.5" fill="#334155">• Модели сущностей: Flight, Airport, UserProfile, EmailVerificationCode, auth_user</text>
-    <text x="12" y="86" font-size="9.5" fill="#334155">• Генерация оптимизированных SQL-запросов (SELECT, INSERT, UPDATE, DELETE)</text>
-  </g>
+  <rect x="70" y="760" width="480" height="70" rx="4" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.5" />
+  <text x="82" y="779" font-size="11" font-weight="bold" fill="#0F172A">Модуль Django ORM (models.py / QuerySet API)</text>
+  <text x="82" y="796" font-size="9.5" fill="#334155">• Объектно-реляционное отображение (ORM)</text>
+  <text x="82" y="812" font-size="9.5" fill="#334155">• Защита от прямых SQL-инъекций, транзакции atomic</text>
+  <text x="82" y="826" font-size="9.5" fill="#334155">• Управление схемами и миграциями данных</text>
 
-  <!-- Компонент: SQLite 3 -->
-  <g transform="translate(1055, 825)" filter="url(#shadow)">
-    <rect width="330" height="250" rx="4" fill="#F1F5F9" stroke="#334155" stroke-width="1.4" />
-    <rect width="330" height="32" rx="4" fill="#E2E8F0" stroke="#334155" stroke-width="1.4" />
-    <text x="10" y="13" font-size="8.5" font-weight="bold" fill="#475569">«database: sqlite3»</text>
-    <text x="10" y="26" font-size="11" font-weight="bold" fill="#0F172A">База данных SQLite 3</text>
-    <text x="10" y="50" font-size="9.5" fill="#334155">• flights_flight (Рейсы, терминал, цена)</text>
-    <text x="10" y="68" font-size="9.5" fill="#334155">• flights_airport (Хабы, IATA, город)</text>
-    <text x="10" y="86" font-size="9.5" fill="#334155">• auth_user (Хэши паролей PBKDF2)</text>
-    <text x="10" y="104" font-size="9.5" fill="#334155">• accounts_userprofile (is_email_verified)</text>
-    <text x="10" y="122" font-size="9.5" fill="#334155">• accounts_emailverificationcode (TTL 15м)</text>
-    <text x="10" y="140" font-size="9.5" fill="#334155">• Индексы: IATA code, flight_number</text>
-  </g>
+  <path d="M 630 765 C 630 755, 1230 755, 1230 765 L 1230 820 C 1230 830, 630 830, 630 820 Z" fill="#FFFFFF" stroke="#DC2626" stroke-width="1.5" />
+  <path d="M 630 765 C 630 775, 1230 775, 1230 765" fill="none" stroke="#DC2626" stroke-width="1.5" />
+  <text x="650" y="785" font-size="11" font-weight="bold" fill="#991B1B">SQLite 3 СУБД (db.sqlite3)</text>
+  <text x="650" y="802" font-size="9.5" fill="#334155">• Встроенная реляционная база данных (DatabaseSync)</text>
+  <text x="650" y="818" font-size="9.5" fill="#475569">Таблицы: flights, airports, user_profile, email_verification_code</text>
 
-  <!-- Компонент: External Integrations -->
-  <g transform="translate(1415, 825)" filter="url(#shadow)">
-    <rect width="335" height="250" rx="4" fill="#FFFFFF" stroke="#DC2626" stroke-width="1.4" />
-    <rect width="335" height="32" rx="4" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.4" />
-    <text x="10" y="13" font-size="8.5" font-weight="bold" fill="#991B1B">«external interfaces»</text>
-    <text x="10" y="26" font-size="11" font-weight="bold" fill="#991B1B">Внешние сервисы и интеграции</text>
-    <text x="10" y="50" font-size="9.5" font-weight="bold" fill="#1E293B">Внешние сетевые шлюзы:</text>
-    <text x="10" y="68" font-size="9.5" fill="#334155">• Яндекс SMTP (smtp.yandex.ru)</text>
-    <text x="18" y="84" font-size="9" fill="#475569">- Защищенный протокол SSL (порт 465)</text>
-    <text x="18" y="100" font-size="9" fill="#475569">- Отправка 6-значных кодов 2FA</text>
-    <text x="10" y="120" font-size="9.5" fill="#334155">• Aviationstack REST API</text>
-    <text x="18" y="136" font-size="9" fill="#475569">- Загрузка расписаний рейсов мира</text>
-    <text x="18" y="152" font-size="9" fill="#475569">- Источник реальных авиаданных</text>
-  </g>
+  <line x1="550" y1="795" x2="622" y2="795" stroke="#7C3AED" stroke-width="1.6" marker-end="url(#arrow-purple)" />
+  <text x="555" y="787" font-size="9" font-weight="bold" fill="#7C3AED">SQL доступ</text>
 
-  <!-- Межмодульные стрелки -->
-  <!-- Nginx -> Backend -->
-  <line x1="995" y1="720" x2="1055" y2="200" stroke="#7C3AED" stroke-width="1.6" marker-end="url(#arr-purple)" />
-  <text x="1000" y="440" font-size="9.5" font-weight="bold" fill="#7C3AED">WSGI /api/*</text>
+  <!-- МЕЖСЛОЙНЫЕ СВЯЗИ СВЕРХУ ВНИЗ -->
+  <line x1="200" y1="160" x2="200" y2="228" stroke="#7C3AED" stroke-width="1.5" marker-end="url(#arrow-purple)" />
+  <text x="208" y="195" font-size="9" font-weight="bold" fill="#7C3AED">Подписка на состояние</text>
 
-  <!-- Фронтенд -> Nginx Static -->
-  <line x1="760" y1="260" x2="820" y2="260" stroke="#16A34A" stroke-width="1.6" marker-end="url(#arr-green)" />
-  <text x="765" y="250" font-size="9.5" font-weight="bold" fill="#16A34A">HTTP GET</text>
+  <line x1="450" y1="160" x2="595" y2="230" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arrow-blue)" />
+  <text x="510" y="195" font-size="9" font-weight="bold" fill="#2563EB">Вызов хуков</text>
 
-  <!-- Фронтенд -> Nginx Proxy -->
-  <line x1="760" y1="720" x2="820" y2="720" stroke="#1E3A8A" stroke-width="1.6" marker-end="url(#arr-blue)" />
-  <text x="765" y="710" font-size="9.5" font-weight="bold" fill="#1E3A8A">/api/* JSON</text>
+  <line x1="880" y1="313" x2="880" y2="382" stroke="#7C3AED" stroke-width="1.5" marker-end="url(#arrow-purple)" />
+  <text x="888" y="350" font-size="9" font-weight="bold" fill="#7C3AED">Делегирование запросов</text>
+
+  <line x1="530" y1="435" x2="498" y2="435" stroke="#059669" stroke-width="1.5" marker-end="url(#arrow-green)" />
+  <text x="500" y="425" font-size="8.5" font-weight="bold" fill="#059669">Вызов</text>
+
+  <line x1="280" y1="468" x2="280" y2="538" stroke="#059669" stroke-width="2" marker-end="url(#arrow-green)" />
+  <text x="288" y="505" font-size="10" font-weight="bold" fill="#059669">HTTP REST JSON (/api/)</text>
+
+  <line x1="490" y1="577" x2="522" y2="577" stroke="#0284C7" stroke-width="1.5" marker-end="url(#arrow-sky)" />
+  <text x="495" y="570" font-size="8.5" font-weight="bold" fill="#0284C7">Роутинг</text>
+
+  <line x1="700" y1="610" x2="350" y2="752" stroke="#7C3AED" stroke-width="1.8" marker-end="url(#arrow-purple)" />
+  <text x="530" y="705" font-size="9.5" font-weight="bold" fill="#7C3AED">QuerySet API вызовы</text>
+
+  <line x1="300" y1="682" x2="300" y2="752" stroke="#D97706" stroke-width="1.5" marker-end="url(#arrow-orange)" />
+  <text x="308" y="720" font-size="9" font-weight="bold" fill="#D97706">ORM CRUD</text>
+
+  <text x="50" y="875" font-size="9.5" fill="#64748B">Модульная диаграмма веб-сервиса Flight Tracker. 5 слоев по стандартам РПИ: Представление -> Состояние/Хуки -> Сетевые службы -> Серверная логика -> База данных.</text>
 </svg>
-

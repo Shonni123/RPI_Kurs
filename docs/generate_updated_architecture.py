@@ -467,3 +467,4 @@ if __name__ == "__main__":
     generate_drawio_xml()
     generate_architecture_png()
     generate_architecture_svg()
+

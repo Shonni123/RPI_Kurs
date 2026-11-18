@@ -1,6 +1,6 @@
 # Модульная диаграмма программного комплекса (UML Component / Module Diagram)
 
-В данном документе представлена **Модульная диаграмма** веб-сервиса **Flight Tracker** («Разработка веб-интерфейса для информационного сервиса об авиарейсах на React»), спроектированная в строгом соответствии со стандартами UML и принципами модульной декомпозиции программной инженерии по дисциплине «Разработка программных интерфейсов» (РПИ).
+В данном документе представлена **Модульная диаграмма** веб-сервиса **Flight Tracker** («Разработка веб-интерфейса для информационного сервиса об авиарейсах на React»), спроектированная в строгом соответствии с 5-слойной моделью декомпозиции программной инженерии по дисциплине «Разработка программных интерфейсов» (РПИ).
 
 ---
 
@@ -8,7 +8,7 @@
 
 ![Модульная диаграмма программного комплекса](./module_diagram.png)
 
-*Файлы модульной диаграммы высокой чёткости (300 DPI) на чистом белом фоне:*
+*Файлы модульной диаграммы высокой чёткости (300 DPI) на чистом непрозрачном белом фоне:*
 * **Редактируемый проект Draw.io:** [`docs/module_diagram.drawio`](file:///c:/Users/faizr/PycharmProjects/KursovayaRPI/docs/module_diagram.drawio)
 * **PNG формат:** [`docs/module_diagram.png`](file:///c:/Users/faizr/PycharmProjects/KursovayaRPI/docs/module_diagram.png)
 * **Векторный SVG формат:** [`docs/module_diagram.svg`](file:///c:/Users/faizr/PycharmProjects/KursovayaRPI/docs/module_diagram.svg)
@@ -18,74 +18,91 @@
 ## 2. Модульная диаграмма в нотации Mermaid
 
 ```mermaid
-%%{init: {'theme': 'neutral', 'themeVariables': {'darkMode': false, 'background': '#FFFFFF', 'mainBkg': '#FFFFFF', 'nodeBorder': '#333333', 'textColor': '#000000', 'lineColor': '#1E3A8A'}}}%%
-graph TD
-    subgraph Frontend["Подсистема клиентской части (React 19 SPA)"]
-        Pages["Модуль страниц (Pages)<br/>• HomePage, FlightsPage, FlightDetailPage<br/>• AirportsPage, FavoritesPage, UserProfile"]
-        UI_Components["Модуль UI-компонентов<br/>• auth/ (AuthModal, 6-code Verify)<br/>• flights/ (FlightCard, Filters, Search)<br/>• layout/ (Header, Footer, Drawer)"]
-        State_Module["Модуль состояния (State & Context)<br/>• AuthContext, FavoritesContext<br/>• useFlights, useDebounce, Router v7"]
-        Services_Module["Модуль API-сервисов (Services)<br/>• api.ts (REST-клиент рейсов)<br/>• authApi.ts (Регистрация, 2FA)<br/>• mockFlights.ts (Offline Fallback)"]
-        
-        Pages -->|"«use»"| UI_Components
-        Pages -->|"«subscribe»"| State_Module
-        State_Module -->|"«call»"| Services_Module
+flowchart TD
+    subgraph LAYER_PRES["1. Слой представления (Presentation Layer)"]
+        subgraph MOD_PAGES["Модуль страниц (Pages)"]
+            P_HOME["HomePage (Лендинг, промо-блоки, FAQ)"]
+            P_FLIGHTS["FlightsPage / FlightDetailPage"]
+            P_EXTRA["AirportsPage / FavoritesPage / UserProfilePage"]
+        end
+        subgraph MOD_UI["Модуль UI-компонентов (Components)"]
+            UI_NAV["Navbar / TopNav / Footer"]
+            UI_FLIGHT["FlightCard / StatusBadge / SearchBar"]
+            UI_AUTH["AuthModal (Регистрация, 2FA код) / Common"]
+        end
     end
 
-    subgraph Gateway["Сетевой шлюз (Nginx)"]
-        Nginx_Static["Nginx Static Server<br/>(Раздача HTML5, JS-бандла, CSS, Gzip)"]
-        Nginx_Proxy["Nginx Reverse Proxy<br/>(SSL 443, CORS, проксирование /api/*)"]
+    subgraph LAYER_STATE["2. Слой состояния и хуков (State & Logic Layer)"]
+        CTX["Глобальное состояние (AuthContext / Favorites)"]
+        subgraph MOD_HOOKS["Хуки предметной логики"]
+            H_FLIGHTS["useFlights (Каталог, фильтры, автообновление)"]
+            H_DETAIL["useFlightDetail (Телеметрия и статус рейса)"]
+            H_FAV["useFavorites (Локальное сохранение рейсов)"]
+        end
     end
 
-    subgraph Backend["Подсистема серверной части (Django 5 & DRF)"]
-        Router_Module["Ядро и маршрутизация (urls.py)<br/>• DefaultRouter, CORS, PBKDF2"]
-        Accounts_App["Модуль Accounts<br/>• views.py, serializers.py, models.py<br/>• EmailService, генерация 6-значных кодов"]
-        Flights_App["Модуль Flights<br/>• FlightViewSet, AirportViewSet<br/>• Фильтры, поиск, сортировка"]
-        Lifecycle_Engine["Модуль Services (24/7 Engine)<br/>• FlightLifecycleEngine (статусы)<br/>• cleanup_flights (TTL очистка 14 дней)<br/>• AviationstackSyncClient"]
-        Django_ORM["Слой моделей (Django ORM)<br/>• QuerySet API, транзакции atomic, миграции"]
-        SQLite_DB[("СУБД SQLite 3<br/>• flights, airports, auth_user, codes")]
-        External_Services["Внешние интерфейсы<br/>• Яндекс SMTP (порт 465 SSL)<br/>• Aviationstack REST API"]
-
-        Router_Module -->|"«dispatch»"| Accounts_App
-        Router_Module -->|"«dispatch»"| Flights_App
-        Flights_App -->|"«invoke»"| Lifecycle_Engine
-        Flights_App -->|"QuerySet"| Django_ORM
-        Accounts_App -->|"QuerySet"| Django_ORM
-        Lifecycle_Engine -->|"QuerySet"| Django_ORM
-        Django_ORM -->|"SQL CRUD"| SQLite_DB
-        Accounts_App -->|"SMTP SSL"| External_Services
-        Lifecycle_Engine -->|"HTTPS Sync"| External_Services
+    subgraph LAYER_SVC["3. Слой сетевых служб (Data Services Layer)"]
+        API_CLIENT["Универсальный сетевой клиент (api.ts / Axios)"]
+        subgraph MOD_SVC["Службы предметных данных"]
+            S_FLIGHTS["flightService (Рейсы, фильтрация, детали)"]
+            S_AUTH["authApi (Регистрация, 2FA подтверждение)"]
+            S_AIRPORT["airportService (Каталог узловых хабов)"]
+        end
     end
 
-    %% Межсистемные связи
-    UI_Components -->|"HTTP GET"| Nginx_Static
-    Services_Module -->|"/api/* JSON"| Nginx_Proxy
-    Nginx_Proxy -->|"WSGI Вызовы"| Router_Module
+    subgraph LAYER_BE["4. Слой серверной логики (Backend Application Layer)"]
+        MID["Middleware (CORS, Django JSON Parser, PBKDF2 Auth)"]
+        subgraph MOD_ROUTERS["Контроллеры REST API (backend/urls.py)"]
+            R_FLIGHTS["/api/flights Контроллер (FlightViewSet)"]
+            R_AIRPORTS["/api/airports Контроллер (AirportViewSet)"]
+            R_AUTH["/api/auth Контроллер (AuthViewSet / 2FA)"]
+        end
+        ENGINE["Фоновые сервисы (Flight Lifecycle Engine 24/7)"]
+    end
+
+    subgraph LAYER_DATA["5. Слой доступа к базе данных (Database Access Layer)"]
+        DB_MOD["Слой Django ORM (models.py / QuerySet API)"]
+        DB_STORE[("SQLite 3 СУБД (db.sqlite3)")]
+    end
+
+    %% Четкие межслойные связи сверху вниз
+    MOD_PAGES --> MOD_UI
+    MOD_PAGES --> CTX
+    MOD_PAGES --> MOD_HOOKS
+    MOD_HOOKS --> MOD_SVC
+    MOD_SVC --> API_CLIENT
+
+    API_CLIENT -->|HTTP REST JSON| MID
+    MID --> MOD_ROUTERS
+    MOD_ROUTERS --> DB_MOD
+    ENGINE --> DB_MOD
+    DB_MOD --> DB_STORE
 ```
 
 ---
 
-## 3. Описание модульной декомпозиции программного комплекса
+## 3. Детальное описание 5 модульных слоёв
 
-### 3.1 Подсистема клиентской части (Frontend — React 19)
-* **Модуль страниц (`src/pages/`):** Высокоуровневые экранные формы (`HomePage`, `FlightsPage`, `FlightDetailPage`, `AirportsPage`, `FavoritesPage`, `UserProfilePage`, `AboutPage`, `NotFoundPage`). Модуль отвечает за композицию интерфейса, обработку параметров маршрута (`useParams`) и передачу данных в UI-компоненты.
-* **Модуль компонентов (`src/components/`):** Иерархия переиспользуемых визуальных блоков:
-  * `auth/` — диалоговые формы входа, регистрации и 6-ячеечного ввода кода подтверждения;
-  * `flights/` — интерактивные карточки рейсов, переключатели статусов («В полёте», «Ожидает взлёта», «Прибыл»), селектор авиакомпаний;
-  * `layout/` — шапка со счётчиком избранного, подвал и плавная боковая шторка (Drawer);
-  * `common/` — скелетоны ожидания (`LoadingSkeleton`) и заглушки отсутствия данных (`EmptyState`).
-* **Модуль состояния и хуков (`src/context/`, `src/hooks/`):** Обеспечивает единый источник правды (Single Source of Truth). `AuthContext` сохраняет токен и профиль пользователя; `FavoritesContext` синхронизирует закладки с `localStorage`; хуки `useDebounce` снижают нагрузку на сервер при поиске рейсов.
-* **Модуль API-сервисов (`src/services/`):** Сетевой модуль (`api.ts`, `authApi.ts`) инкапсулирует вызовы HTTP, преобразует snake_case сервера в camelCase интерфейса и активирует `mockFlights.ts` при задержке ответа свыше 2 секунд.
+### 1. Слой представления (Presentation Layer)
+* **Модуль страниц (`src/pages/`):** Входные точки маршрутизации SPA приложения (`HomePage`, `FlightsPage`, `FlightDetailPage`, `AirportsPage`, `FavoritesPage`, `UserProfilePage`).
+* **Модуль UI-компонентов (`src/components/`):** Визуальные элементы интерфейса: каркасная навигация (`Navbar`, `Footer`, `TopNav`), виджеты рейсов (`FlightCard`, `StatusBadge`, `SearchBar`), модальные окна аутентификации и подтверждения почты (`AuthModal`), вспомогательные состояния (`LoadingSkeleton`, `ErrorState`, `EmptyState`).
 
-### 3.2 Сетевой шлюз (Gateway — Nginx)
-* **Nginx Static Server:** Обеспечивает высокоскоростную отдачу скомпилированных ассетов (HTML, JavaScript, CSS, шрифты Benzin и TT Travels) со сжатием Gzip/Brotli и клиентским кэшированием.
-* **Nginx Reverse Proxy:** Выступает единой точкой входа (`Single Point of Entry`), экранирует внутренний контур Django, терминарует SSL/TLS и настраивает заголовки CORS.
+### 2. Слой состояния и хуков (State & Logic Layer)
+* **Глобальное состояние (`src/context/`):** `AuthContext` для сквозного контроля сессии пользователя и флага верификации почты; `localStorage` для кэширования избранных рейсов и токенов; `react-router-dom v7` для управления маршрутами.
+* **Пользовательские хуки (`src/hooks/`):** Инкапсулируют бизнес-логику интерфейса: `useFlights` (выборка, фильтрация, таймеры автообновления), `useFlightDetail` (детализация и расчёт времени), `useFavorites` (сохранение в локальное хранилище), `useDebounce` (отложенный поисковый ввод).
 
-### 3.3 Подсистема серверной части (Backend — Django 5 & DRF)
-* **Модуль ядра и диспетчеризации (`backend/`):** Конфигурация параметров безопасности (`settings.py`), корневой URL-диспетчер (`urls.py`) и генерация схемы эндпоинтов на базе DRF `DefaultRouter`.
-* **Модуль `flights` (`backend/flights/`):** Реализует REST API управления авиарейсами: выборка с многокритериальной фильтрацией (город, аэропорт, статус, перевозчик), динамическая сортировка по стоимости и времени вылета.
-* **Модуль `accounts` (`backend/accounts/`):** Отвечает за аутентификацию и безопасность: регистрация новых пользователей, хэширование паролей по стандарту PBKDF2-SHA256, генерация криптостойких 6-значных кодов с TTL 15 минут.
-* **Модуль фоновых служб (`Lifecycle Engine & Services`):** Независимый демон 24/7 (`update_dynamic_flight_lifecycle`), который автоматически рассчитывает текущее положение и статус борта по системному времени, и фоновая команда `cleanup_flights`, удаляющая рейсы старше 14 дней.
-* **Слой моделей (`Django ORM`):** Гарантирует типобезопасный доступ к реляционным таблицам без прямых сырых SQL-вызовов, обеспечивая ACID-транзакции.
-* **СУБД SQLite 3:** Локальное дисковое реляционное хранилище со структурированными индексами.
-* **Внешние интерфейсы:** Почтовый шлюз Яндекс SMTP (порт 465 SSL) для отправки кодов 2FA и клиент Aviationstack API для периодической синхронизации глобального расписания.
+### 3. Слой сетевых служб (Data Services Layer)
+* **Сетевой клиент (`src/services/api.ts`):** Универсальный HTTP-клиент (Axios/Fetch) с централизованной настройкой базового URL (`/api/`), интерцепторами заголовков, обработкой кодов 401/403/500 и механизмом fallback-кэширования.
+* **Службы предметных данных:**
+  - `flightService`: методы получения списка рейсов, пагинации, поиска по городам и получения рейса по идентификатору.
+  - `authApi`: методы регистрации, отправки и проверки 6-значного кода подтверждения email, входа и выхода.
+  - `airportService`: поставщик справочника узловых аэропортов.
 
+### 4. Слой серверной логики (Backend Application Layer)
+* **Маршрутизация и Middleware (`backend/urls.py`):** Диспетчер `DefaultRouter`, проверка CORS заголовков, парсер JSON-тел запросов, шифрование паролей PBKDF2.
+* **REST API Контроллеры (ViewSets):** `FlightViewSet`, `AirportViewSet`, `AuthViewSet` — обработка входящих HTTP-запросов, валидация через сериализаторы `ModelSerializer`.
+* **Фоновые сервисы движка (`backend/services/flight_lifecycle.py`):** Движок жизненного цикла рейсов 24/7 (симуляция полетов), планировщик очистки архива `cleanup_archived_flights` (старше 14 дней), генератор одноразовых кодов email.
+
+### 5. Слой доступа к базе данных (Database Access Layer)
+* **Слой Django ORM (`models.py`, QuerySet API):** Обеспечивает безопасное объектно-реляционное взаимодействие, исключает возможность SQL-инъекций, гарантирует транзакционность (ACID).
+* **СУБД SQLite 3 (`db.sqlite3`):** Локальная реляционная база данных, хранящая таблицы `Flight`, `Airport`, `UserProfile`, `EmailVerificationCode`.
