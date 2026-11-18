@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
-import { ArrowUpRight, ArrowRight, ChevronRight } from 'lucide-react';
+import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import { IMAGES } from '../../assets/images';
-import { Link } from 'react-router-dom';
 
 export const WhyUsSection: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -136,7 +135,7 @@ export const WhyUsSection: React.FC = () => {
               </div>
 
               {/* Bottom Content Container - Locked vertical levels across all 4 cards */}
-              <div className="absolute inset-x-0 bottom-0 z-10 px-5 sm:px-6 pb-[30px] flex flex-col justify-end">
+              <div className="absolute inset-x-0 bottom-0 z-10 px-5 sm:px-6 pb-7 sm:pb-8 flex flex-col justify-end">
                 {/* Titles in Benzin: exactly 2 lines at identical horizontal level */}
                 <div className="h-[64px] flex flex-col justify-end">
                   <h3
@@ -155,17 +154,6 @@ export const WhyUsSection: React.FC = () => {
                   >
                     {card.desc}
                   </p>
-                </div>
-
-                {/* Full-width White Pill Button matching Figma */}
-                <div className="mt-5">
-                  <Link
-                    to={card.link}
-                    className="flex items-center justify-between w-full h-[48px] bg-white hover:bg-slate-100 text-slate-900 font-semibold text-xs sm:text-sm px-6 rounded-full transition-all shadow-md group-hover:shadow-lg cursor-pointer"
-                  >
-                    <span>Подробнее</span>
-                    <ChevronRight className="w-4 h-4 text-slate-600 stroke-[2.2]" />
-                  </Link>
                 </div>
               </div>
             </div>
