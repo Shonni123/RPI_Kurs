@@ -33,6 +33,6 @@ export interface FlightFiltersState {
   searchQuery: string;
   status: string;
   airline: string;
-  sortBy: 'time' | 'price' | 'status';
+  sortBy: 'time' | 'airline' | 'status';
 }
 

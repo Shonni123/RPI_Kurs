@@ -22,7 +22,7 @@ export const FlightsPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedStatus, setSelectedStatus] = useState<string>(initialStatus);
   const [selectedAirline, setSelectedAirline] = useState<string>('all');
-  const [sortBy, setSortBy] = useState<'time' | 'price'>('time');
+  const [sortBy, setSortBy] = useState<'time' | 'airline'>('time');
   const [lastUpdated, setLastUpdated] = useState<string>('только что');
 
   // Loading & Error states
@@ -139,8 +139,8 @@ export const FlightsPage: React.FC = () => {
 
     // Sort
     result.sort((a, b) => {
-      if (sortBy === 'price') {
-        return (a.price || 0) - (b.price || 0);
+      if (sortBy === 'airline') {
+        return a.airline.localeCompare(b.airline);
       }
       return a.departureTime.localeCompare(b.departureTime);
     });
@@ -317,11 +317,11 @@ export const FlightsPage: React.FC = () => {
               <div className="flex-1 lg:flex-initial">
                 <select
                   value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value as 'time' | 'price')}
+                  onChange={(e) => setSortBy(e.target.value as 'time' | 'airline')}
                   className="w-full lg:w-auto px-4 py-2 rounded-full bg-[#ECF9FF] border border-[#D5ECF8] text-xs font-semibold text-slate-800 focus:outline-none focus:border-sky-400 cursor-pointer"
                 >
                   <option value="time">По времени вылета</option>
-                  <option value="price">По цене билета</option>
+                  <option value="airline">По авиакомпании (А-Я)</option>
                 </select>
               </div>
             </div>

@@ -119,7 +119,7 @@ export const FlightCard: React.FC<FlightCardProps> = ({
 
       </div>
 
-      {/* Footer Info & CTA with Aviasales ticket link and Aviationstack API source */}
+      {/* Footer Info & CTA */}
       <div className="border-t border-slate-100 pt-4 flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs text-slate-600 font-sans">
           {flight.from.gate && (
@@ -127,24 +127,14 @@ export const FlightCard: React.FC<FlightCardProps> = ({
               Гейт: <strong className="text-slate-900 font-semibold">{flight.from.gate}</strong>
             </span>
           )}
-          {flight.price && (
-            <div className="flex items-center gap-2">
-              <span>
-                Билеты от <strong className="font-benzin-medium text-slate-950 text-xs sm:text-sm">{flight.price.toLocaleString('ru-RU')} ₽</strong>
-              </span>
-              <a
-                href={`https://www.aviasales.ru/search/${flight.from.code || 'MOW'}${flight.to.code || 'LED'}1`}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="inline-flex items-center gap-1 text-[11px] font-semibold text-sky-600 hover:text-sky-800 hover:underline px-2 py-0.5 rounded-md bg-[#EFF7FE] border border-[#D5ECF8] transition-colors"
-                title="Купить или проверить цену на Aviasales"
-              >
-                <span>Купить билет</span>
-                <ExternalLink className="w-2.5 h-2.5" />
-              </a>
-            </div>
+          {flight.from.terminal && (
+            <span>
+              Терминал: <strong className="text-slate-900 font-semibold">{flight.from.terminal}</strong>
+            </span>
           )}
+          <span>
+            Борт: <strong className="text-slate-900 font-semibold">{flight.aircraft}</strong>
+          </span>
         </div>
 
         <div className="flex items-center gap-2.5">
