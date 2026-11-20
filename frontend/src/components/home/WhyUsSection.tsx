@@ -73,8 +73,8 @@ export const WhyUsSection: React.FC = () => {
       desc: (
         <>
           Информация поступает<br />
-          напрямую от аэропортов и<br />
-          авиакомпаний.
+          через глобальные радары<br />
+          и авиационный API.
         </>
       ),
       image: IMAGES.why4Reliable,
