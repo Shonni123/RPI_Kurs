@@ -58,17 +58,17 @@ export const TopNav: React.FC<TopNavProps> = ({ className = '' }) => {
   const navLinks = [
     { name: 'Главная', path: '/' },
     { name: 'Посмотреть рейс', path: '/flights' },
-    { name: 'О сервисе', path: '/#why-us' },
-    { name: 'Как это работает', path: '/#features' },
+    { name: 'Аэропорты', path: '/airports' },
+    { name: 'Обратная связь', path: '/#faq' },
   ];
 
   const drawerLinks = [
     { name: 'Онлайн-табло рейсов', path: '/flights', icon: Plane, badge: 'Live' },
     { name: 'Аэропорты и хабы', path: '/airports', icon: Building2 },
     { name: 'Избранные рейсы', path: '/favorites', icon: Heart, count: favorites.length },
+    { name: 'Обратная связь (FAQ)', path: '/#faq', icon: HelpCircle },
     { name: 'О сервисе', path: '/#why-us', icon: Info },
     { name: 'Архитектура и стек', path: '/about', icon: ExternalLink },
-    { name: 'Вопросы и ответы (FAQ)', path: '/#faq', icon: HelpCircle },
   ];
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
