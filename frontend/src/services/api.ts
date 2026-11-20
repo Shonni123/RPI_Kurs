@@ -1,10 +1,10 @@
 import { Flight } from '../types/flight';
 import { MOCK_FLIGHTS } from './mockFlights';
 
-// Backend port fallback (8001 if 8000 is occupied by another project, or 8000)
+// Backend port fallback (8000 default, or 8001)
 const CANDIDATE_API_URLS = [
-  'http://127.0.0.1:8001/api',
   'http://127.0.0.1:8000/api',
+  'http://127.0.0.1:8001/api',
 ];
 
 let activeApiBaseUrl = CANDIDATE_API_URLS[0];

@@ -51,8 +51,8 @@ class FlightListAPIView(APIView):
 
         # Ordering
         ordering = request.query_params.get('ordering', 'time')
-        if ordering == 'price':
-            queryset = queryset.order_by('price')
+        if ordering == 'airline':
+            queryset = queryset.order_by('airline')
         else:
             queryset = queryset.order_by('departure_time')
 

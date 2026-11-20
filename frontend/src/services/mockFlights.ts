@@ -28,7 +28,6 @@ export const MOCK_FLIGHTS: Flight[] = [
     statusText: 'В полёте',
     altitude: 10800,
     speed: 890,
-    price: 18400,
   },
   {
     id: 's7-2041',
@@ -57,7 +56,6 @@ export const MOCK_FLIGHTS: Flight[] = [
     statusText: 'Ожидает взлёта',
     altitude: 0,
     speed: 0,
-    price: 9200,
   },
   {
     id: 'dp-6511',
@@ -86,7 +84,6 @@ export const MOCK_FLIGHTS: Flight[] = [
     statusText: 'Задержан до 16:30',
     altitude: 0,
     speed: 0,
-    price: 3600,
   },
   {
     id: 'ek-134',
@@ -115,7 +112,6 @@ export const MOCK_FLIGHTS: Flight[] = [
     statusText: 'Посадка на борт',
     altitude: 0,
     speed: 0,
-    price: 42800,
   },
   {
     id: 'tk-414',
@@ -144,7 +140,6 @@ export const MOCK_FLIGHTS: Flight[] = [
     statusText: 'Прибыл в 15:24',
     altitude: 0,
     speed: 0,
-    price: 29500,
   },
   {
     id: 'su-1110',
@@ -173,7 +168,6 @@ export const MOCK_FLIGHTS: Flight[] = [
     statusText: 'По расписанию',
     altitude: 0,
     speed: 0,
-    price: 5400,
   },
   {
     id: 'su-1004',
@@ -202,7 +196,6 @@ export const MOCK_FLIGHTS: Flight[] = [
     statusText: 'В полёте',
     altitude: 10400,
     speed: 840,
-    price: 7800,
   },
   {
     id: 's7-2507',
@@ -231,7 +224,6 @@ export const MOCK_FLIGHTS: Flight[] = [
     statusText: 'Ожидает взлёта',
     altitude: 0,
     speed: 0,
-    price: 13500,
   },
   {
     id: 'qr-338',
@@ -260,7 +252,6 @@ export const MOCK_FLIGHTS: Flight[] = [
     statusText: 'В полёте',
     altitude: 11200,
     speed: 910,
-    price: 49800,
   },
   {
     id: 'ut-369',
@@ -289,7 +280,6 @@ export const MOCK_FLIGHTS: Flight[] = [
     statusText: 'По расписанию',
     altitude: 0,
     speed: 0,
-    price: 6100,
   },
   {
     id: 'dp-502',
@@ -318,7 +308,6 @@ export const MOCK_FLIGHTS: Flight[] = [
     statusText: 'Прибыл в 13:42',
     altitude: 0,
     speed: 0,
-    price: 5200,
   },
   {
     id: 'fz-966',
@@ -347,6 +336,5 @@ export const MOCK_FLIGHTS: Flight[] = [
     statusText: 'В полёте',
     altitude: 10600,
     speed: 875,
-    price: 36700,
   }
 ];

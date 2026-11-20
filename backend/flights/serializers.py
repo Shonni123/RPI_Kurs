@@ -31,7 +31,6 @@ class FlightSerializer(serializers.ModelSerializer):
             'statusText',
             'altitude',
             'speed',
-            'price',
             'isRealApi',
         ]
 

@@ -79,13 +79,6 @@ def fetch_and_sync_aviationstack_flights(limit=25):
                 if live_info.get('speed_horizontal'):
                     speed = int(live_info.get('speed_horizontal'))
 
-            # Price estimation
-            price = 14500
-            if status == 'in_air':
-                price = 19200
-            elif status == 'delayed':
-                price = 8400
-
             slug_id = (flight_number.lower().replace(' ', '-') + f"-{dep_info.get('iata', 'apt').lower()}").strip('-')
 
             Flight.objects.update_or_create(
@@ -112,7 +105,6 @@ def fetch_and_sync_aviationstack_flights(limit=25):
                     'status_text': status_text,
                     'altitude': altitude,
                     'speed': speed,
-                    'price': price,
                     'is_real_api': True,
                 }
             )
@@ -301,7 +293,6 @@ def seed_initial_database():
             'status_text': 'В полёте',
             'altitude': 10800,
             'speed': 890,
-            'price': 18400,
             'is_real_api': True,
         },
         {
@@ -327,7 +318,6 @@ def seed_initial_database():
             'status_text': 'Ожидает взлёта',
             'altitude': 0,
             'speed': 0,
-            'price': 9200,
             'is_real_api': True,
         },
         {
@@ -353,7 +343,6 @@ def seed_initial_database():
             'status_text': 'Задержан до 16:30',
             'altitude': 0,
             'speed': 0,
-            'price': 3600,
             'is_real_api': True,
         },
         {
@@ -379,7 +368,6 @@ def seed_initial_database():
             'status_text': 'Посадка на борт',
             'altitude': 0,
             'speed': 0,
-            'price': 42800,
             'is_real_api': True,
         },
     ]
