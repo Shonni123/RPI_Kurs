@@ -10,7 +10,6 @@ import {
   HelpCircle,
   Info,
   ChevronRight,
-  ExternalLink,
   User as UserIcon,
 } from 'lucide-react';
 import { useFavorites } from '../../hooks/useFavorites';
@@ -68,7 +67,6 @@ export const TopNav: React.FC<TopNavProps> = ({ className = '' }) => {
     { name: 'Избранные рейсы', path: '/favorites', icon: Heart, count: favorites.length },
     { name: 'Обратная связь (FAQ)', path: '/#faq', icon: HelpCircle },
     { name: 'О сервисе', path: '/#why-us', icon: Info },
-    { name: 'Архитектура и стек', path: '/about', icon: ExternalLink },
   ];
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
