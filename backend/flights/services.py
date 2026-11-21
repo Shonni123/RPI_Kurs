@@ -81,18 +81,63 @@ def fetch_and_sync_aviationstack_flights(limit=25):
 
             slug_id = (flight_number.lower().replace(' ', '-') + f"-{dep_info.get('iata', 'apt').lower()}").strip('-')
 
+            # Skip invalid / empty flight records
+            if not flight_number or flight_number.lower() in ['рейс', 'none', 'null', 'flight']:
+                continue
+            if not airline_name or airline_name.lower() in ['empty', 'none', 'null']:
+                continue
+
+            from_c = dep_info.get('iata') or 'SVO'
+            to_c = arr_info.get('iata') or 'DXB'
+
+            # Deduplicate codeshare flights (same route and same departure time)
+            existing_dup = Flight.objects.filter(
+                from_code=from_c,
+                to_code=to_c,
+                departure_time=dep_time,
+                departure_date=dep_date
+            ).exclude(flight_id=slug_id).first()
+            if existing_dup:
+                continue
+
+            # Calculate dynamic duration
+            diff_m = 160
+            try:
+                dh, dm = map(int, dep_time.split(':'))
+                ah, am = map(int, arr_time.split(':'))
+                diff_m = (ah * 60 + am) - (dh * 60 + dm)
+                if diff_m < 0:
+                    diff_m += 24 * 60
+                dur_h = diff_m // 60
+                dur_m = diff_m % 60
+                duration = f"{dur_h} ч {dur_m:02d} мин" if dur_m else f"{dur_h} ч"
+            except Exception:
+                duration = "2 ч 40 мин"
+
+            # Diverse aircraft model
+            if aircraft_info and aircraft_info.get('iata'):
+                aircraft = aircraft_info.get('iata')
+            else:
+                last_digit = int(flight_number[-1]) if flight_number[-1].isdigit() else 0
+                if diff_m >= 360:
+                    aircraft = 'Boeing 777-300ER' if last_digit % 2 == 0 else 'Airbus A350-900'
+                elif diff_m >= 180:
+                    aircraft = 'Airbus A321neo' if last_digit % 2 == 0 else 'Boeing 737-800'
+                else:
+                    aircraft = 'Airbus A320neo' if last_digit % 2 == 0 else 'Sukhoi Superjet 100'
+
             Flight.objects.update_or_create(
                 flight_id=slug_id,
                 defaults={
                     'flight_number': flight_number,
                     'airline': airline_name,
-                    'aircraft': (aircraft_info.get('iata') or 'Airbus A320-200') if aircraft_info else 'Airbus A321neo',
-                    'from_code': dep_info.get('iata') or 'SVO',
+                    'aircraft': aircraft,
+                    'from_code': from_c,
                     'from_name': dep_info.get('airport') or 'Аэропорт вылета',
                     'from_city': dep_info.get('airport', '').split(' ')[0] or 'Москва',
                     'from_terminal': dep_info.get('terminal'),
                     'from_gate': dep_info.get('gate'),
-                    'to_code': arr_info.get('iata') or 'DXB',
+                    'to_code': to_c,
                     'to_name': arr_info.get('airport') or 'Аэропорт прилёта',
                     'to_city': arr_info.get('airport', '').split(' ')[0] or 'Дубай',
                     'to_terminal': arr_info.get('terminal'),
@@ -100,7 +145,7 @@ def fetch_and_sync_aviationstack_flights(limit=25):
                     'departure_time': dep_time,
                     'arrival_time': arr_time,
                     'departure_date': dep_date,
-                    'duration': '3 ч 20 мин',
+                    'duration': duration,
                     'status': status,
                     'status_text': status_text,
                     'altitude': altitude,
@@ -269,109 +314,7 @@ def seed_initial_database():
     for apt in initial_airports:
         Airport.objects.get_or_create(code=apt['code'], defaults=apt)
 
-    initial_flights = [
-        {
-            'flight_id': 'su-1702',
-            'flight_number': 'SU 1702',
-            'airline': 'Аэрофлот',
-            'aircraft': 'Airbus A350-900',
-            'from_code': 'SVO',
-            'from_name': 'Шереметьево',
-            'from_city': 'Москва',
-            'from_terminal': 'B',
-            'from_gate': '115',
-            'to_code': 'VVO',
-            'to_name': 'Кневичи',
-            'to_city': 'Владивосток',
-            'to_terminal': 'A',
-            'to_gate': '04',
-            'departure_time': '15:40',
-            'arrival_time': '07:15',
-            'departure_date': today_str,
-            'duration': '8 ч 35 мин',
-            'status': 'in_air',
-            'status_text': 'В полёте',
-            'altitude': 10800,
-            'speed': 890,
-            'is_real_api': True,
-        },
-        {
-            'flight_id': 's7-2041',
-            'flight_number': 'S7 2041',
-            'airline': 'S7 Airlines',
-            'aircraft': 'Boeing 737-800',
-            'from_code': 'DME',
-            'from_name': 'Домодедово',
-            'from_city': 'Москва',
-            'from_terminal': '1',
-            'from_gate': '22',
-            'to_code': 'AER',
-            'to_name': 'Сочи (Адлер)',
-            'to_city': 'Сочи',
-            'to_terminal': '1',
-            'to_gate': '08',
-            'departure_time': '17:10',
-            'arrival_time': '21:00',
-            'departure_date': today_str,
-            'duration': '3 ч 50 мин',
-            'status': 'scheduled',
-            'status_text': 'Ожидает взлёта',
-            'altitude': 0,
-            'speed': 0,
-            'is_real_api': True,
-        },
-        {
-            'flight_id': 'dp-6511',
-            'flight_number': 'DP 6511',
-            'airline': 'Победа',
-            'aircraft': 'Boeing 737-800',
-            'from_code': 'VKO',
-            'from_name': 'Внуково',
-            'from_city': 'Москва',
-            'from_terminal': 'A',
-            'from_gate': '16',
-            'to_code': 'LED',
-            'to_name': 'Пулково',
-            'to_city': 'Санкт-Петербург',
-            'to_terminal': '1',
-            'to_gate': '12',
-            'departure_time': '14:20',
-            'arrival_time': '15:45',
-            'departure_date': today_str,
-            'duration': '1 ч 25 мин',
-            'status': 'delayed',
-            'status_text': 'Задержан до 16:30',
-            'altitude': 0,
-            'speed': 0,
-            'is_real_api': True,
-        },
-        {
-            'flight_id': 'ek-134',
-            'flight_number': 'EK 134',
-            'airline': 'Emirates',
-            'aircraft': 'Boeing 777-300ER',
-            'from_code': 'DME',
-            'from_name': 'Домодедово',
-            'from_city': 'Москва',
-            'from_terminal': '2',
-            'from_gate': '45',
-            'to_code': 'DXB',
-            'to_name': 'Дубай',
-            'to_city': 'Дубай',
-            'to_terminal': '3',
-            'to_gate': 'B12',
-            'departure_time': '16:45',
-            'arrival_time': '23:15',
-            'departure_date': today_str,
-            'duration': '5 ч 30 мин',
-            'status': 'boarding',
-            'status_text': 'Посадка на борт',
-            'altitude': 0,
-            'speed': 0,
-            'is_real_api': True,
-        },
-    ]
-
-    for fl in initial_flights:
+    from .seed_diverse_data import get_diverse_flights_data
+    for fl in get_diverse_flights_data():
         Flight.objects.get_or_create(flight_id=fl['flight_id'], defaults=fl)
 
