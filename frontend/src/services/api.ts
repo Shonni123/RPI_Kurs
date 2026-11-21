@@ -10,11 +10,12 @@ const CANDIDATE_API_URLS = [
 let activeApiBaseUrl = CANDIDATE_API_URLS[0];
 
 async function fetchFromApi(endpoint: string, options?: RequestInit): Promise<Response> {
+  const defaultTimeout = options?.signal ? options.signal : AbortSignal.timeout(4000);
   // First attempt with currently active URL
   try {
     const res = await fetch(`${activeApiBaseUrl}${endpoint}`, {
       ...options,
-      signal: AbortSignal.timeout(2000),
+      signal: defaultTimeout,
     });
     if (res.ok) return res;
   } catch {
@@ -26,7 +27,7 @@ async function fetchFromApi(endpoint: string, options?: RequestInit): Promise<Re
   try {
     const res = await fetch(`${altUrl}${endpoint}`, {
       ...options,
-      signal: AbortSignal.timeout(2000),
+      signal: defaultTimeout,
     });
     if (res.ok) {
       activeApiBaseUrl = altUrl;
@@ -115,6 +116,27 @@ export const flightApi = {
       return res.ok;
     } catch {
       return false;
+    }
+  },
+
+  /**
+   * Subscribe to newsletter
+   */
+  async subscribeNewsletter(email: string): Promise<{ success: boolean; message?: string; error?: string }> {
+    try {
+      const response = await fetchFromApi('/newsletter/subscribe/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+        signal: AbortSignal.timeout(20000), // SMTP mail delivery might take a few seconds
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        return { success: false, error: data?.error || 'Ошибка при оформлении подписки' };
+      }
+      return { success: true, message: data.message };
+    } catch (e: any) {
+      return { success: false, error: e?.message || 'Не удалось связаться с сервером' };
     }
   }
 };

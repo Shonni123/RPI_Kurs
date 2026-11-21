@@ -1,14 +1,38 @@
 import React, { useState } from 'react';
+import { flightApi } from '../../services/api';
 
 export const NewsletterSection: React.FC = () => {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [statusMessage, setStatusMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !email.includes('@')) return;
-    setSubmitted(true);
-    setEmail('');
+    if (loading) return;
+    const cleanEmail = email.trim();
+    if (!cleanEmail || !cleanEmail.includes('@') || !cleanEmail.includes('.')) {
+      setErrorMessage('Пожалуйста, введите корректный адрес электронной почты');
+      return;
+    }
+
+    setLoading(true);
+    setErrorMessage('');
+    try {
+      const res = await flightApi.subscribeNewsletter(cleanEmail);
+      if (res.success) {
+        setSubmitted(true);
+        setStatusMessage(res.message || 'Спасибо! Вы успешно подписаны. На вашу почту отправлено письмо.');
+        setEmail('');
+      } else {
+        setErrorMessage(res.error || 'Не удалось оформить подписку. Попробуйте позже.');
+      }
+    } catch {
+      setErrorMessage('Ошибка соединения с сервером. Пожалуйста, попробуйте позже.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -73,31 +97,52 @@ export const NewsletterSection: React.FC = () => {
             </div>
 
             {/* Pill Form: 467 x 62 with black button matching Figma */}
-            <div className="relative z-10 w-full flex justify-center mt-8 sm:mt-12">
+            <div className="relative z-10 w-full flex flex-col items-center justify-center mt-8 sm:mt-12 space-y-3">
               {submitted ? (
-                <div className="w-full max-w-[467px] h-[58px] sm:h-[62px] bg-white rounded-full shadow-md px-6 flex items-center justify-center text-emerald-700 text-xs sm:text-sm font-semibold border border-emerald-300">
-                  Спасибо! Вы успешно подписаны.
+                <div className="w-full max-w-[520px] min-h-[58px] sm:min-h-[62px] bg-white rounded-full shadow-md px-6 py-3 flex items-center justify-center text-emerald-700 text-xs sm:text-sm font-semibold border border-emerald-300 text-center animate-fade-in">
+                  {statusMessage || 'Спасибо! Вы успешно подписаны. На вашу почту отправлено письмо.'}
                 </div>
               ) : (
                 <form
                   onSubmit={handleSubmit}
-                  className="w-full max-w-[467px] h-[58px] sm:h-[62px] bg-white rounded-full shadow-sm pl-5 sm:pl-6 pr-1.5 py-1.5 flex items-center justify-between border border-slate-200/60"
+                  className="w-full max-w-[467px] h-[58px] sm:h-[62px] bg-white rounded-full shadow-sm pl-5 sm:pl-6 pr-1.5 py-1.5 flex items-center justify-between border border-slate-200/60 transition-all focus-within:border-sky-400 focus-within:shadow-md"
                 >
                   <input
                     type="email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      if (errorMessage) setErrorMessage('');
+                    }}
                     placeholder="Ваш email..."
                     required
-                    className="flex-1 bg-transparent text-slate-900 placeholder:text-slate-400 text-sm sm:text-base focus:outline-none pr-3 font-sans"
+                    disabled={loading}
+                    className="flex-1 bg-transparent text-slate-900 placeholder:text-slate-400 text-sm sm:text-base focus:outline-none pr-3 font-sans disabled:opacity-60"
                   />
                   <button
                     type="submit"
-                    className="h-[48px] sm:h-[52px] px-6 sm:px-7 rounded-full bg-black hover:bg-slate-900 text-white font-medium text-sm sm:text-[15px] transition-all whitespace-nowrap flex items-center justify-center cursor-pointer"
+                    disabled={loading}
+                    className="h-[48px] sm:h-[52px] px-6 sm:px-7 rounded-full bg-black hover:bg-slate-900 active:scale-95 disabled:bg-slate-700 disabled:opacity-80 disabled:cursor-not-allowed text-white font-medium text-sm sm:text-[15px] transition-all whitespace-nowrap flex items-center justify-center gap-2 cursor-pointer shadow-sm"
                   >
-                    Подписаться
+                    {loading ? (
+                      <>
+                        <svg className="animate-spin h-4 w-4 text-white" viewBox="0 0 24 24" fill="none">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+                        </svg>
+                        <span>Отправка...</span>
+                      </>
+                    ) : (
+                      'Подписаться'
+                    )}
                   </button>
                 </form>
+              )}
+
+              {errorMessage && (
+                <p className="text-red-500 text-xs sm:text-sm font-medium bg-red-50/90 border border-red-200 px-4 py-1.5 rounded-full animate-fade-in">
+                  {errorMessage}
+                </p>
               )}
             </div>
 

@@ -71,3 +71,17 @@ class Airport(models.Model):
 
     def __str__(self):
         return f"{self.code} - {self.name} ({self.city})"
+
+
+class NewsletterSubscriber(models.Model):
+    email = models.EmailField(unique=True, verbose_name="Email подписчика")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата подписки")
+    is_active = models.BooleanField(default=True, verbose_name="Активна")
+
+    class Meta:
+        verbose_name = "Подписчик рассылки"
+        verbose_name_plural = "Подписчики рассылки"
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return self.email

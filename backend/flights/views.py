@@ -2,7 +2,12 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.db.models import Q
-from .models import Flight, Airport
+import logging
+from django.conf import settings
+from django.core.mail import send_mail
+from .models import Flight, Airport, NewsletterSubscriber
+
+logger = logging.getLogger(__name__)
 from .serializers import FlightSerializer, AirportSerializer
 from .services import (
     fetch_and_sync_aviationstack_flights,
@@ -141,3 +146,61 @@ class CleanupArchivedFlightsAPIView(APIView):
             'deleted_count': deleted_count,
             'remaining_flights': Flight.objects.count(),
         })
+
+
+class NewsletterSubscribeAPIView(APIView):
+    """
+    Subscribes user to newsletter and sends authentic welcome confirmation email.
+    """
+    def post(self, request):
+        email = request.data.get('email', '').strip().lower()
+        if not email or '@' not in email or '.' not in email:
+            return Response(
+                {'success': False, 'error': 'Пожалуйста, укажите корректный адрес электронной почты.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        subscriber, created = NewsletterSubscriber.objects.get_or_create(
+            email=email,
+            defaults={'is_active': True}
+        )
+        if not subscriber.is_active:
+            subscriber.is_active = True
+            subscriber.save()
+
+        # Send welcome email via Yandex SMTP
+        subject = 'Добро пожаловать в рассылку сервиса «Авиарейсы» ✈️'
+        message = (
+            f'Здравствуйте!\n\n'
+            f'Благодарим вас за подписку на информационный сервис «Авиарейсы».\n\n'
+            f'Теперь вы будете первыми узнавать:\n'
+            f' • об оперативных изменениях в расписании и статусах рейсов;\n'
+            f' • о задержках и метеоусловиях в ключевых аэропортах;\n'
+            f' • о полезных советах и рекомендациях для комфортных перелётов.\n\n'
+            f'Вы можете в любой момент изменить параметры уведомлений в личном кабинете на сайте.\n\n'
+            f'---\n'
+            f'С уважением,\n'
+            f'Команда информационного сервиса «Авиарейсы»'
+        )
+
+        email_sent = False
+        try:
+            send_mail(
+                subject=subject,
+                message=message,
+                from_email=getattr(settings, 'DEFAULT_FROM_EMAIL', 'Авиарейсы <noreply@aviaraces.ru>'),
+                recipient_list=[email],
+                fail_silently=False,
+            )
+            email_sent = True
+            logger.info(f'Newsletter confirmation email sent to {email}')
+        except Exception as e:
+            logger.error(f'Failed to send newsletter email to {email}: {e}')
+
+        return Response({
+            'success': True,
+            'message': 'Вы успешно подписались на рассылку! Проверьте вашу почту.',
+            'email': email,
+            'email_sent': email_sent,
+            'is_new': created,
+        }, status=status.HTTP_200_OK)

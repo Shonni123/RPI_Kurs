@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Flight, Airport
+from .models import Flight, Airport, NewsletterSubscriber
 
 @admin.register(Flight)
 class FlightAdmin(admin.ModelAdmin):
@@ -11,3 +11,9 @@ class FlightAdmin(admin.ModelAdmin):
 class AirportAdmin(admin.ModelAdmin):
     list_display = ('code', 'name', 'city', 'country', 'departures_count', 'arrivals_count', 'timezone')
     search_fields = ('code', 'name', 'city', 'country')
+
+@admin.register(NewsletterSubscriber)
+class NewsletterSubscriberAdmin(admin.ModelAdmin):
+    list_display = ('email', 'created_at', 'is_active')
+    search_fields = ('email',)
+    list_filter = ('is_active', 'created_at')

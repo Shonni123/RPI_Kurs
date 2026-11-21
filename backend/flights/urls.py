@@ -6,6 +6,7 @@ from .views import (
     SyncAviationstackAPIView,
     ApiStatusAPIView,
     CleanupArchivedFlightsAPIView,
+    NewsletterSubscribeAPIView,
 )
 
 urlpatterns = [
@@ -14,6 +15,7 @@ urlpatterns = [
     path('airports/', AirportListAPIView.as_view(), name='airport-list'),
     path('sync-aviationstack/', SyncAviationstackAPIView.as_view(), name='sync-aviationstack'),
     path('cleanup/', CleanupArchivedFlightsAPIView.as_view(), name='flights-cleanup'),
+    path('newsletter/subscribe/', NewsletterSubscribeAPIView.as_view(), name='newsletter-subscribe'),
     path('status/', ApiStatusAPIView.as_view(), name='api-status'),
 ]
 
