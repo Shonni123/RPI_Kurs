@@ -301,15 +301,15 @@ def seed_initial_database():
     """
     today_str = datetime.date.today().isoformat()
     initial_airports = [
-        {'code': 'SVO', 'name': 'Шереметьево имени А. С. Пушкина', 'city': 'Москва', 'country': 'Россия', 'departures_count': 142, 'arrivals_count': 138, 'timezone': 'UTC+3'},
-        {'code': 'DME', 'name': 'Домодедово имени М. В. Ломоносова', 'city': 'Москва', 'country': 'Россия', 'departures_count': 98, 'arrivals_count': 95, 'timezone': 'UTC+3'},
-        {'code': 'VKO', 'name': 'Внуково имени А. Н. Туполева', 'city': 'Москва', 'country': 'Россия', 'departures_count': 64, 'arrivals_count': 61, 'timezone': 'UTC+3'},
-        {'code': 'LED', 'name': 'Пулково', 'city': 'Санкт-Петербург', 'country': 'Россия', 'departures_count': 88, 'arrivals_count': 84, 'timezone': 'UTC+3'},
-        {'code': 'AER', 'name': 'Международный аэропорт Сочи', 'city': 'Сочи', 'country': 'Россия', 'departures_count': 76, 'arrivals_count': 72, 'timezone': 'UTC+3'},
-        {'code': 'KZN', 'name': 'Международный аэропорт Казань', 'city': 'Казань', 'country': 'Россия', 'departures_count': 45, 'arrivals_count': 42, 'timezone': 'UTC+3'},
-        {'code': 'DXB', 'name': 'Международный аэропорт Дубай', 'city': 'Дубай', 'country': 'ОАЭ', 'departures_count': 310, 'arrivals_count': 305, 'timezone': 'UTC+4'},
-        {'code': 'IST', 'name': 'Новый аэропорт Стамбула', 'city': 'Стамбул', 'country': 'Турция', 'departures_count': 260, 'arrivals_count': 254, 'timezone': 'UTC+3'},
-        {'code': 'DOH', 'name': 'Международный аэропорт Хамад', 'city': 'Доха', 'country': 'Катар', 'departures_count': 185, 'arrivals_count': 180, 'timezone': 'UTC+3'},
+        {'code': 'SVO', 'name': 'Шереметьево имени А. С. Пушкина', 'city': 'Москва', 'country': 'Россия', 'departures_count': 0, 'arrivals_count': 0, 'timezone': 'UTC+3'},
+        {'code': 'DME', 'name': 'Домодедово имени М. В. Ломоносова', 'city': 'Москва', 'country': 'Россия', 'departures_count': 0, 'arrivals_count': 0, 'timezone': 'UTC+3'},
+        {'code': 'VKO', 'name': 'Внуково имени А. Н. Туполева', 'city': 'Москва', 'country': 'Россия', 'departures_count': 0, 'arrivals_count': 0, 'timezone': 'UTC+3'},
+        {'code': 'LED', 'name': 'Пулково', 'city': 'Санкт-Петербург', 'country': 'Россия', 'departures_count': 0, 'arrivals_count': 0, 'timezone': 'UTC+3'},
+        {'code': 'AER', 'name': 'Международный аэропорт Сочи', 'city': 'Сочи', 'country': 'Россия', 'departures_count': 0, 'arrivals_count': 0, 'timezone': 'UTC+3'},
+        {'code': 'KZN', 'name': 'Международный аэропорт Казань', 'city': 'Казань', 'country': 'Россия', 'departures_count': 0, 'arrivals_count': 0, 'timezone': 'UTC+3'},
+        {'code': 'DXB', 'name': 'Международный аэропорт Дубай', 'city': 'Дубай', 'country': 'ОАЭ', 'departures_count': 0, 'arrivals_count': 0, 'timezone': 'UTC+4'},
+        {'code': 'IST', 'name': 'Новый аэропорт Стамбула', 'city': 'Стамбул', 'country': 'Турция', 'departures_count': 0, 'arrivals_count': 0, 'timezone': 'UTC+3'},
+        {'code': 'DOH', 'name': 'Международный аэропорт Хамад', 'city': 'Доха', 'country': 'Катар', 'departures_count': 0, 'arrivals_count': 0, 'timezone': 'UTC+3'},
     ]
     for apt in initial_airports:
         Airport.objects.get_or_create(code=apt['code'], defaults=apt)
@@ -317,4 +317,10 @@ def seed_initial_database():
     from .seed_diverse_data import get_diverse_flights_data
     for fl in get_diverse_flights_data():
         Flight.objects.get_or_create(flight_id=fl['flight_id'], defaults=fl)
+
+    # Automatically calculate real departures and arrivals per airport
+    for apt in Airport.objects.all():
+        apt.departures_count = Flight.objects.filter(from_code=apt.code).count()
+        apt.arrivals_count = Flight.objects.filter(to_code=apt.code).count()
+        apt.save()
 

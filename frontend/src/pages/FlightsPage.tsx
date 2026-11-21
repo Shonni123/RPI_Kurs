@@ -13,13 +13,14 @@ import { useFavorites } from '../hooks/useFavorites';
 export const FlightsPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const initialStatus = searchParams.get('status') || 'all';
+  const initialSearch = searchParams.get('search') || '';
 
   const [flights, setFlights] = useState<Flight[]>(MOCK_FLIGHTS);
   const [isLiveServer, setIsLiveServer] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
   const [syncMessage, setSyncMessage] = useState<string | null>(null);
 
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(initialSearch);
   const [selectedStatus, setSelectedStatus] = useState<string>(initialStatus);
   const [selectedAirline, setSelectedAirline] = useState<string>('all');
   const [sortBy, setSortBy] = useState<'time' | 'airline'>('time');
@@ -30,6 +31,17 @@ export const FlightsPage: React.FC = () => {
   const [hasError, setHasError] = useState(false);
 
   const { favorites, isFavorite, toggleFavorite } = useFavorites();
+
+  useEffect(() => {
+    const s = searchParams.get('search');
+    if (s !== null) {
+      setSearchQuery(s);
+    }
+    const st = searchParams.get('status');
+    if (st !== null) {
+      setSelectedStatus(st);
+    }
+  }, [searchParams]);
 
   const loadFlightsData = async () => {
     setIsLoading(true);

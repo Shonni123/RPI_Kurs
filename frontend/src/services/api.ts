@@ -120,6 +120,19 @@ export const flightApi = {
   },
 
   /**
+   * Fetches airports list with dynamic departures and arrivals
+   */
+  async getAirports(): Promise<any[]> {
+    try {
+      const res = await fetchFromApi('/airports/', { signal: AbortSignal.timeout(3000) });
+      if (res.ok) {
+        return await res.json();
+      }
+    } catch {}
+    return [];
+  },
+
+  /**
    * Subscribe to newsletter
    */
   async subscribeNewsletter(email: string): Promise<{ success: boolean; message?: string; error?: string }> {

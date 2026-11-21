@@ -81,13 +81,22 @@ class FlightDetailAPIView(APIView):
 
 class AirportListAPIView(APIView):
     """
-    Returns list of hubs and airports.
+    Returns list of hubs and airports with live calculated departures and arrivals.
     """
     def get(self, request):
         if not Airport.objects.exists():
             seed_initial_database()
 
         airports = Airport.objects.all()
+        # Always ensure departure and arrival counts strictly match actual flights in DB
+        for apt in airports:
+            dep_count = Flight.objects.filter(from_code=apt.code).count()
+            arr_count = Flight.objects.filter(to_code=apt.code).count()
+            if apt.departures_count != dep_count or apt.arrivals_count != arr_count:
+                apt.departures_count = dep_count
+                apt.arrivals_count = arr_count
+                apt.save(update_fields=['departures_count', 'arrivals_count'])
+
         serializer = AirportSerializer(airports, many=True)
         return Response(serializer.data)
 

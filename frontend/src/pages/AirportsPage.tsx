@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { PlaneTakeoff, PlaneLanding, MapPin, Search, ArrowLeft, ArrowRight, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { flightApi } from '../services/api';
+import { MOCK_FLIGHTS } from '../services/mockFlights';
+import { Flight } from '../types/flight';
 
 interface AirportCardData {
   code: string;
@@ -12,14 +15,12 @@ interface AirportCardData {
   timezone: string;
 }
 
-const AIRPORTS: AirportCardData[] = [
+const BASE_AIRPORTS: Omit<AirportCardData, 'departuresCount' | 'arrivalsCount'>[] = [
   {
     code: 'SVO',
     name: 'Шереметьево имени А. С. Пушкина',
     city: 'Москва',
     country: 'Россия',
-    departuresCount: 142,
-    arrivalsCount: 138,
     timezone: 'UTC+3',
   },
   {
@@ -27,8 +28,6 @@ const AIRPORTS: AirportCardData[] = [
     name: 'Домодедово имени М. В. Ломоносова',
     city: 'Москва',
     country: 'Россия',
-    departuresCount: 98,
-    arrivalsCount: 95,
     timezone: 'UTC+3',
   },
   {
@@ -36,8 +35,6 @@ const AIRPORTS: AirportCardData[] = [
     name: 'Внуково имени А. Н. Туполева',
     city: 'Москва',
     country: 'Россия',
-    departuresCount: 64,
-    arrivalsCount: 61,
     timezone: 'UTC+3',
   },
   {
@@ -45,8 +42,6 @@ const AIRPORTS: AirportCardData[] = [
     name: 'Пулково',
     city: 'Санкт-Петербург',
     country: 'Россия',
-    departuresCount: 88,
-    arrivalsCount: 84,
     timezone: 'UTC+3',
   },
   {
@@ -54,8 +49,6 @@ const AIRPORTS: AirportCardData[] = [
     name: 'Международный аэропорт Сочи',
     city: 'Сочи',
     country: 'Россия',
-    departuresCount: 76,
-    arrivalsCount: 72,
     timezone: 'UTC+3',
   },
   {
@@ -63,8 +56,41 @@ const AIRPORTS: AirportCardData[] = [
     name: 'Международный аэропорт Казань',
     city: 'Казань',
     country: 'Россия',
-    departuresCount: 45,
-    arrivalsCount: 42,
+    timezone: 'UTC+3',
+  },
+  {
+    code: 'OVB',
+    name: 'Толмачёво имени А. И. Покрышкина',
+    city: 'Новосибирск',
+    country: 'Россия',
+    timezone: 'UTC+7',
+  },
+  {
+    code: 'SVX',
+    name: 'Кольцово имени А. Н. Демидова',
+    city: 'Екатеринбург',
+    country: 'Россия',
+    timezone: 'UTC+5',
+  },
+  {
+    code: 'VVO',
+    name: 'Кневичи имени В. К. Арсеньева',
+    city: 'Владивосток',
+    country: 'Россия',
+    timezone: 'UTC+10',
+  },
+  {
+    code: 'KGD',
+    name: 'Храброво',
+    city: 'Калининград',
+    country: 'Россия',
+    timezone: 'UTC+2',
+  },
+  {
+    code: 'MRV',
+    name: 'Минеральные Воды',
+    city: 'Минеральные Воды',
+    country: 'Россия',
     timezone: 'UTC+3',
   },
   {
@@ -72,8 +98,6 @@ const AIRPORTS: AirportCardData[] = [
     name: 'Международный аэропорт Дубай',
     city: 'Дубай',
     country: 'ОАЭ',
-    departuresCount: 310,
-    arrivalsCount: 305,
     timezone: 'UTC+4',
   },
   {
@@ -81,8 +105,6 @@ const AIRPORTS: AirportCardData[] = [
     name: 'Новый аэропорт Стамбула',
     city: 'Стамбул',
     country: 'Турция',
-    departuresCount: 260,
-    arrivalsCount: 254,
     timezone: 'UTC+3',
   },
   {
@@ -90,16 +112,36 @@ const AIRPORTS: AirportCardData[] = [
     name: 'Международный аэропорт Хамад',
     city: 'Доха',
     country: 'Катар',
-    departuresCount: 185,
-    arrivalsCount: 180,
     timezone: 'UTC+3',
   },
 ];
 
 export const AirportsPage: React.FC = () => {
   const [search, setSearch] = useState('');
+  const [flights, setFlights] = useState<Flight[]>(MOCK_FLIGHTS);
 
-  const filtered = AIRPORTS.filter(
+  useEffect(() => {
+    flightApi.getFlights().then((res) => {
+      if (res.flights && res.flights.length > 0) {
+        setFlights(res.flights);
+      }
+    });
+  }, []);
+
+  // Calculate live departure and arrival counts dynamically from actual flights
+  const airportsWithCounts: AirportCardData[] = useMemo(() => {
+    return BASE_AIRPORTS.map((apt) => {
+      const departuresCount = flights.filter((f) => f.from.code === apt.code).length;
+      const arrivalsCount = flights.filter((f) => f.to.code === apt.code).length;
+      return {
+        ...apt,
+        departuresCount,
+        arrivalsCount,
+      };
+    });
+  }, [flights]);
+
+  const filtered = airportsWithCounts.filter(
     (a) =>
       a.city.toLowerCase().includes(search.toLowerCase()) ||
       a.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -138,7 +180,7 @@ export const AirportsPage: React.FC = () => {
           </div>
 
           <div className="text-xs text-slate-500 font-sans">
-            Всего аэропортов в базе: <strong className="font-benzin-medium text-slate-950">{AIRPORTS.length}</strong>
+            Всего аэропортов в базе: <strong className="font-benzin-medium text-slate-950">{airportsWithCounts.length}</strong>
           </div>
         </div>
 
@@ -207,7 +249,7 @@ export const AirportsPage: React.FC = () => {
               </div>
 
               <Link
-                to={`/flights`}
+                to={`/flights?search=${airport.code}`}
                 className="w-full text-center py-2.5 rounded-full bg-black hover:bg-slate-800 text-xs font-semibold text-white transition-all shadow-xs flex items-center justify-center gap-1.5"
               >
                 <span>Смотреть рейсы</span>
