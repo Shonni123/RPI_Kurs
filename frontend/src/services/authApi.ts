@@ -1,8 +1,8 @@
 import { AuthResponse, AuthUser } from '../types/auth';
 
 const CANDIDATE_AUTH_URLS = [
-  'http://127.0.0.1:8001/api/auth',
   'http://127.0.0.1:8000/api/auth',
+  'http://127.0.0.1:8001/api/auth',
 ];
 
 let activeAuthBaseUrl = CANDIDATE_AUTH_URLS[0];
@@ -13,22 +13,30 @@ async function fetchAuth(endpoint: string, options?: RequestInit): Promise<Respo
     ...(options?.headers || {}),
   };
 
+  const isMutation = options?.method && options.method.toUpperCase() !== 'GET';
+  // Allow plenty of time for SMTP email delivery (25s) without prematurely aborting
+  const timeoutMs = isMutation ? 25000 : 5000;
+
   try {
     const res = await fetch(`${activeAuthBaseUrl}${endpoint}`, {
       ...options,
       headers,
-      signal: AbortSignal.timeout(3000),
+      signal: AbortSignal.timeout(timeoutMs),
     });
     if (res.status < 500) return res;
-  } catch {
-    // try fallback
+  } catch (err: any) {
+    // If it's a mutation, DO NOT retry on error/timeout to prevent duplicate operations (such as sending two emails)
+    if (isMutation) {
+      throw err;
+    }
   }
 
+  // Only GET requests or connection setup can try fallback port
   const altUrl = CANDIDATE_AUTH_URLS.find((u) => u !== activeAuthBaseUrl) || CANDIDATE_AUTH_URLS[0];
   const res = await fetch(`${altUrl}${endpoint}`, {
     ...options,
     headers,
-    signal: AbortSignal.timeout(3000),
+    signal: AbortSignal.timeout(timeoutMs),
   });
   if (res.status < 500) {
     activeAuthBaseUrl = altUrl;

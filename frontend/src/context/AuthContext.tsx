@@ -97,7 +97,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       handleAuthSuccess(res.token, res.user);
     } else if (res.requiresVerification && res.email) {
       setPendingEmail(res.email);
-      if (res.debugCode) setDebugCode(res.debugCode);
       setAuthModalTab('verify_email');
     }
     return res;
@@ -107,7 +106,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const res = await authApi.register(data);
     if (res.success && res.email) {
       setPendingEmail(res.email);
-      if (res.debugCode) setDebugCode(res.debugCode);
       setAuthModalTab('verify_email');
     }
     return res;
@@ -123,9 +121,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const resendVerificationCode = async (purpose = 'verify_email'): Promise<AuthResponse> => {
     const res = await authApi.resendCode(pendingEmail, purpose);
-    if (res.success && res.debugCode) {
-      setDebugCode(res.debugCode);
-    }
     return res;
   };
 
@@ -133,7 +128,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setPendingEmail(email);
     const res = await authApi.requestPasswordReset(email);
     if (res.success) {
-      if (res.debugCode) setDebugCode(res.debugCode);
       setAuthModalTab('reset_confirm');
     }
     return res;

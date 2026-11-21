@@ -20,7 +20,6 @@ export const AuthModal: React.FC = () => {
     isAuthModalOpen,
     authModalTab,
     pendingEmail,
-    debugCode,
     closeAuthModal,
     setAuthModalTab,
     login,
@@ -111,6 +110,7 @@ export const AuthModal: React.FC = () => {
   // Form submissions
   const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setErrorMsg(null);
     setLoading(true);
     const res = await login({ emailOrUsername: email, password });
@@ -122,6 +122,7 @@ export const AuthModal: React.FC = () => {
 
   const handleRegisterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setErrorMsg(null);
     if (password !== passwordConfirm) {
       setErrorMsg('Пароли не совпадают');
@@ -145,6 +146,7 @@ export const AuthModal: React.FC = () => {
 
   const handleVerifySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setErrorMsg(null);
     const fullCode = codeDigits.join('');
     if (fullCode.length !== 6) {
@@ -178,6 +180,7 @@ export const AuthModal: React.FC = () => {
 
   const handleResetRequestSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setErrorMsg(null);
     if (!email) {
       setErrorMsg('Введите ваш email');
@@ -193,6 +196,7 @@ export const AuthModal: React.FC = () => {
 
   const handleResetConfirmSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setErrorMsg(null);
     const fullCode = codeDigits.join('');
     if (fullCode.length !== 6) {
@@ -482,23 +486,6 @@ export const AuthModal: React.FC = () => {
                 ))}
               </div>
 
-              {/* Optional Demo helper for easy coursework presentation */}
-              {debugCode && (
-                <div className="p-2.5 rounded-xl bg-amber-50 border border-amber-200 text-[11px] text-amber-800 flex items-center justify-between">
-                  <span>Демо-код сервера: <strong>{debugCode}</strong></span>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const digits = debugCode.split('').slice(0, 6);
-                      setCodeDigits(digits);
-                    }}
-                    className="text-[10px] font-bold uppercase tracking-wider text-amber-700 hover:text-amber-900 underline cursor-pointer"
-                  >
-                    Вставить
-                  </button>
-                </div>
-              )}
-
               <button
                 type="submit"
                 disabled={loading}
@@ -627,22 +614,6 @@ export const AuthModal: React.FC = () => {
                   />
                 ))}
               </div>
-
-              {debugCode && (
-                <div className="p-2 rounded-xl bg-amber-50 border border-amber-200 text-[11px] text-amber-800 flex items-center justify-between">
-                  <span>Демо-код сброса: <strong>{debugCode}</strong></span>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const digits = debugCode.split('').slice(0, 6);
-                      setCodeDigits(digits);
-                    }}
-                    className="text-[10px] font-bold uppercase underline cursor-pointer"
-                  >
-                    Вставить
-                  </button>
-                </div>
-              )}
 
               <div>
                 <label className="block text-xs font-semibold text-slate-700 mb-1.5">

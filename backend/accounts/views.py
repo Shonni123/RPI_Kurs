@@ -74,7 +74,7 @@ class RegisterAPIView(views.APIView):
             'message': f'Код подтверждения отправлен на почту {email}',
             'email': email,
             'emailSent': email_sent,
-            'debugCode': code_obj.code if settings.DEBUG else None,
+            'debugCode': None,
         }, status=status.HTTP_201_CREATED)
 
 
@@ -161,7 +161,7 @@ class ResendCodeAPIView(views.APIView):
             'message': f'Новый код отправлен на {email}',
             'email': email,
             'emailSent': email_sent,
-            'debugCode': code_obj.code if settings.DEBUG else None,
+            'debugCode': None,
         }, status=status.HTTP_200_OK)
 
 
@@ -193,7 +193,7 @@ class LoginAPIView(views.APIView):
                 'requiresVerification': True,
                 'email': user.email,
                 'message': 'Ваша почта ещё не подтверждена. Мы отправили свежий код подтверждения.',
-                'debugCode': code_obj.code if settings.DEBUG else None,
+                'debugCode': None,
             }, status=status.HTTP_200_OK)
 
         token, _ = Token.objects.get_or_create(user=user)
@@ -240,7 +240,7 @@ class PasswordResetRequestAPIView(views.APIView):
             'message': f'Код для сброса пароля отправлен на почту {email}',
             'email': email,
             'emailSent': email_sent,
-            'debugCode': code_obj.code if settings.DEBUG else None,
+            'debugCode': None,
         }, status=status.HTTP_200_OK)
 
 
